@@ -1,0 +1,62 @@
+<odoo>
+  <data>
+      <record id="kzm_product_template_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//label[@for='standard_price']" position="attributes">
+                    <attribute name="groups">kzm_purchase_visibility.purchase_visibility</attribute>
+                </xpath>
+
+                <xpath expr="//div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="groups">kzm_purchase_visibility.purchase_visibility</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='purchase']" position="attributes">
+                     <attribute name="groups">kzm_purchase_visibility.purchase_visibility</attribute>
+                </xpath>
+
+                <xpath expr="//page[@name='inventory']" position="attributes">
+                     <attribute name="groups">kzm_purchase_visibility.purchase_visibility</attribute>
+                </xpath>
+
+            </field>
+      </record>
+
+      <record id="kzm_product_template_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product.template.tree.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="replace">
+                    <field name="standard_price" groups="kzm_purchase_visibility.purchase_visibility"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="kzm_product_variant_easy_edit_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.view.form.easy.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="replace">
+                    <field name="standard_price" widget='monetary'
+                           options="{'currency_field': 'currency_id'}" groups="kzm_purchase_visibility.purchase_visibility"/>
+                </xpath>
+            </field>
+      </record>
+
+      <record id="kzm_product_product_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.tree.inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='standard_price']" position="replace">
+                    <field name="standard_price" groups="kzm_purchase_visibility.purchase_visibility"/>
+                </xpath>
+            </field>
+      </record>
+
+  </data>
+</odoo>

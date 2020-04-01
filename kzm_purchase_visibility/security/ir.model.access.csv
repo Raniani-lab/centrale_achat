@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kzm_purchase_visibility_kzm_purchase_visibility,kzm_purchase_visibility.kzm_purchase_visibility,model_kzm_purchase_visibility_kzm_purchase_visibility,,1,0,0,0

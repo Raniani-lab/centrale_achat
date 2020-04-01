@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* kzm_purchase_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-07 13:28+0000\n"
+"PO-Revision-Date: 2018-09-07 13:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: kzm_purchase_type
+#: model:ir.actions.act_window,help:kzm_purchase_type.purchase_form_action_import
+msgid "Click to create a quotation that will be converted into a purchase order."
+msgstr "Cliquez pour créer un devis qui sera converti en un bon de commande d'achat."
+
+#. module: kzm_purchase_type
+#: model:ir.actions.act_window,help:kzm_purchase_type.purchase_rfq_import
+msgid "Click to create a request for quotation."
+msgstr "Cliquer pour créer la demande de prix"
+
+#. module: kzm_purchase_type
+#: selection:purchase.order,purchase_type:0
+msgid "Import"
+msgstr "Import"
+
+#. module: kzm_purchase_type
+#: model:res.groups,name:kzm_purchase_type.import_purchase_group
+msgid "Import purchase"
+msgstr "Acheteur à l'Import"
+
+#. module: kzm_purchase_type
+#: selection:purchase.order,purchase_type:0
+msgid "Local"
+msgstr "Local"
+
+#. module: kzm_purchase_type
+#: model:res.groups,name:kzm_purchase_type.local_purchase_group
+msgid "Local purchase"
+msgstr "Acheteur Local"
+
+#. module: kzm_purchase_type
+#: model:ir.actions.act_window,help:kzm_purchase_type.purchase_rfq_import
+msgid ""
+"Most propositions of purchase orders are created automatically\n"
+"                by Odoo based on inventory needs."
+msgstr ""
+"La plupart des propositions d'ordres d'achat sont crées automatiquement\n"
+"par Odoo, basé sur les besoins de l'inventaire."
+
+#. module: kzm_purchase_type
+#: model:ir.model,name:kzm_purchase_type.model_purchase_order
+msgid "Purchase Order"
+msgstr "Commande fournisseur"
+
+#. module: kzm_purchase_type
+#: model:ir.actions.act_window,name:kzm_purchase_type.purchase_form_action_import
+#: model:ir.ui.menu,name:kzm_purchase_type.menu_purchase_form_action_import
+msgid "Purchase Orders"
+msgstr "Bon de commande"
+
+#. module: kzm_purchase_type
+#: model:ir.model.fields,field_description:kzm_purchase_type.field_purchase_order_purchase_type
+msgid "Purchase Type"
+msgstr "Type d'Achat"
+
+#. module: kzm_purchase_type
+#: model:ir.actions.act_window,help:kzm_purchase_type.purchase_form_action_import
+msgid ""
+"Use this menu to search within your purchase orders by\n"
+"                references, vendor, products, etc. For each purchase order,\n"
+"                you can track the related discussion with the vendor, control\n"
+"                the products received and control the vendor bills."
+msgstr ""
+"Utilisez ce menu pour cherchez dans vos ordres d'achat selon\n"
+"la référence, fournisseur, produit, etc. Pour chaque ordre d'achat,\n"
+"vous pouvez suivre la discussion avec le fournisseur, contrôler les produits reçus et contrôler les notes du fournisseur."

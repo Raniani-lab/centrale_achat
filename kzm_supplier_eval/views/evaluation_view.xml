@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.act_window" id="evaluation_list_action">
+            <field name="name">Supplier Evaluation</field>
+            <field name="res_model">evaluation.evaluation</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="context" eval="{'search_default_my_evaluations': 1}"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_smiling_face">Create the first supplier evaluation
+                </p>
+            </field>
+        </record>
+        <!-- override the automatically generated list view for courses -->
+        <record model="ir.ui.view" id="evaluation_tree_view">
+            <field name="name">evaluation.tree</field>
+            <field name="model">evaluation.evaluation</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluation Tree">
+                    <field name="name" />
+                    <field name="evaluation_type_id"/>
+                    <field name="current_user"/>
+                    <field name="evaluation_responsible_id" required="1" readonly="1"/>
+                    <field name="evaluation_deadline_date"/>
+                    <field name="purchase_order_id" />
+                    <field name="evaluation_note" />
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="evaluation_search_view">
+            <field name="name">evaluation.search</field>
+            <field name="model">evaluation.evaluation</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="purchase_order_id"/>
+                    <filter name="my_evaluations" string="My evaluations"
+                            domain="[('current_user', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_purchases" string="Purchases Orders"
+                                context="{'group_by': 'purchase_order_id'}"/>
+                    </group>
+                    <group string="Group By">
+                        <filter name="by_types" string="Evaluation type"
+                                context="{'group_by': 'evaluation_type_id'}"/>
+                    </group>
+                    <group string="Group By">
+                        <filter name="by_evaluators" string="Evaluators"
+                                context="{'group_by': 'current_user'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="evaluation_form_view">
+            <field name="name">evaluation.form</field>
+            <field name="model">evaluation.evaluation</field>
+            <field name="arch" type="xml">
+                <form string="Evaluation Form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed,done"/>
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Submit Evaluation" states="confirmed"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <div class="oe_title">
+                                    <h1>
+                                        <field name="name"  required = "1" placeholder="Evaluation designation" />
+                                    </h1>
+                                </div>
+                            </group>
+                        </group>
+                        <group>
+                            <group string="">
+                                <field name="evaluation_type_id"/>
+                                <field name="evaluation_responsible_id"/>
+                                <field name="current_user"/>
+                            </group>
+                            <group string="">
+                                <field name="evaluation_deadline_date"/>
+                                <field name="start_date" />
+                                <field name="purchase_order_id" required = "1" />
+                            </group>
+
+                        </group>
+                        <notebook>
+                            <page string="Criterias">
+                                <field name="evaluation_line_ids">
+                                    <tree string="Evaluation Criterias" editable="bottom">
+                                        <field name="criteria_id" />
+                                        <field name="note_without_coef"/>
+                                        <field name="evaluation_comments"/>
+                                        <field name="criteria_coef" readonly="1" />
+                                        <field name="note_with_coef" readonly="1"/>
+                                    </tree>
+                                    <form string="Evaluation Criterias">
+                                        <group>
+                                            <group string="">
+                                                <field name="criteria_id"/>
+                                                <field name="note_without_coef"/>
+                                                <field name="criteria_coef" readonly="1"/>
+                                                <field name="note_with_coef" readonly="1"/>
+                                            </group>
+
+                                            <group string="">
+                                                <field name="evaluation_comments"/>
+                                            </group>
+                                        </group>
+
+                                    </form>
+                                </field>
+                                <group class="oe_subtotal_footer oe_right">
+                                    <field name="coef_sum"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="evaluation_note"/>
+                                    </div>
+                                <field name="evaluation_note" nolabel="1" class="oe_subtotal_footer_separator" />
+                                </group>
+                            </page>
+                            <page string="Autres informations">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+    <record model="ir.ui.view" id="view_eval_eval">
+        <field name="name">evaluation.evaluation.kanban</field>
+        <field name="model">evaluation.evaluation</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="evaluation_type_id">
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                                t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                                  oe_kanban_global_click_edit oe_semantic_html_override
+                                                  oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            <div class="oe_dropdown_kanban">
+                                <!-- dropdown menu -->
+                                <div class="oe_dropdown_toggle">
+                                    <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage"/>
+                                    <ul class="oe_dropdown_menu">
+                                        <li>
+                                            <a type="delete">Delete</a>
+                                        </li>
+                                        <li>
+                                            <ul class="oe_kanban_colorpicker"
+                                                data-field="color"/>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+                            <div t-attf-class="oe_kanban_content">
+                                <!-- title -->
+                                <h2><strong><field name="name"/></strong></h2>
+                                <br/>
+                                <ul>
+                                    <li> <strong>Type:</strong><field name="evaluation_type_id"/></li>
+                                    <li> <strong>Evaluateur:</strong><field name="current_user"/></li>
+                                    <li><strong>Note: </strong><field name="evaluation_note"/> </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+      <menuitem
+                name="Supplier Evaluation"
+                id="evaluation_menu"
+                sequence="2"
+                parent="purchase.menu_purchase_root"
+        />
+     <menuitem
+                name="Evaluation"
+                id="evaluation_evaluation_menu"
+                action="evaluation_list_action"
+                sequence="1"
+                parent="evaluation_menu"
+        />
+</odoo>

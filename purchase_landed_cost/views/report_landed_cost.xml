@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="0">
+        <template id="report_landed_cost_document">
+            <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+                    <t t-as="i" t-foreach="docs">
+                        <div class="page" style="font-size: 16px;">
+
+                            <h1 style="text-align : center">
+                                DOSSIER D'IMPORT
+                                <strong>
+                                    <div t-field="i.name"/>
+                                </strong>
+                            </h1>
+                            <br/>
+                            <br/>
+
+                            <div class="row">
+
+                                <div class="col-xs-6">
+                                    <span t-if="i.designation">
+                                        <strong>Désignation:</strong>
+                                        <span t-field="i.designation"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.currency_id">
+                                        <strong>Devise:</strong>
+                                        <span t-field="i.currency_id"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.rate_curr">
+                                        <strong>Cours Transfert:</strong>
+                                        <span t-field="i.rate_curr"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.rate_dum">
+                                        <strong>DUM:</strong>
+                                        <span t-field="i.rate_dum"/>
+                                        <br/>
+                                    </span>
+
+                                    <br/>
+                                    <br/>
+
+                                    <span t-if="i.shippment_port">
+                                        <strong>Port d'embarquement:</strong>
+                                        <span t-field="i.shippment_port"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.ship">
+                                        <strong>Navire:</strong>
+                                        <span t-field="i.ship"/>
+                                        <br/>
+                                    </span>
+                                </div>
+
+                                <div class="col-xs-6">
+                                    <span t-if="i.date">
+                                        <strong>Date:</strong>
+                                        <span t-field="i.date"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.date_leaving">
+                                        <strong>Date Départ:</strong>
+                                        <span t-field="i.date_leaving"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.date_arrival">
+                                        <strong>Date Arrivée:</strong>
+                                        <span t-field="i.date_arrival"/>
+                                        <br/>
+                                    </span>
+
+                                    <!--<span t-if="i.cost_update_type">-->
+                                        <!--<strong>Type de mise à jour des coûts:</strong>-->
+                                        <!--<span t-field="i.cost_update_type"/>-->
+                                        <!--<br/>-->
+                                    <!--</span>-->
+
+                                    <br/>
+                                    <br/>
+
+                                    <span t-if="i.pr_val">
+                                        <strong>Valeur Marchandise MAD:</strong>
+                                        <span t-field="i.pr_val"/>
+                                        <br/>
+                                    </span>
+
+                                    <span t-if="i.declared_val">
+                                        <strong>Valeur déclarée:</strong>
+                                        <span t-field="i.declared_val"/>
+                                        <br/>
+                                    </span>
+                                </div>
+
+
+                            </div>
+
+                            <br/>
+                            <br/>
+                            <br/>
+
+                            <strong style="font-size: 14px;">Lignes:</strong>
+                            <table class="table table-bordered" border="2" style="font-size: 12px;">
+                                <thead>
+                                    <tr class="active">
+                                        <th class="text-right">
+                                            <strong>Réception</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Ligne de prélévement</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Fournisseur</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Article</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Quantité</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Prix Unitaire MAD</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Sous-total MAD</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Prix Unitaire Devise</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Sous-total Devise</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Frais d'approche Imputés prop.</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Coût unitaire</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Ancien coût</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Nouveau coût</strong>
+                                        </th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="i.cost_lines" t-as="cl">
+                                        <td class="text-right">
+                                            <span t-field="cl.picking_id"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="cl.move_id"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="cl.partner"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="cl.product_id"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.product_qty"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.product_price_unit"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.total_amount"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.product_price_unit_curr"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.total_amount_curr"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.expense_amount"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.cost_ratio"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.old_standard_price"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="cl.standard_price_new"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <br/>
+                            <br/>
+
+                            <strong style="font-size: 14px;">Dépenses:</strong>
+                            <table class="table table-bordered" border="2" style="font-size: 12px;">
+                                <thead>
+                                    <tr class="active">
+                                        <th class="text-right">
+                                            <strong>Type de dépense</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Référence</strong>
+                                        </th>
+                                        <th class="text-right">
+                                            <strong>Montant des dépenses</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="i.expense_lines" t-as="el">
+                                        <td class="text-right">
+                                            <span t-field="el.type"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="el.ref"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="el.expense_amount"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="row" name="total">
+                                <div class="col-xs-4 pull-right">
+                                    <table class="table table-condensed">
+                                        <tr>
+                                            <td>
+                                                <strong>Total Achat:</strong>
+                                            </td>
+                                            <td class="text-right">
+
+                                                <span t-field="i.total_purchase"
+                                                      t-options='{"widget": "monetary", "display_currency": i.company_currency}'/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <strong>Total Dépenses:</strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <span t-field="i.total_expense"
+                                                      t-options='{"widget": "monetary", "display_currency": i.company_currency}'/>
+                                            </td>
+                                        </tr>
+                                        <tr class="border-black">
+                                            <td>
+                                                Total:
+                                            </td>
+                                            <td class="text-right">
+                                                <strong>
+                                                    <span t-field="i.amount_total"
+                                                          t-options='{"widget": "monetary", "display_currency": i.company_currency}'/>
+                                                </strong>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 pull-left">
+                                    <strong>Total quantité:</strong>
+                                    <span t-field="i.total_uom_qty"/>
+                                    <br/>
+                                    <strong>Total poids brut:</strong>
+                                    <span t-field="i.total_weight"/>
+                                    <br/>
+                                    <strong>Total volume:</strong>
+                                    <span t-field="i.total_volume"/>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <report file="purchase_landed_cost.report_landed_cost_document"
+                id="report_landed_cost_report_action"
+                model="purchase.cost.distribution"
+                name="purchase_landed_cost.report_landed_cost_document"
+                report_type="qweb-pdf"
+                string="Dossier d'Import"/>
+    </data>
+</odoo>

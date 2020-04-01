@@ -1,0 +1,7 @@
+<odoo>
+    <data>
+        <record id="purchase_visibility" model="res.groups">
+            <field name="name">Voir les information de l'achat</field>
+        </record>
+    </data>
+</odoo>

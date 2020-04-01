@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <report
+        string="Comparatif"
+        id="action_report_purchase_requisitions_comparative"
+        model="purchase.requisition"
+        report_type="qweb-pdf"
+        name="kzm_purchase_requisition_extension.report_purchaserequisitions_comparative"
+        file="kzm_purchase_requisition_extension.report_purchaserequisitions_comparative"
+     />
+
+</odoo>

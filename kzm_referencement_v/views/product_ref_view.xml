@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+           <record model="ir.ui.view" id="product_ref_form_view">
+            <field name="name">ref.form</field>
+            <field name="model">ref.product</field>
+            <field name="arch" type="xml">
+                <form string="Product referencement Form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="draft"/>
+                        <button name="action_confirm" type="object"
+                                string="SEND" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Done" states="confirmed"
+                                class="oe_highlight"
+                                groups="kzm_referencement_v.group_ref_manager"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="product_ref" type="object"
+                                    string="Product"
+                                class="oe_stat_button"
+                                states = "done"
+                                icon="fa-bar-chart-o">
+                        </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1><field name="name" placeholder="Reference sequence" readonly="1" /></h1>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="prod_name" placeholder="Name of the product" required="1"/>
+                            </group>
+                            <group>
+                                <div>
+                                    <div>
+                                        <field name="sale_ok"/>
+                                        <label for="sale_ok"/>
+                                    </div>
+                                    <div>
+                                        <field name="purchase_ok"/>
+                                        <label for="purchase_ok"/>
+                                    </div>
+                                </div>
+                            </group>
+                        </group>
+
+                        <group>
+                            <group string="">
+                                <field name="ref_asked_by"/>
+                                <field name="ref_responsible" readonly="1"/>
+                            </group>
+                            <group string="">
+                                <field name="ref_date"/>
+                                <field name="ref_val_date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="type" />
+                                <field name="categ_id" string="Product Category"/>
+                                <field name="default_code" />
+                            </group>
+                            <group>
+                                <field name="currency_id" invisible="1"/>
+                                <field name="list_price"
+                                       widget='monetary'
+                                       options="{'currency_field': 'currency_id'}"/>
+<!--                  <field name="taxes_id" widget="many2many_tags" domain="[('type_tax_use', '=', 'sale')]"/>-->
+                                <field name="standard_price"
+                                       widget='monetary'
+                                       options="{'currency_field': 'currency_id'}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="description_sale"/>
+                            </group>
+                            <group>
+                                <field name="description_purchase"/>
+                            </group>
+                        </group>
+
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+    <record model="ir.ui.view" id="ref_product_tree_view">
+        <field name="name">ref.tree</field>
+        <field name="model">ref.product</field>
+        <field name="arch" type="xml">
+            <tree string="Product ref Tree">
+                <field name="name" />
+                <field name="prod_name"/>
+                <field name="ref_asked_by"/>
+                <field name="ref_responsible"/>
+
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+        <record model="ir.actions.act_window" id="product_ref_form_action">
+            <field name="name">Product referencement</field>
+            <field name="res_model">ref.product</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+</data>
+</odoo>
+

@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ref_product_manager,access_ref_product,model_ref_product,kzm_referencement_v.group_ref_manager,1,1,1,1
+access_ref_product_user,access_ref_product,model_ref_product,kzm_referencement_v.group_ref_user,1,1,1,0
+access_ref_ref,access_ref_ref,model_ref_ref,base.group_user,1,1,1,1
+access_ref_res,access_ref_res,model_ref_res,base.group_user,1,1,1,1

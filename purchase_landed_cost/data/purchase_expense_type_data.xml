@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data>
+
+        <record id="purchase_expense_type_assurance" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Assurance</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_transit" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Transit</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_dd" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">DD</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_honoraires_transit" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Honoraires Transit</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_transport_national" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Transport national</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_transport_international" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Transport international</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_taxes_regionnales" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Taxes Régionnales</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_charges_bancaires" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Charges bancaires</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_frais_magasinage" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Frais de magasinage</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+        <record id="purchase_expense_type_perte_change" model="purchase.expense.type">
+            <field name="default_expense" eval="True"/>
+            <field name="name">Perte de change</field>
+            <field name="calculation_method">amount</field>
+        </record>
+
+    </data>
+</odoo>

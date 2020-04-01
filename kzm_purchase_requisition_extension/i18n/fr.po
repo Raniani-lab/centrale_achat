@@ -1,0 +1,82 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* kzm_purchase_requisition_extension
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-03-20 17:33+0000\n"
+"PO-Revision-Date: 2019-03-20 17:33+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Article</strong>"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Call for Bif Reference:</strong><br/>"
+msgstr "<strong>Référence d'appel d'offre:</strong><br/>"
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Date prévu de livraison</strong>"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Date</strong>"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Prix unitaire</strong>"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Reference </strong>"
+msgstr "<strong>Référence </strong>"
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Scheduled Ordering Date:</strong><br/>"
+msgstr "<strong>Date de commande planifiée :</strong><br/>"
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Source:</strong><br/>"
+msgstr "<strong>Origine :</strong><br/>"
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "<strong>Supplier </strong>"
+msgstr "<strong>Fournisseur </strong>"
+
+#. module: kzm_purchase_requisition_extension
+#: model:ir.actions.report,name:kzm_purchase_requisition_extension.action_report_purchase_requisitions_comparative
+msgid "Comparatif"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "Comparatif des prix"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "Fournisseur :"
+msgstr ""
+
+#. module: kzm_purchase_requisition_extension
+#: model_terms:ir.ui.view,arch_db:kzm_purchase_requisition_extension.report_purchaserequisitions_comparative
+msgid "Requests for Quotation Details"
+msgstr "Détails de la demande de prix"
+

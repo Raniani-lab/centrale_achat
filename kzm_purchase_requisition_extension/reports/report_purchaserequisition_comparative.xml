@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_purchaserequisitions_comparative">
+    <t t-call="web.html_container">
+        <t t-foreach="docs" t-as="o">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <div class="oe_structure"/>
+
+                    <h2>Comparatif des prix <span t-field="o.name"/></h2>
+
+                    <div class="row mt32 mb32">
+                        <div t-if="o.name" class="col-3 bm-2">
+                            <strong>Call for Bif Reference:</strong><br/>
+                            <span t-field="o.name"/>
+                        </div>
+                        <div t-if="o.ordering_date" class="col-3 bm-2">
+                            <strong>Scheduled Ordering Date:</strong><br/>
+                            <span t-field="o.ordering_date"/>
+                        </div>
+                        <!--<div class="col-xs-3">-->
+                            <!--<strong>Selection Type:</strong><br/>-->
+                            <!--<span t-if="o.exclusive=='exclusive'">Purchase Requisitions (exclusive)</span>-->
+                            <!--<span t-if="o.exclusive=='multiple'">Multiple Requisitions</span>-->
+                        <!--</div>-->
+                        <div t-if="o.origin" class="col-3 bm-2">
+                            <strong>Source:</strong><br/>
+                            <span t-field="o.origin"/>
+                        </div>
+                    </div>
+
+                    <t t-if="o.purchase_ids">
+                    	<div t-foreach="o.purchase_ids" t-as="purchase_id">
+                        <strong>Fournisseur : <span t-field="purchase_id.partner_id"/></strong>
+	                        <table class="table table-condensed">
+	                            <thead>
+	                                <tr>
+	                                    <th><strong>Article</strong></th>
+	                                    <th class="text-center"><strong>Prix unitaire</strong></th>
+	                                    <th class="text-center"><strong>Date prévu de livraison</strong></th>
+	                                </tr>
+	                            </thead>
+	                            <tbody>
+	                                <tr t-foreach="purchase_id.order_line" t-as="line">
+	                                    <td>
+	                                        <span t-field="line.product_id"/>
+	                                    </td>
+	                                    <td class="text-center">
+	                                        <span t-field="line.price_unit"/>
+	                                    </td>
+	                                    <td class="text-center">
+	                                        <span t-field="line.date_planned"/>
+	                                    </td>
+	                                </tr>
+	                            </tbody>
+	                        </table>
+                        </div>
+                    </t>
+                    
+                    <t t-if="o.purchase_ids">
+                        <h3>Requests for Quotation Details</h3>
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th><strong>Supplier </strong></th>
+                                    <th><strong>Date</strong></th>
+                                    <th class="text-right"><strong>Reference </strong></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr t-foreach="o.purchase_ids" t-as="purchase_ids">
+                                    <td>
+                                        <span t-field="purchase_ids.partner_id.name"/>
+                                    </td>
+                                    <td class="text-center">
+                                        <span t-field="purchase_ids.date_order"/>
+                                    </td>
+                                    <td class="text-right">
+                                        <span t-field="purchase_ids.name"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </t>
+
+                    <div class="oe_structure"/>
+                </div>
+            </t>
+        </t>
+    </t>
+</template>
+</data>
+</openerp>

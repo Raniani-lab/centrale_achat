@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_kzm_purchase_request_validation_kzm_purchase_request_validation,kzm_purchase_request_validation.kzm_purchase_request_validation,model_kzm_purchase_request_validation_kzm_purchase_request_validation,,1,0,0,0

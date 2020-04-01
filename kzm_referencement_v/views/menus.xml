@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="main_ref_menu"
+                  name="Referencement"
+                  web_icon="kzm_referencement_v,static/description/icon.png"
+                  sequence="3"/>
+
+    <menuitem id="product_ref_menu"
+              name="Referencement Demand"
+              sequence="1"
+              parent="main_ref_menu"/>
+
+    <menuitem id="product_template_menu"
+              sequence="2"
+              name="Referentiel"
+              parent="main_ref_menu"/>
+
+    <menuitem id="ref_config_menu"
+              sequence="3"
+              name="Settings"
+              parent="main_ref_menu"
+              groups="kzm_referencement_v.group_ref_manager"
+    />
+
+    <menuitem id="ref_product_menu_ref"
+              name="RR Product"
+              sequence="1"
+              parent="product_ref_menu"
+              action="product_ref_form_action"/>
+
+    <menuitem id="ref_client_menu_ref"
+              name="RR Client"
+              sequence="2"
+              parent="product_ref_menu"
+              action="res_ref_list_action"/>
+
+    <menuitem id="ref_supplier_menu_ref"
+              name="RR Supplier"
+              sequence="3"
+              parent="product_ref_menu"
+              action="res_ref_list_action_sup"/>
+
+    <menuitem id="ref_config_config_menu"
+              name="Settings"
+              sequence="1"
+              parent="ref_config_menu"
+              action="action_ref_configuration"/>
+
+    <menuitem id="ref_product_menu_prod"
+              name="Products"
+              parent="product_template_menu"
+              action="product.product_template_action"/>
+
+    <menuitem id="ref_client_menu_prod"
+              name="Clients"
+              parent="product_template_menu"
+              action="base.action_partner_customer_form"/>
+
+    <menuitem id="ref_supplier_menu_prod"
+              name="Supplier"
+              parent="product_template_menu"
+              action="base.action_partner_supplier_form"/>
+        </data>
+</odoo>

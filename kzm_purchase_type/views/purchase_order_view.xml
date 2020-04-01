@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="purchase_order_form">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form" />
+        <field name="arch" type="xml">
+            <field name="partner_ref" position="after">
+                <field name="purchase_type" readonly="1"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="purchase_order_landed_cost_form">
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase_landed_cost.purchase_order_form" />
+        <field name="arch" type="xml">
+            <button name="action_open_landed_cost" position="attributes">
+                <attribute name="attrs">{'invisible': [('purchase_type', '=', 'local')]}</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record model="ir.ui.menu" id="purchase_landed_cost.menu_purchase_cost_control">
+        <field name="groups_id" eval="[(6,0,[ref('kzm_purchase_type.import_purchase_group')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="purchase.menu_purchase_rfq">
+        <field name="groups_id" eval="[(6,0,[ref('kzm_purchase_type.local_purchase_group')])]"/>
+    </record>
+
+    <record model="ir.ui.menu" id="purchase.menu_purchase_form_action">
+        <field name="groups_id" eval="[(6,0,[ref('kzm_purchase_type.local_purchase_group')])]"/>
+    </record>
+
+    <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+        <field name="context">{'search_default_todo':1, 'show_purchase': False, 'default_purchase_type':'local'}</field>
+        <field name="domain">[('state','in',('draft','sent','bid','cancel', 'confirmed')), ('purchase_type','=','local')]</field>
+    </record>
+
+    <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+        <field name="context">{'search_default_todo':1, 'show_purchase': True, 'default_purchase_type':'local'}</field>
+        <field name="domain">[('state','not in',('draft','sent','bid', 'confirmed')), ('purchase_type','=','local')]</field>
+    </record>
+
+    <!--<record id="purchase_rfq_import" model="ir.actions.act_window">-->
+        <!--<field name="name">Requests for Quotation</field>-->
+        <!--<field name="type">ir.actions.act_window</field>-->
+        <!--<field name="res_model">purchase.order</field>-->
+        <!--<field name="context">{'search_default_todo':1, 'show_purchase': False, 'default_purchase_type':'import'}</field>-->
+        <!--<field name="domain">[('state','in',('draft','sent','bid','cancel', 'confirmed')), ('purchase_type','=','import')]</field>-->
+        <!--<field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>-->
+        <!--<field name="search_view_id" ref="purchase.view_purchase_order_filter"/>-->
+        <!--<field name="help" type="html">-->
+          <!--<p class="oe_view_nocontent_create">-->
+            <!--Click to create a request for quotation.-->
+          <!--</p><p>-->
+            <!--The quotation contains the history of the discussion/negotiation-->
+            <!--you had with your vendor. Once confirmed, a request for-->
+            <!--quotation is converted into a purchase order.-->
+          <!--</p><p>-->
+            <!--Most propositions of purchase orders are created automatically-->
+            <!--by Odoo based on inventory needs.-->
+          <!--</p>-->
+        <!--</field>-->
+    <!--</record>-->
+    <record id="purchase_form_action_import" model="ir.actions.act_window">
+        <field name="name">Purchase Orders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph,calendar</field>
+        <field name="context">{'search_default_todo':1, 'show_purchase': True, 'default_purchase_type':'import'}</field>
+        <field name="domain">[('state','not in',('draft','sent','bid', 'confirmed')), ('purchase_type','=','import')]</field>
+        <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="help" type="html">
+          <p class="oe_view_nocontent_create">
+            Click to create a quotation that will be converted into a purchase order.
+          </p><p>
+            Use this menu to search within your purchase orders by
+            references, vendor, products, etc. For each purchase order,
+            you can track the related discussion with the vendor, control
+            the products received and control the vendor bills.
+          </p>
+        </field>
+    </record>
+    <!--<menuitem action="purchase_rfq_import" id="menu_purchase_rfq_import"-->
+        <!--parent="purchase_landed_cost.menu_purchase_cost_control"-->
+        <!--sequence="0"/>-->
+    <menuitem action="purchase_form_action_import" id="menu_purchase_form_action_import"
+        parent="purchase_landed_cost.menu_purchase_cost_control"
+        sequence="5"/>
+
+</odoo>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="product_template_only_form_view">
+        <field name="name">product.template.form.inherit</field>
+        <field name="model">product.template</field>
+        <field  name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="set_sale_visible" invisible="1"/>
+                </div>
+            </xpath>
+            <field name="sale_ok" position="attributes">
+                <attribute name="attrs">{'invisible': [('set_sale_visible', '=', False)]}</attribute>
+            </field>
+            <label for="sale_ok" position="attributes">
+                <attribute name="attrs">{'invisible': [('set_sale_visible', '=', False)]}</attribute>
+            </label>
+            <field name="list_price" position="attributes">
+                <attribute name="attrs">{'invisible': [('set_sale_visible', '=', False)]}</attribute>
+            </field>
+            <xpath expr="//div[@name='options']" position="inside">
+                <div>
+                    <field name="set_purchase_visible" invisible="1"/>
+                </div>
+            </xpath>
+            <field name="purchase_ok" position="attributes">
+                <attribute name="attrs">{'invisible': [('set_purchase_visible', '=', False)]}</attribute>
+            </field>
+            <label for="purchase_ok" position="attributes">
+                <attribute name="attrs">{'invisible': [('set_purchase_visible', '=', False)]}</attribute>
+            </label>
+            <field name="standard_price" position="attributes">
+                <attribute name="attrs">{'invisible': [('set_purchase_visible', '=', False)]}</attribute>
+            </field>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,104 @@
+<odoo>
+
+    <report
+            id="report_eval_eval"
+            model="evaluation.evaluation"
+            string="Rapport d'évaluation"
+            name="kzm_supplier_eval.report_eval_eval_view"
+            file="kzm_supplier_eval.report_eval_eval"
+            report_type="qweb-pdf"/>
+
+    <template id="report_eval_eval_view">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 t-field="doc.name"/>
+                        <br></br>
+                        <div>
+                            <p class="text-left">
+                                <strong>Type d'évaluation :</strong>
+                                <span t-field="doc.evaluation_type_id"/>
+                                <br></br>
+                                <strong>Evaluateur :</strong>
+                                <span t-field="doc.current_user"/>
+                                <br></br>
+                                <strong>Responsable d'évaluation :</strong>
+                                <t t-if="evaluation_responsible_id is not False">
+                                    <span t-field="doc.evaluation_responsible_id"/>
+                                </t>
+                            </p>
+                            <div class="text-right">
+                                <strong>Evaluation du</strong>
+                                <span t-field="doc.start_date"/>
+                                <br></br>
+                                <t t-if="purchase_order_id is not False">
+                                    <strong>Commande évaluée :</strong>
+                                    <span t-field="doc.purchase_order_id"/>
+                                </t>
+                            </div>
+                        </div>
+
+                        <br></br>
+                        <h3>Les critères d'évaluation:</h3>
+                        <br></br>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Critère</th>
+                                    <th scope="col">Note</th>
+                                    <th scope="col">Coefficiant</th>
+                                    <th scope="col">Commentaires</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="doc.evaluation_line_ids" t-as="eval">
+                                    <tr>
+                                        <td>
+                                            <span t-field="eval.criteria_id"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="eval.note_without_coef"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="eval.criteria_coef"/>
+                                        </td>
+                                        <td>
+                                            <span t-field="eval.evaluation_comments"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <br></br>
+                        <div id="recap" class="row justify-content-end">
+                            <div class="col-4">
+                                <table class="table table-sm">
+                                    <tr class="border-black o_total">
+                                        <td>
+                                            <strong>Barème total</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <strong>
+                                                <span t-field="doc.coef_sum"/>
+                                            </strong>
+                                        </td>
+                                    </tr>
+                                    <tr class="border-black">
+                                        <td>
+                                            <strong>Note totale fournisseur</strong>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="doc.evaluation_note"/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>
