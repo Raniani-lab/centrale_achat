@@ -5,15 +5,13 @@ from odoo import api, fields, models, _
 
 
 class PurchaseRequest(models.Model):
-
     _inherit = 'purchase.request'
 
     assigned_to = fields.Many2one(
         'res.users', 'Approver',
-        compute="_compute_approver",readonly=True
+        compute="_compute_approver", readonly=True
     )
 
-    @api.multi
     @api.depends('requested_by')
     def _compute_approver(self):
         for rec in self:
@@ -21,13 +19,13 @@ class PurchaseRequest(models.Model):
             if emp:
                 rec.assigned_to = emp.parent_id.user_id.id
 
-
     def write(self, vals):
         res = super(PurchaseRequest, self).write(vals)
         for o in self:
             if o.assigned_to and o.assigned_to.partner_id:
                 old_followers = self.env['mail.followers'].search(
-                    [('res_id', '=', o.id), ('res_model', '=', 'purchase.request'), ('partner_id','in', [o.assigned_to.partner_id.id, o.requested_by.partner_id.id])])
+                    [('res_id', '=', o.id), ('res_model', '=', 'purchase.request'),
+                     ('partner_id', 'in', [o.assigned_to.partner_id.id, o.requested_by.partner_id.id])])
                 if old_followers:
                     old_followers.sudo().unlink()
                 res = super(PurchaseRequest, self).write(vals)
@@ -36,7 +34,7 @@ class PurchaseRequest(models.Model):
                     'res_model': 'purchase.request',
                     'partner_id': o.assigned_to.partner_id.id,
                 })
-            #if o.requested_by and o.requested_by.partner_id:
+                # if o.requested_by and o.requested_by.partner_id:
                 self.env['mail.followers'].create({
                     'res_id': o.id,
                     'res_model': 'purchase.request',
@@ -45,13 +43,11 @@ class PurchaseRequest(models.Model):
 
         return res
 
-    @api.multi
     def button_to_approve(self):
         res = super(PurchaseRequest, self).button_to_approve()
         self.activity_update()
         return res
 
-    @api.multi
     def button_rejected(self):
         res = super(PurchaseRequest, self).button_rejected()
         self.activity_update()
@@ -63,7 +59,8 @@ class PurchaseRequest(models.Model):
         for o in self:
             if o.assigned_to and o.assigned_to.partner_id:
                 old_followers = self.env['mail.followers'].search(
-                    [('res_id', '=', o.id), ('res_model', '=', 'purchase.request'),('partner_id','in', [o.assigned_to.partner_id.id, o.requested_by.partner_id.id])])
+                    [('res_id', '=', o.id), ('res_model', '=', 'purchase.request'),
+                     ('partner_id', 'in', [o.assigned_to.partner_id.id, o.requested_by.partner_id.id])])
                 if old_followers:
                     old_followers.sudo().unlink()
                 self.env['mail.followers'].create({
@@ -93,9 +90,6 @@ class PurchaseRequest(models.Model):
             elif holiday.state == 'rejected':
                 to_clean |= holiday
         if to_clean:
-            to_clean.activity_unlink(['kzm_purchase_request_validation.mail_act_purchase_approval',])
+            to_clean.activity_unlink(['kzm_purchase_request_validation.mail_act_purchase_approval', ])
         if to_do:
-            to_do.activity_feedback(['kzm_purchase_request_validation.mail_act_purchase_approval',])
-
-
-
+            to_do.activity_feedback(['kzm_purchase_request_validation.mail_act_purchase_approval', ])

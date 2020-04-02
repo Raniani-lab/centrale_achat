@@ -79,7 +79,7 @@ class KzmEvaluationLine(models.Model):
     commentaire = fields.Text("Commentaire")
     hr_evaluation_id = fields.Many2one('kzm.hr.evaluation.eval', string='Evaluation', required=True, ondelete='cascade')
 
-    @api.multi
+
     def _compute_note(self):
         for o in self:
             o.computed_note = o.note.note * o.coef
@@ -101,13 +101,13 @@ class KzmEvaluationPlan(models.Model):
                                              'hr_plan_evaluation_id',
 
                                              'Evaluation Plan lines')
-    @api.multi
+
     def _compute_name(self):
         for o in self:
             o.name = str(o.employe_id and o.employe_id.name or '') +\
                      ' : ' + str(o.date_start or '')+' - '+ str(o.date_end or '')
 
-    @api.multi
+
     @api.depends('hr_evaluation_plan_line_ids')
     def _compute_note(self):
         for o in self:
@@ -115,7 +115,7 @@ class KzmEvaluationPlan(models.Model):
             coefs = sum([l.coef for l in o.hr_evaluation_plan_line_ids])
             o.note = float(notes) / (coefs or 1)
 
-    @api.multi
+
     def _compute_period_str(self):
         for o in self:
             o.period_str = str(o.date_start or '') + ' - ' + str(o.date_end or '')
@@ -172,7 +172,7 @@ class KzmEvaluationPlanLine(models.Model):
     computed_note = fields.Float('Note * Coef', compute='_compute_note')  # compute
     hr_plan_evaluation_id = fields.Many2one('kzm.hr.plan.evaluation.eval', string='Evaluation Plan', required=True, ondelete='cascade')
 
-    @api.multi
+
     def _compute_note(self):
         for o in self:
             o.computed_note = o.note * o.coef

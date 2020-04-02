@@ -44,7 +44,7 @@
         <record id="bareme_eval_action" model="ir.actions.act_window">
             <field name="name">Baremes</field>
             <field name="res_model">kzm.hr.bareme.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="bareme_eval_search_view"/>
             <field name="help" type="html">
@@ -98,7 +98,7 @@
         <record id="axe_eval_action" model="ir.actions.act_window">
             <field name="name">Axes</field>
             <field name="res_model">kzm.hr.axe.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="axe_eval_search_view"/>
             <field name="help" type="html">
@@ -168,7 +168,7 @@
         <record id="critere_eval_action" model="ir.actions.act_window">
             <field name="name">Criteres</field>
             <field name="res_model">kzm.hr.critere.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="critere_eval_search_view"/>
             <field name="help" type="html">
@@ -238,7 +238,7 @@
         <record id="modele_eval_action" model="ir.actions.act_window">
             <field name="name">Modeles</field>
             <field name="res_model">kzm.hr.modele.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="modele_eval_search_view"/>
             <field name="help" type="html">
@@ -316,7 +316,7 @@
         <record id="evaluation_eval_action" model="ir.actions.act_window">
             <field name="name">Evaluations</field>
             <field name="res_model">kzm.hr.evaluation.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="evaluation_eval_search_view"/>
             <field name="help" type="html">
@@ -381,7 +381,7 @@
         <record id="evaluation_line_eval_action" model="ir.actions.act_window">
             <field name="name">Evaluation lines</field>
             <field name="res_model">kzm.hr.evaluation.line.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="evaluation_line_eval_search_view"/>
             <field name="help" type="html">
@@ -463,7 +463,7 @@
         <record id="plan_evaluation_eval_action" model="ir.actions.act_window">
             <field name="name">Evaluation Plans</field>
             <field name="res_model">kzm.hr.plan.evaluation.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="plan_evaluation_eval_search_view"/>
             <field name="help" type="html">
@@ -525,7 +525,7 @@
         <record id="plan_evaluation_line_eval_action" model="ir.actions.act_window">
             <field name="name">Plan Evaluation lines</field>
             <field name="res_model">kzm.hr.plan.evaluation.line.eval</field>
-            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="plan_evaluation_line_eval_search_view"/>
             <field name="help" type="html">
