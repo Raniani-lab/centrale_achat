@@ -7,7 +7,6 @@ from odoo import _, api, exceptions, fields, models
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
-    @api.multi
     def _purchase_request_confirm_message_content(self, request,
                                                   request_dict):
         self.ensure_one()
@@ -31,7 +30,6 @@ class PurchaseOrder(models.Model):
         message += '</ul>'
         return message
 
-    @api.multi
     def _purchase_request_confirm_message(self):
         request_obj = self.env['purchase.request']
         for po in self:
@@ -56,7 +54,6 @@ class PurchaseOrder(models.Model):
                 request.message_post(body=message, subtype='mail.mt_comment')
         return True
 
-    @api.multi
     def _purchase_request_line_check(self):
         for po in self:
             for line in po.order_line:
@@ -67,7 +64,6 @@ class PurchaseOrder(models.Model):
                               'been completed') % request_line.request_id.name)
         return True
 
-    @api.multi
     def button_confirm(self):
         self._purchase_request_line_check()
         res = super(PurchaseOrder, self).button_confirm()
@@ -85,7 +81,6 @@ class PurchaseOrderLine(models.Model):
         'purchase_request_line_id',
         'Purchase Request Lines', readonly=True, copy=False)
 
-    @api.multi
     def action_openRequestLineTreeView(self):
         """
         :return dict: dictionary value for created view

@@ -192,7 +192,6 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
             order_line_data.append(('name', '=', item.name))
         return order_line_data
 
-    @api.multi
     def make_purchase_order(self):
         res = []
         purchase_obj = self.env['purchase.order']

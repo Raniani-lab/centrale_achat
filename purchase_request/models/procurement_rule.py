@@ -61,7 +61,6 @@ class ProcurementRule(models.Model):
                 )
         return domain
 
-    @api.multi
     def is_create_purchase_request_allowed(self, product_id):
         """
         Tell if current procurement order should
@@ -71,7 +70,6 @@ class ProcurementRule(models.Model):
         return self.action == 'buy' \
             and product_id.purchase_request
 
-    @api.multi
     def _run_buy(self, product_id, product_qty, product_uom,
                  location_id, name, origin, values):
         if self.is_create_purchase_request_allowed(product_id):
@@ -82,7 +80,6 @@ class ProcurementRule(models.Model):
             product_id, product_qty, product_uom, location_id, name,
             origin, values)
 
-    @api.multi
     def create_purchase_request(self, product_id, product_qty, product_uom,
                                 origin, values):
         """

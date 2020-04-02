@@ -30,7 +30,6 @@ class StockPicking(models.Model):
         message += '</ul>'
         return message
 
-    @api.multi
     def do_transfer(self):
         super(StockPicking, self).do_transfer()
         request_obj = self.env['purchase.request']

@@ -48,7 +48,6 @@ class PurchaseRequest(models.Model):
                                      ('warehouse_id', '=', False)])
         return types[:1]
 
-    @api.multi
     @api.depends('state')
     def _compute_is_editable(self):
         for rec in self:
@@ -113,7 +112,6 @@ class PurchaseRequest(models.Model):
     def _compute_line_count(self):
         self.line_count = len(self.mapped('line_ids'))
 
-    @api.multi
     def action_view_purchase_request_line(self):
         action = self.env.ref(
             'purchase_request.purchase_request_line_form_action').read()[0]
@@ -126,7 +124,6 @@ class PurchaseRequest(models.Model):
             action['res_id'] = lines.ids[0]
         return action
 
-    @api.multi
     @api.depends(
         'state',
         'line_ids.product_qty',
@@ -142,7 +139,6 @@ class PurchaseRequest(models.Model):
                 ])
             )
 
-    @api.multi
     def copy(self, default=None):
         default = dict(default or {})
         self.ensure_one()
@@ -159,7 +155,6 @@ class PurchaseRequest(models.Model):
             request.message_subscribe(partner_ids=request.assigned_to.partner_id.ids)
         return request
 
-    @api.multi
     def write(self, vals):
         res = super(PurchaseRequest, self).write(vals)
         for request in self:
@@ -167,30 +162,24 @@ class PurchaseRequest(models.Model):
                 request.message_subscribe(partner_ids=request.assigned_to.partner_id.ids)
         return res
 
-    @api.multi
     def button_draft(self):
         self.mapped('line_ids').do_uncancel()
         return self.write({'state': 'draft'})
 
-    @api.multi
     def button_to_approve(self):
         self.to_approve_allowed_check()
         return self.write({'state': 'to_approve'})
 
-    @api.multi
     def button_approved(self):
         return self.write({'state': 'approved'})
 
-    @api.multi
     def button_rejected(self):
         self.mapped('line_ids').do_cancel()
         return self.write({'state': 'rejected'})
 
-    @api.multi
     def button_done(self):
         return self.write({'state': 'done'})
 
-    @api.multi
     def check_auto_reject(self):
         """When all lines are cancelled the purchase request should be
         auto-rejected."""
@@ -198,7 +187,6 @@ class PurchaseRequest(models.Model):
             if not pr.line_ids.filtered(lambda l: l.cancelled is False):
                 pr.write({'state': 'rejected'})
 
-    @api.multi
     def to_approve_allowed_check(self):
         for rec in self:
             if not rec.to_approve_allowed:
@@ -283,7 +271,6 @@ class PurchaseRequestLine(models.Model):
 
     orderpoint_id = fields.Many2one('stock.warehouse.orderpoint', 'Orderpoint')
 
-    @api.multi
     @api.depends('product_id', 'name', 'product_uom_id', 'product_qty',
                  'analytic_account_id', 'date_required', 'specifications',
                  'purchase_lines')
@@ -297,7 +284,6 @@ class PurchaseRequestLine(models.Model):
         for rec in self.filtered(lambda p: p.purchase_lines):
             rec.is_editable = False
 
-    @api.multi
     def _compute_supplier_id(self):
         for rec in self:
             if rec.product_id:
@@ -321,17 +307,14 @@ class PurchaseRequestLine(models.Model):
             self.product_qty = 1
             self.name = name
 
-    @api.multi
     def do_cancel(self):
         """Actions to perform when cancelling a purchase request line."""
         self.write({'cancelled': True})
 
-    @api.multi
     def do_uncancel(self):
         """Actions to perform when uncancelling a purchase request line."""
         self.write({'cancelled': False})
 
-    @api.multi
     def write(self, vals):
         res = super(PurchaseRequestLine, self).write(vals)
         if vals.get('cancelled'):
@@ -339,7 +322,6 @@ class PurchaseRequestLine(models.Model):
             requests.check_auto_reject()
         return res
 
-    @api.multi
     def _compute_purchased_qty(self):
         for rec in self:
             rec.purchased_qty = 0.0
@@ -352,7 +334,6 @@ class PurchaseRequestLine(models.Model):
                 else:
                     rec.purchased_qty += line.product_qty
 
-    @api.multi
     @api.depends('purchase_lines.state', 'purchase_lines.order_id.state')
     def _compute_purchase_state(self):
         for rec in self:
@@ -423,7 +404,6 @@ class PurchaseRequestLine(models.Model):
         qty = max(rl_qty, supplierinfo_min_qty)
         return qty
 
-    @api.multi
     def unlink(self):
         if self.mapped('purchase_lines'):
             raise UserError(
