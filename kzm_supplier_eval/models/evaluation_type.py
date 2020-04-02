@@ -22,15 +22,12 @@ class EvaluationType(models.Model):
         ('done', "Done"),
     ], default='draft', track_visibility='onchange')
 
-    @api.multi
     def action_draft(self):
         self.state = 'draft'
 
-    @api.multi
     def action_confirm(self):
         self.state = 'confirmed'
 
-    @api.multi
     def action_done(self):
         self.state = 'done'
         env = self.env['mail.followers']
@@ -48,3 +45,8 @@ class EvaluationType(models.Model):
         request_line_ids = self.env.context.get('active_ids', False)
         res['criterias_ids'] = [(6, 0, request_line_ids)]
         return res
+
+class ResPartner(models.Model):
+    _inherit="res.partner"
+
+    supplier = fields.Boolean(string="Is a Supplier")

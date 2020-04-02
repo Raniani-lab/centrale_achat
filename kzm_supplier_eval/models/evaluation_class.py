@@ -19,15 +19,12 @@ class EvaluationClass(models.Model):
         ('done', "Done"),
     ], default='draft', track_visibility='onchange')
 
-    @api.multi
     def action_draft(self):
         self.state = 'draft'
 
-    @api.multi
     def action_confirm(self):
         self.state = 'confirmed'
 
-    @api.multi
     def action_done(self):
         self.state = 'done'
         env = self.env['mail.followers']
@@ -63,7 +60,7 @@ class Partner(models.Model):
             coefs = sum([int(l.evaluation_type_id.evaluation_weight) for l in evals])
             r.evaluation_note = notes / (coefs or 1.0)
             print(r.evaluation_note)
-    @api.multi
+
     def _get_supplier_class(self):
         """récupère la classe fournisseur et l'affecte au fournisseurs pour affichage"""
         for r in self:
@@ -74,7 +71,6 @@ class Partner(models.Model):
             print(r.evaluation_class_name)
 
 
-    @api.multi
     def eval_recap(self):
         """action de redirection vers la liste des evaluations """
         po = self.env['purchase.order'].search([('partner_id', '=', self.id)])

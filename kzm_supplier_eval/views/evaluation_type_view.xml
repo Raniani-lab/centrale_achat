@@ -87,7 +87,6 @@
         <record model="ir.actions.act_window" id="evaluation_type_list_action">
             <field name="name">Evaluation types</field>
             <field name="res_model">evaluation.type</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 

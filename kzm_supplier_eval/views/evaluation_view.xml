@@ -3,7 +3,6 @@
     <record model="ir.actions.act_window" id="evaluation_list_action">
             <field name="name">Supplier Evaluation</field>
             <field name="res_model">evaluation.evaluation</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form,kanban</field>
             <field name="context" eval="{'search_default_my_evaluations': 1}"/>
             <field name="help" type="html">

@@ -54,14 +54,12 @@
 <!--            name="Create an Evaluation type"-->
 <!--            src_model="evaluation.criteria"-->
 <!--            res_model="evaluation.type"-->
-<!--            view_type="form" view_mode="form"-->
 <!--            key2="tree_but_open" target="new"-->
 <!--            groups="kzm_supplier_eval.group_eval_manager"/>-->
 
     <record model="ir.actions.act_window" id="create_eval_type_id">
         <field name="name">Create evaluation type</field>
         <field name="res_model">evaluation.type</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="binding_model_id" ref="kzm_supplier_eval.model_evaluation_criteria" />
@@ -80,7 +78,6 @@
         <record model="ir.actions.act_window" id="evaluation_criteria_list_action">
             <field name="name">Evaluation criterias</field>
             <field name="res_model">evaluation.criteria</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 

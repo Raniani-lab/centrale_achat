@@ -51,15 +51,12 @@ class EvaluationEvaluation(models.Model):
                 }))
             o.evaluation_line_ids = to_be_creat
 
-    @api.multi
     def action_draft(self):
         self.state = 'draft'
 
-    @api.multi
     def action_confirm(self):
         self.state = 'confirmed'
 
-    @api.multi
     def action_done(self):
         self.state = 'done'
         old_followers = self.env['mail.followers'].search(
@@ -81,7 +78,6 @@ class EvaluationEvaluation(models.Model):
                 'partner_id': self.evaluation_responsible_id.partner_id.id,
             })
 
-    @api.multi
     @api.depends('current_user')
     def _compute_approver(self):
         for rec in self:

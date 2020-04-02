@@ -25,15 +25,12 @@ class EvaluationCriteria(models.Model):
         ('done', "Done"),
     ], default='draft', track_visibility='onchange')
 
-    @api.multi
     def action_draft(self):
         self.state = 'draft'
 
-    @api.multi
     def action_confirm(self):
         self.state = 'confirmed'
 
-    @api.multi
     def action_done(self):
         self.state = 'done'
         env = self.env['mail.followers']

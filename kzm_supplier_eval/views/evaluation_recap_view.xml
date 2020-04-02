@@ -148,7 +148,6 @@
         <record model="ir.actions.act_window" id="evaluation_recap_list_action">
             <field name="name">Supplier Evaluations Recapitulation</field>
             <field name="res_model">evaluation.recap</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form,kanban</field>
         </record>
 
