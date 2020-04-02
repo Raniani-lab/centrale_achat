@@ -127,14 +127,12 @@
         <record model="ir.actions.act_window" id="res_ref_list_action">
             <field name="name">Client referencement</field>
             <field name="res_model">ref.res</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain" >[('nature', '=', 'client')]</field>
         </record>
         <record model="ir.actions.act_window" id="res_ref_list_action_sup">
             <field name="name">Supplier referencement</field>
             <field name="res_model">ref.res</field>
-            <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
             <field name="domain" >[('nature', '=', 'supplier')]</field>
         </record>

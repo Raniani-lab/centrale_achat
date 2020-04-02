@@ -34,15 +34,12 @@ class ResRef(models.Model):
         vals['name'] = seq
         return super(ResRef, self).create(vals)
 
-    @api.multi
     def action_draft(self):
         self.state = 'draft'
 
-    @api.multi
     def action_confirm(self):
         self.state = 'confirmed'
 
-    @api.multi
     def action_done(self):
         self.state = 'done'
         test = True if self.nature == 'supplier' else False
@@ -62,7 +59,6 @@ class ResRef(models.Model):
             'reference_id': self.id,
         })
 
-    @api.multi
     def res_ref(self):
         """action de redirection le produit reference """
         test = True if self.nature == 'supplier' else False

@@ -5,14 +5,16 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//button[@name='toggle_active']" position="after">
-                    <field name="isReferenced" invisible="1" />
-                    <button name="product_ref" type="object"
-                            class="oe_stat_button"
-                             attrs="{'invisible': [('isReferenced', '=', False)]}"
-                            icon="fa-star">
-                        <field name="reference_id" />
-                    </button>
+                <xpath expr="//sheet" position="inside">
+                    <div class="oe_button_box" name="button_box">
+                        <field name="isReferenced" invisible="1" />
+                        <button name="product_ref" type="object"
+                                class="oe_stat_button"
+                                 attrs="{'invisible': [('isReferenced', '=', False)]}"
+                                icon="fa-star">
+                            <field name="reference_id" />
+                        </button>
+                    </div>
                 </xpath>
             </field>
         </record>

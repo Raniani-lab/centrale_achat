@@ -65,21 +65,17 @@ class ProductRef(models.Model):
         'res.currency', 'Currency', compute='_compute_currency_id')
     company_id = fields.Many2one('res.company', default=lambda self: self.env.user.company_id)
 
-    @api.multi
     def _compute_currency_id(self):
         main_company = self.env['res.company']._get_main_company()
         for template in self:
             template.currency_id = template.company_id.sudo().currency_id.id or main_company.currency_id.id
 
-    @api.multi
     def action_draft(self):
         self.state = 'draft'
 
-    @api.multi
     def action_confirm(self):
         self.state = 'confirmed'
 
-    @api.multi
     def action_done(self):
         self.env['product.template'].create({
             'name': self.prod_name,
@@ -116,7 +112,6 @@ class ProductRef(models.Model):
         vals['name'] = seq
         return super(ProductRef, self).create(vals)
 
-    @api.multi
     def product_ref(self):
         """action de redirection le produit reference """
         evals_recaps = self.env['product.template'].search([('name', '=', self.prod_name)])

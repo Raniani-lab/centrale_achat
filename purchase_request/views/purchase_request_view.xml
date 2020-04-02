@@ -36,7 +36,8 @@
                         groups="purchase_request.group_purchase_request_manager"/>
                 <field name="state"
                        widget="statusbar"
-                       statusbar_visible="draft,to_approve,approved,done,rejected"/>
+                       statusbar_visible="draft,to_approve,approved,done,rejected"
+                       statusbar_colors='{"approved":"blue"}'/>
             </header>
             <sheet>
                 <div class="oe_button_box" name="button_box">
