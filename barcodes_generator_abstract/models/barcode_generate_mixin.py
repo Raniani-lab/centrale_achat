@@ -48,7 +48,7 @@ class BarcodeGenerateMixin(models.AbstractModel):
         return record
 
     # View Section
-    @api.multi
+
     def generate_base(self):
         for item in self:
             if item.generate_type != 'sequence':
@@ -59,7 +59,7 @@ class BarcodeGenerateMixin(models.AbstractModel):
                 item.barcode_base =\
                     item.barcode_rule_id.sequence_id.next_by_id()
 
-    @api.multi
+
     def generate_barcode(self):
         for item in self:
             padding = item.barcode_rule_id.padding

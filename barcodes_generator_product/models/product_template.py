@@ -5,7 +5,7 @@
 
 from odoo import api, fields, models
 
-from odoo.addons.barcodes_generator_abstract.models.barcode_rule\
+from odoo.addons.barcodes_generator_abstract.models.barcode_rule \
     import _GENERATE_TYPE
 
 
@@ -26,11 +26,10 @@ class ProductTemplate(models.Model):
         related='product_variant_ids.barcode_rule_id.generate_type')
 
     # View Section
-    @api.multi
+
     def generate_base(self):
         self.product_variant_ids.generate_base()
 
-    @api.multi
     def generate_barcode(self):
         self.ensure_one()
         self.product_variant_ids.generate_barcode()

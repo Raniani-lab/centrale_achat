@@ -59,7 +59,6 @@ class PickingImportWizard(models.TransientModel):
             'move_id': move.id,
         }
 
-    @api.multi
     def action_import_picking(self):
         self.ensure_one()
         distribution = self.env['purchase.cost.distribution'].browse(

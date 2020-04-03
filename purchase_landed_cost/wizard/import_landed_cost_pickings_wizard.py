@@ -11,7 +11,7 @@ class ImportLandedCostPickingsWizard(models.TransientModel):
     possible_picking_ids = fields.Many2many(
         comodel_name="stock.picking", string="Possible pickings")
     picking_ids = fields.Many2many(
-        comodel_name="stock.picking", string="Pickings",
+        comodel_name="stock.picking.type", string="Pickings",
         domain="[('id', 'in', possible_picking_ids and possible_picking_ids[0] and possible_picking_ids[0][2] or False)]")
 
     @api.model
@@ -25,7 +25,6 @@ class ImportLandedCostPickingsWizard(models.TransientModel):
             res['possible_picking_ids'] = [(6, 0, pickings.ids)]
         return res
 
-    @api.multi
     def button_import(self):
         self.ensure_one()
         invoice_id = self.env.context['active_id']

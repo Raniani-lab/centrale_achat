@@ -26,17 +26,16 @@ class ImportInvoiceLine(models.TransientModel):
         comodel_name='res.partner', string='Supplier', required=True,
         domain="[('supplier',  '=', True)]")
     invoice = fields.Many2one(
-        comodel_name='account.invoice', string="Invoice", required=True,
+        comodel_name='account.move', string="Invoice", required=True,
         domain="[('partner_id', '=', supplier), ('type', '=', 'in_invoice'),"
                "('state', 'in', ['open', 'paid'])]")
     invoice_line = fields.Many2one(
-        comodel_name='account.invoice.line', string="Invoice line",
+        comodel_name='account.move.line', string="Invoice line",
         required=True, domain="[('invoice_id', '=', invoice)]")
     expense_type = fields.Many2one(
         comodel_name='purchase.expense.type', string='Expense type',
         required=True)
 
-    @api.multi
     def action_import_invoice_line(self):
         self.ensure_one()
         self.env['purchase.cost.distribution.expense'].create({

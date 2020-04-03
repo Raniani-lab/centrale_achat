@@ -9,7 +9,7 @@ from odoo import models, api
 class PurchaseOrder(models.Model):
     _inherit = 'purchase.order'
 
-    @api.multi
+
     def action_open_landed_cost(self):
         self.ensure_one()
         line_obj = self.env['purchase.cost.distribution.line']

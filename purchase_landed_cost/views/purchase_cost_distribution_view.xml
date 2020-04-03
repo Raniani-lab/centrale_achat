@@ -10,7 +10,7 @@
             model="ir.actions.act_window">
         <field name="name">Purchase cost distributions</field>
         <field name="res_model">purchase.cost.distribution</field>
-        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
         <field name="view_mode">tree,form,calendar,graph</field>
         <field eval="False" name="view_id"/>
         <field name="help" type="html">

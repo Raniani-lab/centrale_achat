@@ -8,10 +8,9 @@ import odoo.addons.decimal_precision as dp
 
 class StockPicking(models.Model):
     _inherit = 'stock.picking'
-    
+
     is_costed = fields.Boolean(default=False)
 
-    @api.multi
     def action_open_landed_cost(self):
         self.ensure_one()
         line_obj = self.env['purchase.cost.distribution.line']
@@ -39,7 +38,6 @@ class StockMove(models.Model):
 
     old_price_unit = fields.Float('Old Unit Price', digits=dp.get_precision('Product Price'))
 
-    @api.multi
     def product_price_update_after_done(self):
         ''' Adapt standard price on outgoing moves, so that a
         return or an inventory loss is made using the last value used for an outgoing valuation. '''
@@ -61,10 +59,12 @@ class StockMove(models.Model):
             valuation_price = sum(m.price_unit * m.product_qty for m in move)
             average_valuation_price = valuation_price / move.product_qty
 
-            move.product_id.with_context(force_company=move.company_id.id).sudo().write({'standard_price': average_valuation_price})
+            move.product_id.with_context(force_company=move.company_id.id).sudo().write(
+                {'standard_price': average_valuation_price})
             move.write({'price_unit': average_valuation_price})
 
-        for move in self.filtered(lambda move: move.product_id.cost_method != 'fifo' and not move.origin_returned_move_id):
+        for move in self.filtered(
+                lambda move: move.product_id.cost_method != 'fifo' and not move.origin_returned_move_id):
             # Unit price of the move should be the current standard price, taking into account
             # price fluctuations due to products received between move creation (e.g. at SO
             # confirmation) and move set to done (delivery completed).
