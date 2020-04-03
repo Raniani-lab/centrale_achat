@@ -206,7 +206,6 @@
 		<record model="ir.actions.act_window" id="action_dossier_import">
 			<field name="name">Dossier import</field>
 			<field name="res_model">dossier_import</field>
-			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 		</record>	
 		  

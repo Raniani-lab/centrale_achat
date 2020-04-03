@@ -8,7 +8,6 @@ class dossier_import(models.Model):
     _description = 'Dossier Import'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    @api.multi
     def compute_taux_frais_approche(self):
         for rec in self:
             rec.taux_frais_approche = (rec.total_frais_dh / ((rec.total_frais_dh+rec.total_achats_dh) or 1))*100
@@ -61,7 +60,6 @@ class dossier_import(models.Model):
                              ('traiter', 'Traité'),
                              ('valide', u'Validé')], u'Statut', default='encours' ,readonly=True, required=True)
 
-    @api.multi
     def to_termine(self):
         self.write( {'state': 'termine'})
         return True
@@ -72,7 +70,6 @@ class dossier_import(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('dossier.import')
         return super(dossier_import, self).create(vals)
 
-    @api.multi
     @api.onchange('taux_change')
     def onchange_taux_change(self):
         for rec in self:
@@ -84,7 +81,6 @@ class dossier_import(models.Model):
         if self.purchase_ids:
             self.partner_id = self.purchase_ids[0].partner_id
 
-    @api.multi
     @api.depends('line_achat_ids')
     def get_totaux(self):
         for rec in self:
@@ -104,7 +100,6 @@ class dossier_import(models.Model):
             rec.tot_volume = somme_volume
 
     # Méthode qui calcule le total des achats en DH
-    @api.multi
     def get_total_achats(self):
         for rec in self:
             somme = 0.0
@@ -113,7 +108,6 @@ class dossier_import(models.Model):
             rec.total_achats_dh = somme
 
     # Méthode qui calcule le total des frais en DH
-    @api.multi
     def get_total_frais(self):
         for rec in self:
             somme = 0.0
@@ -139,7 +133,6 @@ class dossier_import(models.Model):
     #                              }
     #                 self.env['achat.line.dossier.import'].create(line_value)
 
-    @api.multi
     def generate_achat_line(self):
         self.ensure_one()
         return {
@@ -155,7 +148,6 @@ class dossier_import(models.Model):
 
     # Méthode qui effectue les répartitions analytiques
     #Droits de douane = taux( %) x (valeur du produit + coût du transport + assurance...)
-    @api.multi
     def generer_distribution_analytic(self):
         for rec in self:
             rec.analytic_line_ids.unlink()
@@ -189,7 +181,6 @@ class dossier_import(models.Model):
                                     }
                     self.env['ligne.distrib.analytic'].create(distrib_line)
 
-    @api.multi
     def get_couts_unitaires(self):
        couts_unitaires = {}
        for rec in self:
@@ -215,7 +206,6 @@ class dossier_import(models.Model):
        return couts_unitaires
 
     #calcul le total des frais douane seulement
-    @api.multi
     def get_frais_douane(self,article):
         couts_unitaires = self.get_couts_unitaires()
         for rec in self:
@@ -226,7 +216,6 @@ class dossier_import(models.Model):
         return somme
 
     #calcul le total des Droits d’auteurs seulement
-    @api.multi
     def get_copyright(self,article):
         for rec in self:
                somme=0.0
@@ -236,7 +225,6 @@ class dossier_import(models.Model):
         return somme
 
     #calcul le total des frais Hors douane
-    @api.multi
     def get_autres_frais(self, article):
         couts_unitaires = self.get_couts_unitaires()
         for rec in self:
@@ -247,7 +235,6 @@ class dossier_import(models.Model):
         return somme
 
     # Méthode qui calcul le prix de revient impliqués dans le dossier d'import
-    @api.multi
     def calcul_cost_price(self):
         total_douane = 0
         total_copyright = 0
@@ -301,7 +288,6 @@ class dossier_import(models.Model):
         return  couts_unitaires
 
      # Effectuer La mise à jour du prix de revient
-    @api.multi
     def update_cost_price(self):
          couts_unitaires = self.get_couts_unitaires()
          for rec in self:
@@ -317,7 +303,7 @@ class dossier_import(models.Model):
                 else:
                     new_price = prix_dossier
                 article_tmpl.standard_price = new_price
-    @api.multi
+
     def unlink(self):
         if self.state != "encours":
             raise UserError(('Action non valide,Impossible de supprimer un dossier terminer'))
@@ -341,7 +327,6 @@ class AchatLineDossierImport(models.Model):
 
     # Méthode qui calcule le montant en DHS relatif au frais inséré
 
-    @api.multi
     @api.depends('montant_devise','currency_id','dossier_id.taux_change','dossier_id.company_id')
     def get_montant_dh(self):
         for rec in self:
@@ -373,7 +358,6 @@ class FraisDossierImport(models.Model):
     amount_dh = fields.Float(string=u"Montant dhs",compute='get_montant_dh')
     currency_rate = fields.Float(u'Taux de change', digits=(16,4))
 
-    @api.multi
     @api.onchange('product_id')
     def change_split_method(self):
         for rec in self:
@@ -382,7 +366,6 @@ class FraisDossierImport(models.Model):
                 rec.currency_rate = rec.dossier_id.taux_change
 
     # Méthode qui calcule le montant en DHS relatif au frais inséré
-    @api.multi
     @api.depends('amount','currency_id','dossier_id.taux_change','dossier_id.company_id')
     def get_montant_dh(self):
         for rec in self:
@@ -410,7 +393,6 @@ class LigneDistribAnalytic(models.Model):
 class ProductNewPrice(models.Model):
     _name = 'product.new.price'
 
-    @api.multi
     def get_prices(self):
         for rec in self:
             rec.price_unite_sale = rec.product_id.lst_price

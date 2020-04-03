@@ -21,7 +21,6 @@ class LandedCostWizard(models.TransientModel):
             'montant_devise': move.purchase_line_id.price_unit * move.product_qty,
         }
 
-    @api.multi
     def action_import_picking(self):
         self.ensure_one()
         dossier_import_id = self.env['dossier_import'].browse(
