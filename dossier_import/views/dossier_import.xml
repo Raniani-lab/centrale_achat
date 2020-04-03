@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+	    <!-- Dossier import tree-->		
+        <record id="view_dossier_import_tree" model="ir.ui.view">
+            <field name="name">dossier.import.tree</field>
+            <field name="model">dossier_import</field>
+            <field name="arch" type="xml">
+                <tree string="Dossier import">
+                        <field name="name"/>
+                        <field name="date_dossier_import"/>
+                        <field name="partner_id"/>
+                        <field name="total_achats_dh"/>
+                        <field name="devise_id"/>
+                        <field name="state"/>
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Dossier import search view -->
+        <record id="dossier_import_search_view" model="ir.ui.view">
+            <field name="name">Dossier Import</field>
+            <field name="model">dossier_import</field>
+            <field name="arch" type="xml">
+                <search string="Dossier import">
+                    <field name="date_dossier_import"/>
+                    <field name="num_portnet"/>
+                    <field name="partner_id"/>
+                    <field name="tag_ids"/>
+                    <group expand="0" string="Group By">
+                        <filter name="date_dossier_import" string="Date" domain="[]" context="{'group_by':'date_dossier_import'}"/>
+                        <filter name="partner_id" string="Fournisseur" domain="[]" context="{'group_by':'partner_id'}"/>
+                    </group>
+                </search>
+             </field>
+         </record>
+
+       <!-- Dossier import from-->
+       <record id="view_dossier_import_form" model="ir.ui.view">
+            <field name="name">dossier.import.form</field>
+            <field name="model">dossier_import</field>
+            <field name="arch" type="xml">
+                <form string="Dossier import">
+                    <header>
+                        <button name="generer_distribution_analytic" string="Distr.Analytiques" states="encours"
+                                type="object" class="oe_highlight"/>
+                        <button name="calcul_cost_price" string="Calcul PR" states="encours"
+                                type="object" class="oe_highlight"/>
+                        <button name="update_cost_price" string="Mise à jour PR" states="encours"
+                                type="object" class="oe_highlight"/>
+                        <button name="to_termine" string="Terminer"  states="encours" type="object" class="oe_highlight" />
+                        <field name="state" widget="statusbar" statusbar_visible="encours,termine"/>
+                    </header>
+                    <sheet>
+                        <!--<div class="oe_right oe_button_box" name="dossier_import_buttons" states = 'encours'>-->
+                            <!--<button class="oe_inline oe_stat_button" name="generer_distribution_analytic"-->
+                                    <!--string="Distr.Analytiques" type="object" icon="fa-pencil-square-o">-->
+                            <!--</button>-->
+                             <!--<button class="oe_inline oe_stat_button" name="calcul_cost_price"-->
+                                    <!--string="Calcul PR" type="object" icon="fa-pencil-square-o">-->
+                            <!--</button>-->
+                            <!--<button class="oe_inline oe_stat_button" name="update_cost_price"-->
+                                    <!--string="Mise à jour PR" type="object" icon="fa-pencil-square-o">-->
+                            <!--</button>-->
+                        <!--</div>-->
+                        <group>
+                            <field name="name"  required="0"/>
+                            <field name="date_dossier_import" required="1"  attrs="{'readonly':[('state','=','termine')]}" />
+                            <field name="tag_ids"  widget="many2many_tags"/>
+                            <field name="purchase_ids" widget="many2many_tags" domain="[('state','!=','draft')]" attrs="{'readonly':[('state','=','termine')]}"/>
+                            <field name="devise_id" required="1" attrs="{'readonly':[('state','=','termine')]}"/>
+                            <field name="taux_change" required="1" attrs="{'readonly':[('state','=','termine')]}"/>
+                            <field name="company_id" invisible="1" />
+                        </group>
+                  	    <notebook colspan="4">
+                            <page string="Détails Achat" >
+                                <button name="generate_achat_line" string="Générer lignes achat" states="encours" type="object" icon="fa-pencil-square-o"/>
+                                <field name="line_achat_ids" readonly="0">
+                                    <tree>
+                                        <field name="purchase_id" />
+                                        <field name="product_id" />
+                                        <field name="ordered_qty" />
+                                        <field name="taux_douane" />
+                                        <field name="currency_id" />
+                                        <field name="prix_devise" />
+                                        <field name="montant_devise" sum="total_devise"/>
+                                        <field name="montant_dirham" sum="total_dh"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Frais dossier">
+                                <field name="line_frais_ids" attrs="{'readonly':[('state','=','termine')]}">
+                                    <tree editable="top">
+                                        <field name="product_id" required="1"/>
+                                        <field name="split_method" required="1" />
+                                        <field name="amount" required="1" sum="total_frais"/>
+                                        <field name="currency_rate" required="1"/>
+                                        <field name="currency_id" required="1"/>
+                                        <field name="amount_dh" sum="total_frais_devise" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Détails">
+                                <field name="product_new_price_ids" nolabel="1" readonly="1">
+                                    <tree editable="top">
+                                        <field name="product_id" />
+                                        <field name="qty" sum="qty"/>
+                                        <field name="price_unit_devise" sum="price_unit_devise"/>
+                                        <field name="price_total_devise" sum="price_total_devise" />
+                                        <field name="taux"/>
+                                        <field name="frais_douane" sum="frais_douane"/>
+                                        <field name="autres_frais" sum="autres_frais"/>
+                                        <field name="price" sum="price"/>
+                                        <field name="total_price" sum="total_price"/>
+                                        <field name="price_unite_sale" sum="price_unite_sale"/>
+                                        <field name="marge" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Distributions Analytiques">
+                                <field name="analytic_line_ids" nolabel="1" readonly="1">
+                                    <tree editable="top">
+                                        <field name="frais_id" />
+                                        <field name="product_id" />
+                                        <field name="montant_unitaire" />
+                                        <field name="price_unit_devise" />
+                                        <field name="price_total_devise" />
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Informations clés">
+                                <group>
+                                    <group string="Transport">
+                                        <field name="num_portnet"/>
+                                        <field name="transitaire_id"/>
+                                        <field name="transporteur_id"/>
+                                        <field name="incoterm_id"/>
+                                    </group>
+                                    <group string="Echéances">
+                                        <field name="date_mise_en_transport"/>
+                                        <field name="date_arrivee_magasin"/>
+                                        <field name="date_facturation"/>
+                                        <field name="date_paiement_fournisseur"/>
+                                    </group>
+                            </group>
+                            </page>
+                            <page string="Informations">
+                                <group string="D.U.M">
+                                    <group>
+                                        <field name="partner_id" domain="[('supplier', '=', True)]"/>
+                                        <field name="num_dum"/>
+                                        <field name="date_dum"/>
+                                        <field name="marchandise"/>
+                                        <field name="country_id"/>
+                                    </group>
+                                    <group>
+                                        <field name="poids_brut"/>
+                                        <field name="nbre_colis"/>
+                                    </group>
+					            </group>
+                                <group string="QUITTANCE">
+                                    <group>
+                                        <field name="num_quittance"/>
+                                        <field name="date_quittance"/>
+                                    </group>
+                                    <group>
+                                        <field name="fiche_liquidation"/>
+                                    </group>
+                                </group>
+                            </page>
+					    </notebook>
+                        <group>
+                            <group string="Totaux">
+                                <field name="total_achats_dh" />
+                                <field name="total_frais_dh" />
+                                <field name="taux_frais_approche" />
+                            </group>
+                            <group>
+                                <field name="tot_qte_cmd"/>
+                                <field name="tot_poids"/>
+                                <field name="tot_volume"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+		<!-- Dossier import search-->
+        <record id="view_dossier_import_search" model="ir.ui.view">
+            <field name="name">dossier.import.search</field>
+            <field name="model">dossier_import</field>
+            <field name="arch" type="xml">
+                <search string="Dossier import">
+                    <field name="name" string="Nom"/>
+                </search>
+            </field>
+        </record>
+
+		<record model="ir.actions.act_window" id="action_dossier_import">
+			<field name="name">Dossier import</field>
+			<field name="res_model">dossier_import</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+		</record>	
+		  
+		<menuitem  id="dossier_import_root_id" parent="purchase.menu_purchase_root" name="Dossiers Imports" sequence="2" groups="dossier_import.group_dossier_import"/>
+
+    	<menuitem
+        	id="menu_dossier_import"
+        	sequence="1"
+        	parent="dossier_import_root_id"
+        	action="action_dossier_import" groups="dossier_import.group_dossier_import"/>
+    </data>
+</odoo>
