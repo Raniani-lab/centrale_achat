@@ -32,7 +32,7 @@
     <record id="kzm_product_product_tree_view_inherit" model="ir.ui.view">
             <field name="name">product.product.tree.inherit</field>
             <field name="model">product.product</field>
-            <field name="inherit_id" ref="account.product_product_view_tree"/>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='lst_price']" position="attributes">
                     <attribute name="groups">purchase.group_purchase_manager</attribute>
