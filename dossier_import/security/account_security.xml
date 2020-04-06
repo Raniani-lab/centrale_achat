@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data noupdate="0">
+
+    <record model="ir.module.category" id="categorie_dossier_import">
+            <field name="name">Dossier import</field>
+            <field name="description">Dossier d'import</field>
+            <field name="sequence">10</field>
+    </record>
+
+        <record id="group_dossier_import" model="res.groups">
+            <field name="name">Utilisateur</field>
+            <field name="category_id" ref="dossier_import.categorie_dossier_import"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+</data>
+</odoo>
