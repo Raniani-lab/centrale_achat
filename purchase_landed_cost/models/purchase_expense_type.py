@@ -11,7 +11,7 @@ class PurchaseExpenseType(models.Model):
     _description = "Purchase cost type"
 
     name = fields.Char(string='Name', required=True, translate=True,
-                       select=True)
+                       index=True)
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company',
         default=(lambda self: self.env['res.company']._company_default_get(

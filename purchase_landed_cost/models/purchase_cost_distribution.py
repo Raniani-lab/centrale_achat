@@ -63,7 +63,7 @@ class PurchaseCostDistribution(models.Model):
             self.partner_id = self.cost_lines[0].partner.id
 
     name = fields.Char(string='Distribution number', required=True,
-                       select=True, default="/")
+                       index=True, default="/")
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company', required=True,
         default=(lambda self: self.env['res.company']._company_default_get(
@@ -83,31 +83,31 @@ class PurchaseCostDistribution(models.Model):
     #     [('direct', 'Direct Update')], string='Cost Update Type',
     #     default='direct', required=True)
     date = fields.Date(
-        string='Date', required=True, readonly=True, select=True,
+        string='Date', required=True, readonly=True, index=True,
         states={'draft': [('readonly', False)]},
         default=fields.Date.context_today)
     total_uom_qty = fields.Float(
         compute=_compute_total_uom_qty, readonly=True,
-        digits_compute=dp.get_precision('Product UoS'),
+        digits=dp.get_precision('Product UoS'),
         string='Total quantity')
     total_weight = fields.Float(
         compute=_compute_total_weight, string='Total gross weight',
         readonly=True,
-        digits_compute=dp.get_precision('Stock Weight'))
+        digits=dp.get_precision('Stock Weight'))
     total_volume = fields.Float(
         compute=_compute_total_volume, string='Total volume', readonly=True)
     total_purchase = fields.Float(
         compute=_compute_total_purchase,
-        digits_compute=dp.get_precision('Account'), string='Total purchase')
+        digits=dp.get_precision('Account'), string='Total purchase')
     total_price_unit = fields.Float(
         compute=_compute_total_price_unit, string='Total price unit',
-        digits_compute=dp.get_precision('Product Price'))
+        digits=dp.get_precision('Product Price'))
     amount_total = fields.Float(
         compute=_compute_amount_total,
-        digits_compute=dp.get_precision('Account'), string='Total')
+        digits=dp.get_precision('Account'), string='Total')
     total_expense = fields.Float(
         compute=_compute_total_expense,
-        digits_compute=dp.get_precision('Account'), string='Total expenses')
+        digits=dp.get_precision('Account'), string='Total expenses')
     note = fields.Text(string='Documentation for this order')
     cost_lines = fields.One2many(
         comodel_name='purchase.cost.distribution.line', ondelete="cascade",
@@ -393,7 +393,7 @@ class PurchaseCostDistributionLine(models.Model):
         digits_compute=dp.get_precision('Product Price'))
     old_standard_price = fields.Float(
         string='Previous cost', compute='_get_old_standard_price', store=True,
-        digits_compute=dp.get_precision('Product Price'))
+        digits=dp.get_precision('Product Price'))
     expense_amount = fields.Float(
         string='Cost amount', digits=(8, 2), digits_compute=dp.get_precision('Account'),
         compute='_compute_expense_amount')
@@ -404,10 +404,10 @@ class PurchaseCostDistributionLine(models.Model):
         compute='_compute_standard_price_new')
     total_amount_curr = fields.Float(
         compute=_compute_total_amount, string='Amount line',
-        digits_compute=dp.get_precision('Account'))
+        digits=dp.get_precision('Account'))
     total_weight = fields.Float(
         compute=_compute_total_weight, string="Line weight", store=True,
-        digits_compute=dp.get_precision('Stock Weight'),
+        digits=dp.get_precision('Stock Weight'),
         help="The line gross weight in Kg.")
     total_volume = fields.Float(
         compute=_compute_total_volume, string='Line volume', store=True,
@@ -421,7 +421,7 @@ class PurchaseCostDistributionLine(models.Model):
         string='Unit price MAD', compute=_compute_total_amount)
     total_amount = fields.Float(
         compute=_compute_total_amount, string='Amount line MAD',
-        digits_compute=dp.get_precision('Account'))
+        digits=dp.get_precision('Account'))
 
     def name_get(self):
         res = []
@@ -446,7 +446,7 @@ class PurchaseCostDistributionLineExpense(models.Model):
         related='distribution_expense.type')
     expense_amount = fields.Float(
         string='Expense amount', default=0.0,
-        digits_compute=dp.get_precision('Account'))
+        digits=dp.get_precision('Account'))
     cost_ratio = fields.Float('Unit cost', default=0.0)
     company_id = fields.Many2one(
         comodel_name="res.company", related="distribution_line.company_id",
@@ -466,11 +466,11 @@ class PurchaseCostDistributionExpense(models.Model):
 
     distribution = fields.Many2one(
         comodel_name='purchase.cost.distribution', string='Cost distribution',
-        select=True, ondelete="cascade", required=True)
+        index=True, ondelete="cascade", required=True)
     ref = fields.Char(string="Reference")
     type = fields.Many2one(
         comodel_name='purchase.expense.type', string='Expense type',
-        select=True, ondelete="restrict")
+        index=True, ondelete="restrict")
     calculation_method = fields.Selection(
         string='Calculation method', related='type.calculation_method',
         readonly=True)
@@ -485,14 +485,14 @@ class PurchaseCostDistributionExpense(models.Model):
              "distributed across. Leave it blank to use all imported lines.",
         domain="[('id', 'in', imported_lines or False)]")
     expense_amount = fields.Float(
-        string='Expense amount', digits_compute=dp.get_precision('Account'),
+        string='Expense amount', digits=dp.get_precision('Account'),
         required=True)
     invoice_line = fields.Many2one(
-        comodel_name='account.invoice.line', string="Supplier invoice line",
+        comodel_name='account.move.line', string="Supplier invoice line",
         domain="[('invoice_id.type', '=', 'in_invoice'),"
                "('invoice_id.state', 'in', ('open', 'paid'))]")
     invoice_id = fields.Many2one(
-        comodel_name='account.invoice', string="Invoice")
+        comodel_name='account.move', string="Invoice")
     display_name = fields.Char(compute="_compute_display_name", store=True)
     company_id = fields.Many2one(
         comodel_name="res.company", related="distribution.company_id",

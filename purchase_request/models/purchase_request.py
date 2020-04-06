@@ -18,7 +18,6 @@ _STATES = [
 
 
 class PurchaseRequest(models.Model):
-
     _name = 'purchase.request'
     _description = 'Purchase Request'
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -40,7 +39,7 @@ class PurchaseRequest(models.Model):
     def _default_picking_type(self):
         type_obj = self.env['stock.picking.type']
         company_id = self.env.context.get('company_id') or \
-            self.env.user.company_id.id
+                     self.env.user.company_id.id
         types = type_obj.search([('code', '=', 'incoming'),
                                  ('warehouse_id.company_id', '=', company_id)])
         if not types:
@@ -71,10 +70,11 @@ class PurchaseRequest(models.Model):
                                    track_visibility='onchange',
                                    default=_get_default_requested_by)
     assigned_to = fields.Many2one(
-        'res.users', 'Approver', track_visibility='onchange',
-        domain=lambda self: [('groups_id', 'in', self.env.ref(
+        'res.users', 'Approver',track_visibility='onchange',
+        domain = lambda self: [('groups_id', 'in', self.env.ref(
             'purchase_request.group_purchase_request_manager').id)]
     )
+
     description = fields.Text('Description')
     company_id = fields.Many2one('res.company', 'Company',
                                  required=True,
@@ -132,11 +132,11 @@ class PurchaseRequest(models.Model):
     def _compute_to_approve_allowed(self):
         for rec in self:
             rec.to_approve_allowed = (
-                rec.state == 'draft' and
-                any([
-                    not line.cancelled and line.product_qty
-                    for line in rec.line_ids
-                ])
+                    rec.state == 'draft' and
+                    any([
+                        not line.cancelled and line.product_qty
+                        for line in rec.line_ids
+                    ])
             )
 
     def copy(self, default=None):
@@ -196,7 +196,6 @@ class PurchaseRequest(models.Model):
 
 
 class PurchaseRequestLine(models.Model):
-
     _name = "purchase.request.line"
     _description = "Purchase Request Line"
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -327,7 +326,7 @@ class PurchaseRequestLine(models.Model):
             rec.purchased_qty = 0.0
             for line in rec.purchase_lines.filtered(
                     lambda x: x.state != 'cancel'):
-                if rec.product_uom_id and\
+                if rec.product_uom_id and \
                         line.product_uom != rec.product_uom_id:
                     rec.purchased_qty += line.product_uom._compute_quantity(
                         line.product_qty, rec.product_uom_id)
@@ -364,11 +363,11 @@ class PurchaseRequestLine(models.Model):
         company = request_line.company_id
         date_planned = datetime.strptime(
             request_line.date_required, '%Y-%m-%d') - \
-            relativedelta(days=company.po_lead)
+                       relativedelta(days=company.po_lead)
         if delay:
             date_planned -= relativedelta(days=delay)
         return date_planned and date_planned.strftime('%Y-%m-%d') \
-            or False
+               or False
 
     @api.model
     def _get_supplier_min_qty(self, product, partner_id=False):
