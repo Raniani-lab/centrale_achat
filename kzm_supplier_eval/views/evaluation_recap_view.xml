@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+           <record model="ir.ui.view" id="evaluation_recap_form_view">
+            <field name="name">recap.form</field>
+            <field name="model">evaluation.recap</field>
+            <field name="arch" type="xml">
+                <form string="Recapitulation of evaluation Form">
+                    <header>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                    <button name="see_eval" type="object"
+                            class="oe_stat_button" icon="fa-list">
+                        <field name="eval_count" widget="statinfo"
+                               string="Evals"/>
+                    </button>
+                    </div>
+                        <group>
+                               <div class="oe_title">
+                                    <h1>
+                                        <field name="name" placeholder="Evaluation Designation "/>
+                                    </h1>
+                                </div>
+                        </group>
+                        <group>
+                            <group string="">
+                                <field name="supplier_id"/>
+                            </group>
+                            <group>
+                                <field name="current_user" />
+                                <field name="evaluation_deadline_date"/>
+                            </group>
+
+                        </group>
+                        <notebook>
+                            <page string="Evaluations ">
+                                <field name="evaluation_ids">
+                                    <tree string="Evaluations" >
+                                        <field name="evaluation_type_id"/>
+                                        <field name="current_user"/>
+                                        <field name="evaluation_note"/>
+                                        <field name="evaluation_weight"/>
+                                    </tree>
+                                </field>
+                                 <group class="oe_subtotal_footer oe_right">
+                                    <field name="evaluation_global_note"/>
+                                     <div class="oe_subtotal_footer_separator oe_inline">
+                                        <label for="cl"/>
+                                    </div>
+                                <field name="cl" nolabel="1" class="oe_subtotal_footer_separator" />
+                                </group>
+                            </page>
+                            <page string="Autres informations">
+                                <field name="description"/>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+                <record model="ir.ui.view" id="evaluation_recap_tree_view">
+            <field name="name">recap.tree</field>
+            <field name="model">evaluation.recap</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluation Recap Tree">
+                    <field name="name"/>
+                    <field name="supplier_id"/>
+                    <field name="purchase_order_id"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="evaluation_recap_search_view">
+            <field name="name">recap.search</field>
+            <field name="model">evaluation.recap</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="supplier_id"/>
+                    <group string="Group By">
+                        <filter name="by_supplier" string="Evaluation Supplier"
+                                context="{'group_by': 'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+     <record model="ir.ui.view" id="view_evaluation_recap_kanban">
+            <field name="name">evaluation.recap.kanban</field>
+            <field name="model">evaluation.recap</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="supplier_id">
+                    <field name="color"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div
+                                    t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                                  oe_kanban_global_click_edit oe_semantic_html_override
+                                                  oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                                <div class="oe_dropdown_kanban">
+                                    <!-- dropdown menu -->
+                                    <div class="oe_dropdown_toggle">
+                                        <i class="fa fa-bars fa-lg" title="Manage" aria-label="Manage"/>
+                                        <ul class="oe_dropdown_menu">
+                                            <li>
+                                                <a type="delete">Delete</a>
+                                            </li>
+                                            <li>
+                                                <ul class="oe_kanban_colorpicker"
+                                                    data-field="color"/>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="oe_clear"></div>
+                                </div>
+                                <div t-attf-class="oe_kanban_content">
+                                    <!-- title -->
+                                    <div>
+                                        <b>Evaluation name:</b>
+                                        <field name="name"/>
+                                        <br/>
+                                        <b>Global Note:
+                                        <field name="evaluation_global_note"/></b>
+                                    </div>
+                                    <div>
+                                        <br/>
+                                        Start date:
+                                        <field name="start_date"/>
+                                        <br/>
+                                        Deadline date:
+                                        <field name="evaluation_deadline_date"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="evaluation_recap_list_action">
+            <field name="name">Supplier Evaluations Recapitulation</field>
+            <field name="res_model">evaluation.recap</field>
+            <field name="view_mode">tree,form,kanban</field>
+        </record>
+
+        <menuitem id="evaluation_recap_menu"
+                  name="Recapitulation"
+                  parent="evaluation_menu"
+                  sequence = "5"
+                  action="evaluation_recap_list_action"
+                  groups="kzm_supplier_eval.group_eval_manager"/>
+
+</odoo>

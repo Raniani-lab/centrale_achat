@@ -1,0 +1,54 @@
+<odoo>
+    <data>
+        <record id="eval_view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[@name='purchase']" position="inside">
+                    <field name="supplier"/>
+                </xpath>
+                <xpath expr="//sheet" position="inside">
+                    <div class="oe_button_box" name="button_box">
+                        <field name="evaluation_note" invisible="1"/>
+                        <field name="evaluation_class_name" invisible="1"/>
+                        <button name="eval_recap" type="object"
+                                class="oe_stat_button"
+                                attrs="{'invisible':['|',('evaluation_note','=',0.0),('supplier','!=',True)]}"
+                                icon="fa-bar-chart-o">
+                               <field name="evaluation_note"/>
+                        </button>
+                         <button name="supplier_class" type="object"
+                                 class="oe_stat_button"
+                                 attrs="{'invisible':['|',('evaluation_class_name','=',False),('supplier','!=',True)]}"
+                                 icon="fa-star">
+                               <field name="evaluation_class_name"  />
+                        </button>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+        <record id="eval_view_partner_kanban" model="ir.ui.view">
+            <field name="name">res.partner.kanban</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//strong[@class='o_kanban_record_title oe_partner_heading']" position="inside">
+                    <br><field name="evaluation_class_name" /></br>
+                </xpath>
+            </field>
+        </record>
+        <record id="eval_view_partner_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='email']" position="after">
+                    <field name="evaluation_class_id" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
+
+

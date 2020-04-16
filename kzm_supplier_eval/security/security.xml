@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="eval_category">
+            <field name="name">Supplier Evaluation</field>
+            <field name="description">Manage Supplier Evaluation</field>
+            <field name="sequence">100</field>
+        </record>
+
+        <record id="group_eval_user" model="res.groups">
+            <field name="name">User</field>
+            <field name="category_id" ref="kzm_supplier_eval.eval_category"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record id="group_eval_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="kzm_supplier_eval.eval_category"/>
+            <field name="implied_ids" eval="[(4, ref('kzm_supplier_eval.group_eval_user'))]"/>
+        </record>
+    </data>
+</odoo>

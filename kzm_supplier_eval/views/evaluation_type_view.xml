@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+           <record model="ir.ui.view" id="evaluation_type_form_view">
+            <field name="name">type.form</field>
+            <field name="model">evaluation.type</field>
+            <field name="arch" type="xml">
+                <form string="Type of evaluation Form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed,done"/>
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+                        <!--                    <button name="create_invoice" type="object"-->
+                        <!--                            string="Facturate"-->
+                        <!--                    />-->
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                               <div class="oe_title">
+                                    <h1>
+                                        <field name="name" placeholder="Evaluation type "/>
+                                    </h1>
+                                </div>
+                        </group>
+                        <group>
+                            <field name="type_evaluation" />
+                            <field name="evaluation_weight" />
+                            <field name="description"/>
+                        </group>
+                        <notebook>
+                            <page string="Criterias">
+                                <field name="criterias_ids">
+                                    <tree string="Evaluation Criterias" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="criteria_coef"/>
+                                        <field name="description"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Autres informations">
+                                <field name="description"/>
+                            </page>
+                             <page string="Authorized users">
+                                <field name="users_ids"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+            <record model="ir.ui.view" id="evaluation_type_tree_view">
+            <field name="name">type.tree</field>
+            <field name="model">evaluation.type</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluation Type Tree">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="evaluation_type_search_view">
+            <field name="name">type.search</field>
+            <field name="model">evaluation.type</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <filter name="my_evaluation_criterias" string="My Criterias"
+                            domain="[('current_user', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_purchases" string="Evaluation Type"
+                                context="{'group_by': 'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="evaluation_type_list_action">
+            <field name="name">Evaluation types</field>
+            <field name="res_model">evaluation.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+       <menuitem
+                name="Supplier Evaluation"
+                id="evaluation_config_menu"
+                sequence="2"
+                parent="purchase.menu_purchase_config"
+
+        />
+        <menuitem id="evaluation_type_menu" name="Types"
+                  parent="evaluation_config_menu"
+                  sequence = "4"
+                  action="evaluation_type_list_action"
+                  groups="kzm_supplier_eval.group_eval_manager"
+        />
+
+</odoo>
