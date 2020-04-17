@@ -10,7 +10,7 @@ class EvaluationType(models.Model):
     _description = "Evaluation Types"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string=" Evaluation Type", required=True)
+    name = fields.Char(string=" Title ", required=True)
     # type = fields.Selection([
     #     ('buyer', "Buyer"),
     #     ('accountant', "Accountant"),

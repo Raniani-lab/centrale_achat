@@ -29,8 +29,8 @@ class EvaluationEvaluation(models.Model):
     current_user = fields.Many2one('res.users', 'Evaluator', default=lambda self: self.env.uid)
     evaluation_line_ids = fields.One2many('evaluation.line', 'evaluation_id', string="Evaluation Lines")
     purchase_order_id = fields.Many2one('purchase.order', string="Purchase Orders Evaluated")
-    invoice_id = fields.Many2one('account.move', string="Bills Evaluated",context={
-        'default_type': 'in_invoice'}, domain=[('type', '=', 'in_invoice')])
+    invoice_id = fields.Many2one('account.move', string="Bills Evaluated",
+                                 domain=['&', ('type', '=', 'in_invoice'), ('state', '=', 'posted')])
     receipt_id = fields.Many2one('stock.picking', string="Receipts Evaluated",
                                  context={'contact_display': 'partner_address'})
     coef_sum = fields.Char(string="Total scale", compute='_compute_evaluation_note')

@@ -92,17 +92,19 @@
                                 <field name="start_date" />
                                 <field name="purchase_order_id"
                                  domain="[['state','=','purchase']]"
-                                attrs="{'invisible': ['|',('eval_type','=','accountant'),('eval_type','=','storekeeper')]
+                                attrs="{'invisible': ['|','|',['eval_type','=','accountant'],['eval_type','=','storekeeper']
+                                ,['evaluation_type_id','=',False]]
                                 ,'required': [['eval_type','=','buyer']]}"
                                 />
                                 <field name="invoice_id"
-                                  domain="[['state','=','posted']]"
-                                 attrs="{'invisible': ['|',('eval_type','=','storekeeper'),('eval_type','=','buyer')]
+                                 attrs="{'invisible': ['|','|',['eval_type','=','buyer'],['eval_type','=','storekeeper']
+                                ,['evaluation_type_id','=',False]]
                                 ,'required': [['eval_type','=','accountant']]}"
                                 />
                                 <field name="receipt_id"
-                                  domain="[['state','=','assigned']]"
-                                 attrs="{'invisible': ['|',('eval_type','=','accountant'),('eval_type','=','buyer')]
+                                  domain="[['state','=','done']]"
+                                 attrs="{'invisible': ['|','|',['eval_type','=','accountant'],['eval_type','=','buyer']
+                                ,['evaluation_type_id','=',False]]
                                 ,'required': [['eval_type','=','storekeeper']]}"
                                 />
                             </group>
