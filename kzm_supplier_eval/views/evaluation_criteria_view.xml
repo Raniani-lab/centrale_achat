@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+           <record model="ir.ui.view" id="evaluation_criteria_form_view">
+            <field name="name">criteria.form</field>
+            <field name="model">evaluation.criteria</field>
+            <field name="arch" type="xml">
+                <form string="Criteria Form">
+                    <sheet>
+                        <group>
+                                <field name="name"/>
+                                <field name="criteria_coef"/>
+                                <field name="description"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+            <record model="ir.ui.view" id="evaluation_criteria_tree_view">
+            <field name="name">criteria.tree</field>
+            <field name="model">evaluation.criteria</field>
+            <field name="arch" type="xml">
+                <tree string="Criteria Tree">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="criteria_coef"/>
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="evaluation_criteria_search_view">
+            <field name="name">criteria.search</field>
+            <field name="model">evaluation.criteria</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="evaluation_type_id"/>
+                    <filter name="my_evaluation_criterias" string="My Criterias"
+                            domain="[('current_user', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_purchases" string="Evaluation Type"
+                                context="{'group_by': 'evaluation_type_id'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+<!--    <act_window id="action_create_eval_type"-->
+<!--            name="Create an Evaluation type"-->
+<!--            src_model="evaluation.criteria"-->
+<!--            res_model="evaluation.type"-->
+<!--            key2="tree_but_open" target="new"-->
+<!--            groups="kzm_supplier_eval.group_eval_manager"/>-->
+
+    <record model="ir.actions.act_window" id="create_eval_type_id">
+        <field name="name">Create evaluation type</field>
+        <field name="res_model">evaluation.type</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="kzm_supplier_eval.model_evaluation_criteria" />
+    </record>
+
+<!--    <record model="ir.values" id="create_eval_type_value">-->
+<!--        <field name="model_id" ref="model_evaluation_criteria" />-->
+<!--        <field name="name">Create evaluation type</field>-->
+<!--        <field name="key2">client_action_multi</field>-->
+<!--        <field name="value" eval="'ir.actions.act_window,' + str(ref('create_eval_type_id'))"/>-->
+<!--        <field name="key">action</field>-->
+<!--        <field name="model">evaluation.criteria</field>-->
+<!--    </record>-->
+
+
+        <record model="ir.actions.act_window" id="evaluation_criteria_list_action">
+            <field name="name">Evaluation criterias</field>
+            <field name="res_model">evaluation.criteria</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="evaluation_criteria_menu" name="Criteria"
+                  parent="evaluation_config_menu"
+                  sequence = "3"
+                  action="evaluation_criteria_list_action"
+                  groups="kzm_supplier_eval.group_eval_manager"
+        />
+
+</odoo>

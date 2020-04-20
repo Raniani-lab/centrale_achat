@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+           <record model="ir.ui.view" id="evaluation_class_form_view">
+            <field name="name">class.form</field>
+            <field name="model">evaluation.class</field>
+            <field name="arch" type="xml">
+                <form string="Class of evaluation Form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed,done"/>
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+                        <!--                    <button name="create_invoice" type="object"-->
+                        <!--                            string="Facturate"-->
+                        <!--                    />-->
+                        <field name="state" widget="statusbar"/>
+
+
+                    </header>
+                    <sheet>
+                        <group>
+                               <div class="oe_title">
+                                    <h1>
+                                        <field name="name" placeholder="Evaluation Class "/>
+                                    </h1>
+                                </div>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                            <field name="note_max"/>
+                            <field name="note_min" />
+                        </group>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+            <record model="ir.ui.view" id="evaluation_class_tree_view">
+            <field name="name">class.tree</field>
+            <field name="model">evaluation.class</field>
+            <field name="arch" type="xml">
+                <tree string="Evaluation Class Tree">
+                    <field name="name"/>
+                    <field name="description"/>
+                    <field name="note_max"/>
+                    <field name="note_min" />
+                </tree>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="evaluation_class_search_view">
+            <field name="name">class.search</field>
+            <field name="model">evaluation.class</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <filter name="my_classes" string="Created classes"
+                            domain="[('create_uid', '=', uid)]"/>
+                    <group string="Group By">
+                        <filter name="by_supplier" string="Evaluation Supplier"
+                                context="{'group_by': 'name'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+
+        <record model="ir.actions.act_window" id="evaluation_class_list_action">
+            <field name="name">Supplier Evaluations Classes</field>
+            <field name="res_model">evaluation.class</field>
+            <field name="context" eval="{'search_default_my_courses': 1}"/>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="evaluation_class_menu"
+                  name="Classes"
+                  parent="evaluation_config_menu"
+                  sequence = "2"
+                  action="evaluation_class_list_action"
+                  groups="kzm_supplier_eval.group_eval_manager"
+        />
+
+</odoo>
