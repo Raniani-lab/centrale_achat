@@ -1,0 +1,224 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* kzm_request_requisition
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-20 21:22+0000\n"
+"PO-Revision-Date: 2020-04-20 21:22+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__availability
+msgid "Availability"
+msgstr "Disponibilité"
+
+#. module: kzm_request_requisition
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_request_line_make_purchase_order_inherit
+msgid "Choose the method to generate Purchase request:"
+msgstr "Choisissez la méthode pour générer la demande d'achat:"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order_item__status__eligible
+msgid "Eligible"
+msgstr "Éligible"
+
+#. module: kzm_request_requisition
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_requisition_inherit
+msgid "Generate Quotation requests"
+msgstr "Générer les demandes de prix"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_requisition__multiple_consultation
+msgid "Multiple Consultation"
+msgstr "Consultation Multiple"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order_item__status__non_eligible
+msgid "Non Eligible"
+msgstr "Non éligible"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "Please insert at least One supplier."
+msgstr "Veuillez insérer au moins un fournisseur."
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/models/purchase_requisition_type_multi.py:0
+#, python-format
+msgid "Please make sure you have at least One supplier"
+msgstr "Veuillez vous assurer d'avoir au moins un fournisseur"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__quantity_max
+msgid "Quantity maximum"
+msgstr "Quantité maximum"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "RFQ"
+msgstr "Demandes de Prix"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__status
+msgid "Status"
+msgstr "Statut"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "Available"
+msgstr "Disponible"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__convert_to
+msgid "Convert To"
+msgstr "Type"
+
+#. module: kzm_request_requisition
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_request_line_make_purchase_order_inherit
+msgid "Create Convention"
+msgstr "Créer une convention"
+
+#. module: kzm_request_requisition
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_request_line_make_purchase_order_inherit
+msgid "Create RFQ"
+msgstr "Générer une Demande de Prix"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__create_uid
+msgid "Created by"
+msgstr "Créer par"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "Enter a positive quantity."
+msgstr "Entrer une quantité positive."
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "Enter a supplier."
+msgstr "Entrer un fournisseur."
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__id
+msgid "ID"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order__convert_to__multiple_consultation
+msgid "Multiple consultation"
+msgstr "Consultation Multiple"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "Non Available"
+msgstr "Non disponible"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__purchase_request_line_id
+msgid "Purchase Request Line"
+msgstr "Ligne de la demande d'Achat"
+
+#. module: kzm_request_requisition
+#: model:ir.model,name:kzm_request_requisition.model_purchase_request_line_make_purchase_order_item
+msgid "Purchase Request Line Make Purchase Order Item"
+msgstr "Lignes de demande d'achat"
+
+#. module: kzm_request_requisition
+#: model:ir.model,name:kzm_request_requisition.model_purchase_request_line_supplier
+msgid "Purchase Request Line Supplier"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__purchase_contract_id
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order__convert_to__purchase_contract
+msgid "Purchase contract"
+msgstr "Contrat d'Achat"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__quantity_available
+msgid "Quantity available"
+msgstr "Quantité disponible"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "RFQ"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__red
+msgid "Red"
+msgstr "Rouge"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order__convert_to__request_quotation
+msgid "Request for Quotation"
+msgstr "Demande de prix"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_id
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__supplier_id
+msgid "Supplier"
+msgstr "Fournisseur"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_ids
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_wizard_ids
+msgid "Suppliers"
+msgstr "Fournisseurs"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "The product '%s' does not exist in the selected contract."
+msgstr "Veuillez vérifier la disponibilité du produit '%s' dans le contrat d'Achat."
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "The product '%s' does not exist or exceed the quantity in the contract."
+msgstr "Le produit '% s' n'existe pas ou dépasse la quantité sur le contrat"
+
+#. module: kzm_request_requisition
+#: model:ir.model,name:kzm_request_requisition.model_purchase_request_line_make_purchase_order
+msgid "add convert to field"
+msgstr ""

@@ -11,20 +11,55 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
     convert_to = fields.Selection([('purchase_contract', 'Purchase contract'),
                                    ('multiple_consultation', 'Multiple consultation'),
                                    ('request_quotation', 'Request for Quotation')],
-                                  string='Convert To')
-    supplier_id = fields.Many2one('res.partner', string="Supplier", domain="[('supplier_rank','=',True)]")
+                                  default='purchase_contract', string='Convert To')
+    supplier_id = fields.Many2one(
+        comodel_name="res.partner",
+        string="Supplier",
+        required=False,
+        domain=[("supplier_rank", ">", 0)],
+        context={"supplier_rank": 1},
+    )
     purchase_contract_id = fields.Many2one('purchase.requisition', string="Purchase contract",
                                            domain="[('state','=','ongoing')]")
-    supplier_wizard_ids = fields.One2many('purchase.request.line.supplier', 'purchase_request_line_id', string="Suppliers")
-    supplier_ids = fields.Many2many('res.partner', string="Suppliers", )
+    supplier_ids = fields.Many2many('res.partner', string="Suppliers", domain="[('supplier_rank','=',True)]")
+
+    def _get_products_from_contract(self, contract):
+        products = []
+        for line in contract.line_ids:
+            products.append(line.product_id)
+        return products
+
+    def _get_product_qty_from_contract(self,contract, product):
+        qty=0
+        for line in contract.line_ids:
+            if line.product_id.id == product.id:
+                qty = line.product_qty
+        return qty
+
+    @api.onchange('purchase_contract_id')
+    def _compute_quantity_max(self):
+        self.ensure_one()
+        if self.purchase_contract_id:
+            products = self._get_products_from_contract(self.purchase_contract_id)
+            for item in self.item_ids:
+                if item.product_id in products:
+                    item.quantity_max = self._get_product_qty_from_contract(self.purchase_contract_id, item.product_id)
+                if item.product_id in products and self.get_total_quantity(item.product_id) <= self.get_quantity_from_contract(self.purchase_contract_id, item.product_id):
+                    item.status = 'eligible'
+                else:
+                    item.status = 'non_eligible'
 
     @api.onchange('supplier_id')
     def onchange_supplier_contract(self):
         for o in self:
+            res={}
             o.purchase_contract_id = False
             if o.supplier_id:
                 res = {'domain': {
-                    'purchase_contract_id': [('vendor_id', '=', o.supplier_id or o.supplier_id.id)]}}
+                    'purchase_contract_id': [('vendor_id', '=', o.supplier_id.id),
+                                             ('state', '=', 'ongoing'),
+                                             ('type_id', '=', self.env.ref("purchase_requisition.type_single").id)]}}
+        return res
 
     @api.model
     def _prepare_purchase_order(self, picking_type, group_id, company, origin):
@@ -44,17 +79,34 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
         }
         return data
 
+    def get_quantity_from_contract(self, contract, product):
+        qty=0
+        for line in contract.line_ids:
+            if line.product_id.id == product.id:
+                qty = qty + line.product_qty
+        return qty
+
+    def get_total_quantity(self, product):
+        qty=0
+        for o in self:
+            for item in o.item_ids:
+                if item.product_id.id == product.id:
+                    qty = qty + item.product_qty
+        return qty
+
     def generate_base_on_contract(self):
+        self.ensure_one()
         res = []
         purchase_obj = self.env["purchase.order"]
         po_line_obj = self.env["purchase.order.line"]
         pr_line_obj = self.env["purchase.request.line"]
         purchase = False
-
         for item in self.item_ids:
             line = item.line_id
             if item.product_qty <= 0.0:
                 raise UserError(_("Enter a positive quantity."))
+            if item.status == 'non_eligible':
+                raise UserError(_("The product '%s' does not exist or exceed the quantity in the contract.") % item.product_id.name)
             if self.purchase_order_id:
                 purchase = self.purchase_order_id
             if not purchase:
@@ -65,10 +117,6 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
                     line.origin,
                 )
                 purchase = purchase_obj.create(po_data)
-
-            # Look for any other PO line in the selected PO with same
-            # product and UoM to sum quantities instead of creating a new
-            # po line
             domain = self._get_order_line_search_domain(purchase, item)
             available_po_lines = po_line_obj.search(domain)
             new_pr_line = True
@@ -108,7 +156,8 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
             new_qty = pr_line_obj._calc_new_qty(
                 line, po_line=po_line, new_pr_line=new_pr_line
             )
-            po_line.product_qty = new_qty
+            po_line.name = item.name
+            po_line.product_qty = self.get_total_quantity(item.product_id)
             po_line._onchange_quantity()
             # The onchange quantity is altering the scheduled date of the PO
             # lines. We do not want that:
@@ -134,35 +183,40 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
                     ('id', 'in', self.item_ids.ids)
                 ])
         for o in self:
-            vals = []
-            for item in o.item_ids:
-                print(item.product_qty)
-                vals.append({
-                    'product_id': item.product_id and item.product_id.id,
-                    'product_qty': 6,
-            })
-            new_convention = self.env['purchase.requisition'].create({
-                'type_id': self.env.ref('purchase_requisition.type_multi').id,
-            })
-        return {
-            # 'name': self.order_id,
-            'res_model': 'purchase.requisition',
-            'type': 'ir.actions.act_window',
-            'context': {},
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_id': new_convention.id,
-            'view_id': self.env.ref("purchase_requisition.view_purchase_requisition_form").id,
-            'target': 'target'
-        }
+            if o.supplier_ids.ids == []:
+                raise UserError(_("Please insert at least One supplier."))
+            else:
+                new_convention = self.env['purchase.requisition'].create({
+                    'type_id': self.env.ref('purchase_requisition.type_multi').id,
+                    'multiple_consultation': True,
+                    'supplier_ids': o.supplier_ids,
+                })
+                for item in o.item_ids:
+                    new_convention.line_ids = [(0, 0, {
+                                                    'product_id': item.product_id.id,
+                                                    'product_qty': item.product_qty,
+                                                    'display_name': item.name,
+                                                    })]
+                return {
+                    # 'name': self.order_id,
+                    'res_model': 'purchase.requisition',
+                    'type': 'ir.actions.act_window',
+                    'context': {},
+                    'view_mode': 'form',
+                    'view_type': 'form',
+                    'res_id': new_convention.id,
+                    'view_id': self.env.ref("purchase_requisition.view_purchase_requisition_form").id,
+                    'target': 'target'
+                }
 
 
-class PurchaseRequestLineSupplier(models.TransientModel):
-    _name = 'purchase.request.line.supplier'
-    _description = 'Purchase Request Line Supplier'
+class PurchaseRequestLineMakePurchaseOrderItem(models.TransientModel):
+    _inherit = 'purchase.request.line.make.purchase.order.item'
 
-    supplier_id = fields.Many2one('res.partner', string="Supplier", domain="[('supplier_rank','=',True)]")
-    purchase_request_line_id = fields.Many2one('purchase.request.line.make.purchase.order')
+    quantity_max = fields.Integer(string="Quantity maximum")
+    status = fields.Selection([('eligible', 'Eligible'), ('non_eligible', 'Non Eligible')],
+                              string="Status")
+
 
 
 

@@ -11,7 +11,8 @@
                         
     "init_xml": [],
     'data': [
-        "wizard/purchase_request_line_views_inherit.xml"
+        "wizard/purchase_request_line_views_inherit.xml",
+        "views/request_requesition_appel_offre_views.xml",
     ],
     'demo_xml': [],
     'installable': True,
