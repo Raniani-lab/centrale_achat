@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+           <record model="ir.ui.view" id="supplier_type_form_view">
+            <field name="name">type.form</field>
+            <field name="model">partner.supplier.type</field>
+            <field name="arch" type="xml">
+                <form string="Type of supplier">
+                    <!--<header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed,done"/>
+                        <button name="action_confirm" type="object"
+                                string="Confirm" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="Mark as done" states="confirmed"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>-->
+                    <sheet>
+                        <group>
+                            <field name="name" />
+                            <field name="code" />
+                        </group>
+
+                    </sheet>
+
+                </form>
+            </field>
+        </record>
+
+            <record model="ir.ui.view" id="supplier_type_tree_view">
+            <field name="name">type.tree</field>
+            <field name="model">partner.supplier.type</field>
+            <field name="arch" type="xml">
+                <tree string="Supplier Type Tree">
+                    <field name="name"/>
+                    <field name="code"/>
+                </tree>
+            </field>
+        </record>
+
+
+   <record model="ir.actions.act_window" id="supplier_type_list_action">
+            <field name="name">Supplier types</field>
+            <field name="res_model">partner.supplier.type</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+       <menuitem
+                name="Supplier Nature"
+                id="supp_config_menu"
+                action="supplier_type_list_action"
+                sequence="3"
+                parent="purchase.menu_purchase_config"
+        />
+
+
+</odoo>

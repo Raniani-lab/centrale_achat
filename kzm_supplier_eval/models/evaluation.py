@@ -81,24 +81,24 @@ class EvaluationEvaluation(models.Model):
 
     def action_done(self):
         self.state = 'done'
-        old_followers = self.env['mail.followers'].search(
-            [('res_id', '=', self.id),
-             ('res_model', '=', 'evaluation.evaluation'),
-             ])
-        if old_followers:
-            old_followers.sudo().unlink()
-        admin = self.env['res.users'].search([('name', '=', 'Administrator')])
-        self.env['mail.followers'].create({
-            'res_id': self.id,
-            'res_model': 'evaluation.evaluation',
-            'partner_id': admin.partner_id.id,
-        })
-        if self.evaluation_responsible_id.id != admin.id and self.evaluation_responsible_id.id != self.current_user:
-            self.env['mail.followers'].create({
-                'res_id': self.id,
-                'res_model': 'evaluation.evaluation',
-                'partner_id': self.evaluation_responsible_id.partner_id.id,
-            })
+        # # old_followers = self.env['mail.followers'].search(
+        # #     [('res_id', '=', self.id),
+        # #      ('res_model', '=', 'evaluation.evaluation'),
+        # #      ])
+        # # if old_followers:
+        # #     old_followers.sudo().unlink()
+        # # admin = self.env['res.users'].search([('name', '=', 'Administrator')])
+        # # self.env['mail.followers'].create({
+        # #     'res_id': self.id,
+        # #     'res_model': 'evaluation.evaluation',
+        # #     'partner_id': admin.partner_id.id,
+        # # })
+        # if self.evaluation_responsible_id.id != admin.id and self.evaluation_responsible_id.id != self.current_user:
+        #     self.env['mail.followers'].create({
+        #         'res_id': self.id,
+        #         'res_model': 'evaluation.evaluation',
+        #         'partner_id': self.evaluation_responsible_id.partner_id.id,
+        #     })
 
     @api.depends('current_user')
     def _compute_approver(self):

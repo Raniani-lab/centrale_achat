@@ -11,11 +11,6 @@ class EvaluationType(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string=" Title ", required=True)
-    # type = fields.Selection([
-    #     ('buyer', "Buyer"),
-    #     ('accountant', "Accountant"),
-    #     ('storekeeper', "Storekeeper"),
-    # ], default='buyer', track_visibility='onchange')
     type_evaluation = fields.Selection(string='Evaluation Type',
                                        selection=[('buyer', 'Buyer'), ('accountant', 'Accountant'),
                                                   ('storekeeper', 'StoreKeeper')],
