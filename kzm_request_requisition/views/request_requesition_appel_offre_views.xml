@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <record id="view_purchase_requisition_inherit" model="ir.ui.view">
+        <field name="name">Purchase Requisition</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vendor_id']" position="after">
+                <field name="multiple_consultation" invisible="1"/>
+            </xpath>
+            <xpath expr="//field[@name='vendor_id']" position="attributes">
+                <attribute name="attrs">{'invisible': [('multiple_consultation','=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//page" position="after">
+                <page string="Suppliers" attrs="{'invisible': [('multiple_consultation','!=', True)]}">
+                    <field name="supplier_ids" />
+                </page>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button name="generate_quotation_requests" string="Generate Quotation requests" type="object"
+                        attrs="{'invisible': ['|','|',('multiple_consultation','!=', True),
+                        ('state','!=', 'in_progress'), ('order_count','!=', 0)]}" class="btn-primary"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
