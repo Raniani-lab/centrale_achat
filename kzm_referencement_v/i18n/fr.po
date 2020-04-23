@@ -1,0 +1,716 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* kzm_referencement_v
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-04-30 09:28+0000\n"
+"PO-Revision-Date: 2019-04-30 09:28+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.view_ref_config_form_inherit
+msgid "<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-specific.\" aria-label=\"Values set here are company-specific.\" groups=\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__description_sale
+msgid "A description of the Product that you want to communicate to your customers. This description will be copied to every Sales Order, Delivery Order and Customer Invoice/Credit Note"
+msgstr "Une description du produit que vous souhaitez communiquer à vos clients. Cette description sera copiée sur chaque bon de commande, bon de livraison et note de crédit/facture client"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__type
+msgid "A storable product is a product for which you manage stock. The Inventory app has to be installed.\n"
+"A consumable product is a product for which stock is not managed.\n"
+"A service is a non-material product you provide."
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_res_view_form
+msgid "APPROVED"
+msgstr "APPROUVÉE"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_needaction
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_needaction
+msgid "Action Needed"
+msgstr "Nécessite une action"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__activity_ids
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__activity_ids
+msgid "Activities"
+msgstr "Activités"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__activity_state
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__activity_state
+msgid "Activity State"
+msgstr "Status de l'Activité"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.view_ref_config_form_inherit
+msgid "Approbation"
+msgstr "Approbation"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,state:0
+#: selection:ref.res,state:0
+msgid "Approved"
+msgstr "Approuvée"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_config_settings__default_ref_responsible
+msgid "Approver"
+msgstr "Approbateur"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_attachment_count
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre de pièces jointes"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__purchase_ok
+msgid "Can be Purchased"
+msgstr "Peut être acheté"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__sale_ok
+msgid "Can be Sold"
+msgstr "Peut être vendu"
+
+#. module: kzm_referencement_v
+#: selection:ref.res,nature:0
+msgid "Client"
+msgstr "Client"
+
+#. module: kzm_referencement_v
+#: model:ir.actions.act_window,name:kzm_referencement_v.res_ref_list_action
+msgid "Client referencement"
+msgstr "Référencement de clients"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_client_menu_prod
+msgid "Clients"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model,name:kzm_referencement_v.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__company_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__company_id
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_res_view_form
+#: selection:ref.res,company_type:0
+msgid "Company"
+msgstr "Société"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__company_type
+msgid "Company Type"
+msgstr "Type de société"
+
+#. module: kzm_referencement_v
+#: model:ir.model,name:kzm_referencement_v.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de config"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,type:0
+msgid "Consumable"
+msgstr "Consommable"
+
+#. module: kzm_referencement_v
+#: model:ir.model,name:kzm_referencement_v.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__standard_price
+msgid "Cost"
+msgstr "Coût"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__standard_price
+msgid "Cost used for stock valuation in standard price and as a first price to set in average/FIFO."
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__create_uid
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__create_uid
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__create_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__create_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__currency_id
+msgid "Currency"
+msgstr "Devise"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_company__approb_def1
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_config_settings__approb_def1
+msgid "Default approbation"
+msgstr "Approbation par défaut"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__ref_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__ref_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__ref_date
+msgid "Demand date"
+msgstr "Date de demande"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__display_name
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__display_name
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "Done"
+msgstr "Fait"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,state:0
+#: selection:ref.res,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_follower_ids
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_follower_ids
+msgid "Followers"
+msgstr "Abonnés"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_channel_ids
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_channel_ids
+msgid "Followers (Channels)"
+msgstr "Abonnés (Canaux)"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_partner_ids
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Abonnés (Partenaires)"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__function
+msgid "Function"
+msgstr "Fonction"
+
+#. module: kzm_referencement_v
+#: code:addons/kzm_referencement_v/models/product_ref.py:36
+#, python-format
+msgid "Go to Internal Categories"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__id
+msgid "ID"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__message_unread
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__message_unread
+msgid "If checked new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__message_needaction
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si coché, de nouveaux messages demandent votre attention."
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__message_has_error
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si actif, certains messages ont une erreur de livraison."
+
+#. module: kzm_referencement_v
+#: selection:ref.res,company_type:0
+msgid "Individual"
+msgstr "Individuel"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__default_code
+msgid "Internal Reference"
+msgstr "Référence interne"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_is_follower
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_is_follower
+msgid "Is Follower"
+msgstr "Est un abonné"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product____last_update
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref____last_update
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__write_uid
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__write_uid
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__write_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__write_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_main_attachment_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Pièce jointe principale"
+
+#. module: kzm_referencement_v
+#: model:ir.module.category,description:kzm_referencement_v.ref_category
+msgid "Manage Product referencement"
+msgstr "Gère le référencement d'articles"
+
+#. module: kzm_referencement_v
+#: model:res.groups,name:kzm_referencement_v.group_ref_manager
+msgid "Manager"
+msgstr "Gestionnaire"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_has_error
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_has_error
+msgid "Message Delivery error"
+msgstr "Erreur d'envoi du message"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_ids
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__res_name
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_res_view_form
+msgid "Name"
+msgstr "Nom"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "Name of the product"
+msgstr "Désignation du produit"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__nature
+msgid "Nature"
+msgstr "Type"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__activity_date_deadline
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'Activité à Venir"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__activity_summary
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé d'activité suivant"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__activity_type_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'Activités à Venir"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_needaction_counter
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'actions"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_has_error_counter
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_has_error_counter
+msgid "Number of error"
+msgstr "Nombre d'erreurs"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__message_needaction_counter
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de messages exigeant une action"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__message_has_error_counter
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de messages avec des erreurs d'envoi"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__message_unread_counter
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Nombre de messages non lus"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,activity_state:0
+#: selection:ref.res,activity_state:0
+msgid "Overdue"
+msgstr "En retard"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__parent_id
+msgid "Parent"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__phone
+msgid "Phone"
+msgstr "Téléphone"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,activity_state:0
+#: selection:ref.res,activity_state:0
+msgid "Planned"
+msgstr "Plannifiée"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__list_price
+msgid "Price at which the product is sold to customers."
+msgstr "Prix ​​auquel le produit est vendu aux clients"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "Product"
+msgstr "Article"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__categ_id
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "Product Category"
+msgstr "Catégorie d'article"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__prod_name
+msgid "Product Name"
+msgstr "Désignation du produit"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__type
+msgid "Product Type"
+msgstr "Type d'article"
+
+#. module: kzm_referencement_v
+#: code:addons/kzm_referencement_v/models/product_ref.py:108
+#, python-format
+msgid "Product name"
+msgstr "Désignation du produit"
+
+#. module: kzm_referencement_v
+#: code:addons/kzm_referencement_v/models/product_ref.py:109
+#, python-format
+msgid "Product name already exits"
+msgstr "Un produit du meme nom existe"
+
+#. module: kzm_referencement_v
+#: model:ir.actions.act_window,name:kzm_referencement_v.product_ref_form_action
+#: model:ir.module.category,name:kzm_referencement_v.ref_category
+msgid "Product referencement"
+msgstr "Référencement d'articles"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "Product referencement Form"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_product_menu_prod
+msgid "Products"
+msgstr "Articles"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__description_purchase
+msgid "Purchase Description"
+msgstr "Description achat"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_client_menu_ref
+msgid "RR Client"
+msgstr "DR Clients"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_product_menu_ref
+msgid "RR Product"
+msgstr "DR Articles"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_supplier_menu_ref
+msgid "RR Supplier"
+msgstr "DR Fournisseurs"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__name
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__name
+msgid "Ref sequence"
+msgstr "Séquence de référencement"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_kanban
+msgid "Reference"
+msgstr "Référence"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_product_product__reference_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_product_template__reference_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_partner__reference_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_users__reference_id
+msgid "Reference number"
+msgstr "Numéro de référence"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "Reference sequence"
+msgstr "Séquence de référencement"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_product_product__isReferenced
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_product_template__isReferenced
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_partner__isReferenced
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_res_users__isReferenced
+msgid "Referenced"
+msgstr "Référencée"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.main_ref_menu
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.view_ref_config_form_inherit
+msgid "Referencement"
+msgstr "Référencement"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.product_ref_menu
+msgid "Referencement Demand"
+msgstr "Demande de référencement"
+
+#. module: kzm_referencement_v
+#: model:ir.model,name:kzm_referencement_v.model_ref_ref
+msgid "Referencement informations"
+msgstr " Information de référencement"
+
+#. module: kzm_referencement_v
+#: model:ir.model,name:kzm_referencement_v.model_ref_res
+msgid "Referencement of clients and supplier"
+msgstr "Référencement de clients et de fournisseurs"
+
+#. module: kzm_referencement_v
+#: model:ir.model,name:kzm_referencement_v.model_product_template
+#: model:ir.model,name:kzm_referencement_v.model_ref_product
+msgid "Referencement of product"
+msgstr "Référencement d'articles"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.product_template_menu
+msgid "Referentiel"
+msgstr "Référentiel"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__ref_asked_by
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__ref_asked_by
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__ref_asked_by
+msgid "Requested by"
+msgstr "Demandé par"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_res_view_form
+msgid "Res Form"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_product_tree_view
+msgid "Res ref Tree"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_res_view_form
+msgid "Reset to draft"
+msgstr "Remettre en brouillon"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__ref_responsible
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__ref_responsible
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__ref_responsible
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__activity_user_id
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__activity_user_id
+msgid "Responsible User"
+msgstr "Responsable"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.product_ref_form_view
+msgid "SEND"
+msgstr "Envoyé"
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.ref_res_view_form
+msgid "SENT"
+msgstr "SOUMIS"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__description_sale
+msgid "Sale Description"
+msgstr "Description vente"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__list_price
+msgid "Sales Price"
+msgstr "Prix de vente"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__categ_id
+msgid "Select category for the current product"
+msgstr "Sélectionnez la catégorie de l'article actuel"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,state:0
+#: selection:ref.res,state:0
+msgid "Sent"
+msgstr "Soumis"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,type:0
+msgid "Service"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model_terms:ir.ui.view,arch_db:kzm_referencement_v.view_ref_config_form_inherit
+msgid "Set the default approver for your referencement requests"
+msgstr "Définissez l'approbateur par défaut de vous demandes de référencement"
+
+#. module: kzm_referencement_v
+#: model:ir.actions.act_window,name:kzm_referencement_v.action_ref_configuration
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_config_config_menu
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_config_menu
+msgid "Settings"
+msgstr "Configuration"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__state
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__state
+msgid "State"
+msgstr "État"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__activity_state
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr "Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,type:0
+msgid "Stockable Product"
+msgstr "Produit stockable"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__street
+msgid "Street"
+msgstr "Rue"
+
+#. module: kzm_referencement_v
+#: model:ir.ui.menu,name:kzm_referencement_v.ref_supplier_menu_prod
+#: selection:ref.res,nature:0
+msgid "Supplier"
+msgstr "Fournisseurs"
+
+#. module: kzm_referencement_v
+#: model:ir.actions.act_window,name:kzm_referencement_v.res_ref_list_action_sup
+msgid "Supplier referencement"
+msgstr "Référencement de fournisseurs"
+
+#. module: kzm_referencement_v
+#: selection:ref.product,activity_state:0
+#: selection:ref.res,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_unread
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_unread
+msgid "Unread Messages"
+msgstr "Messages non lus"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__message_unread_counter
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Compteur de messages non lus"
+
+#. module: kzm_referencement_v
+#: model:res.groups,name:kzm_referencement_v.group_ref_user
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__vat
+msgid "VAT"
+msgstr "TVA"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__ref_val_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_ref__ref_val_date
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__ref_val_date
+msgid "Validation date"
+msgstr "Date de validation"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_product__website_message_ids
+#: model:ir.model.fields,field_description:kzm_referencement_v.field_ref_res__website_message_ids
+msgid "Website Messages"
+msgstr "Messages du site web"
+
+#. module: kzm_referencement_v
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_product__website_message_ids
+#: model:ir.model.fields,help:kzm_referencement_v.field_ref_res__website_message_ids
+msgid "Website communication history"
+msgstr "Historique de communication du site web"
+
+#. module: kzm_referencement_v
+#: code:addons/kzm_referencement_v/models/product_ref.py:35
+#, python-format
+msgid "You must define at least one product category in order to be able to create products."
+msgstr "Vous devez définir au moins une catégorie de produits pour pouvoir créer des produits."
+

@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+         <record model="ir.ui.view" id="ref_res_view_form">
+            <field name="name">res.form</field>
+            <field name="model">ref.res</field>
+            <field name="arch" type="xml">
+                <form string="Res Form">
+                    <header>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="confirmed"/>
+                        <button name="action_confirm" type="object"
+                                string="SENT" states="draft"
+                                class="oe_highlight"/>
+                        <button name="action_done" type="object"
+                                string="APPROVED" states="confirmed"
+                                class="oe_highlight"
+                                groups="kzm_referencement_v.group_ref_manager"/>
+                         <button name="action_refuse" type="object"
+                                string="REFUSE" states="confirmed"
+                                class="oe_highlight"
+                                 groups="kzm_referencement_v.group_ref_manager"/>
+                        <button name="action_draft" type="object"
+                                string="Reset to draft"
+                                states="refused"/>
+                        <field name="state" widget="statusbar"/>
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="res_ref" type="object"
+                                class="oe_stat_button"
+                                states = "done"
+                                icon="fa-bar-chart-o">
+                                <field name="nature" readonly="1"/>
+                        </button>
+                        </div>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" readonly="1"/>
+                                    <field name="company_type" widget="radio" class="oe_edit_only"
+                                       options="{'horizontal': true}"/>
+                                </h1>
+                            </div>
+                        </group>
+                        <group>
+                                <div class="oe_title">
+                                    <h1>
+                                        <field name="res_name" required="1" placeholder="Name"/>
+                                    </h1>
+                                    <field name="parent_id"
+                                           attrs="{'invisible': [('company_type', '=', 'person')]}"
+                                           placeholder="Company"/>
+                                </div>
+                        </group>
+                        <group>
+                            <group string="">
+                                <field name="nature" required="1" />
+                                <field name="legal_form"
+                                attrs="{'invisible': [('company_type', '=', 'person')]}"/>
+                                <field name="function"
+                                       attrs="{'invisible': [('company_type', '=', 'company')]}" />
+                                <field name="file" filename="file_name" required="1"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="file_sec"  filename="file_name_sec" required="1"/>
+                                <field name="file_name_sec" invisible="1"/>
+                            </group>
+                            <group>
+                                <field name="street" />
+                                <field name="vat" />
+                                <field name="phone" />
+                                <field name="site_web" />
+                                <field name="email" />
+                            </group>
+                        </group>
+                        <group>
+
+                        </group>
+                        <group>
+                            <group string="">
+                                <field name="ref_asked_by"/>
+                                <field name="ref_responsible"
+                                  attrs="{'readonly' : [['state','=','draft']]
+                                ,'required': [['state','=','confirmed']]}"/>
+                            </group>
+                            <group string="">
+                                <field name="ref_date"/>
+                                <field name="ref_val_date"
+                                  attrs="{'readonly' : [['state','=','draft']]
+                                ,'required': [['state','=','confirmed']]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="ref_product_tree_view">
+            <field name="name">ref.res.tree</field>
+            <field name="model">ref.res</field>
+            <field name="arch" type="xml">
+                <tree string="Res ref Tree">
+                    <field name="name"/>
+                    <field name="res_name"/>
+                    <field name="ref_asked_by"/>
+                    <field name="ref_responsible"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+         <record id="res_ref_view_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='parent_id']" position="before">
+                    <field name="isReferenced" invisible="1" />
+                        <field name="reference_id"
+                        attrs="{'invisible':[('isReferenced','=', False)],
+                        'readonly':[('isReferenced','=', True)]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_ref_view_tree" model="ir.ui.view">
+            <field name="name">res.partner.tree</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='active']" position="after">
+                    <field name="isReferenced" invisible="1" />
+                    <field name="reference_id"
+                           attrs="{'invisible':[('isReferenced','=', False)]}"
+                    />
+                </xpath>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="res_ref_list_action">
+            <field name="name">Client referencement</field>
+            <field name="res_model">ref.res</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain" >[('nature', '=', 'client')]</field>
+        </record>
+        <record model="ir.actions.act_window" id="res_ref_list_action_sup">
+            <field name="name">Supplier referencement</field>
+            <field name="res_model">ref.res</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain" >[('nature', '=', 'supplier')]</field>
+        </record>
+
+    </data>
+</odoo>

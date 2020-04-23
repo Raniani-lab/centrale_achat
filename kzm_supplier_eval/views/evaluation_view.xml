@@ -66,6 +66,7 @@
                                 class="oe_highlight"/>
                         <button name="action_done" type="object"
                                 string="Submit Evaluation" states="confirmed"
+                                 groups="kzm_supplier_eval.group_eval_manager"
                                 class="oe_highlight"/>
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -84,7 +85,9 @@
                                 <field name="evaluation_type_id" required="1"/>
                                 <field name="eval_type" invisible="1"/>
                                 <field name="state_invoice" invisible="1"/>
-                                <field name="evaluation_responsible_id"/>
+                                <field name="evaluation_responsible_id"
+                                attrs="{'readonly' : [['state','=','draft']]
+                                ,'required': [['state','=','confirmed']]}"/>
                                 <field name="current_user"/>
                             </group>
                             <group string="">
