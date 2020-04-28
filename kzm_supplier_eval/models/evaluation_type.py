@@ -16,7 +16,10 @@ class EvaluationType(models.Model):
                                                   ('storekeeper', 'StoreKeeper')],
                                        default='buyer')
     description = fields.Text(string="Describe the type of evaluation")
-    users_ids = fields.Many2many('res.users', string="Users")
+    # users_ids = fields.Many2many('res.users', string="Users", domain=lambda self: [
+    #     ("groups_id", "=", self.env.ref("kzm_supplier_eval.group_eval_evaluator").id)])
+    users_ids = fields.Many2many('res.users', 'user_evaluation_type',string="Users")
+    current_user = fields.Many2one(string="current user", compute='get_current_user')
     criterias_ids = fields.One2many('evaluation.criteria', 'evaluation_type_id', string="Criterias")
     evaluation_weight = fields.Selection([
         (str(i), str(i)) for i in range(1, 6)
@@ -26,6 +29,16 @@ class EvaluationType(models.Model):
         ('confirmed', "Confirmed"),
         ('done', "Done"),
     ], default='draft', track_visibility='onchange')
+
+    # @api.onchange('users_ids')
+    # def onchange_users_id(self):
+    #     user = self.env['res.users'].browse(self.env.uid)
+    #     if user.has_group('group_eval_evaluator'):
+    #         users_gr = self.env.ref("kzm_supplier_eval.group_eval_evaluator").users.id
+    #     return {'domain': {'users_ids': [('id', 'in', users_gr.ids)]}}
+
+    def get_current_user(self):
+        return self.env['res.users'].browse(self.env.uid)
 
     def action_draft(self):
         self.state = 'draft'
@@ -56,3 +69,13 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     supplier = fields.Boolean(string="Is a Supplier")
+
+
+class UserModel(models.Model):
+    _inherit = "res.users"
+
+    models_ids = fields.Many2many('evaluation.type',  'user_evaluation_type', string="Models Users")
+
+
+
+

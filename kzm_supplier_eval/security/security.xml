@@ -24,5 +24,21 @@
             <field name="category_id" ref="kzm_supplier_eval.eval_category"/>
             <field name="implied_ids" eval="[(4, ref('kzm_supplier_eval.group_eval_user'))]"/>
         </record>
+
+        <record id="rule_access_evaluation_type" model="ir.rule">
+            <field name="name">User can only access to their Models Type</field>
+            <field name="model_id" ref="model_evaluation_type"/>
+            <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+            <field name="perm_create" eval="False"/>
+            <field name="domain_force">[('id','=',user.models_ids.ids)]</field>
+        </record>
+
+        <record id="rule_insurance_file_for_insurance_manager" model="ir.rule">
+            <field name="name">Model manager can see all</field>
+            <field name="model_id" ref="model_evaluation_type"/>
+            <field name="groups" eval="[(4, ref('kzm_supplier_eval.group_eval_manager'))]"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+        </record>
+
     </data>
 </odoo>

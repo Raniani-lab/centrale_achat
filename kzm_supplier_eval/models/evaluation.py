@@ -44,6 +44,13 @@ class EvaluationEvaluation(models.Model):
         ('done', "Done"),
     ], default='draft', track_visibility='onchange')
 
+    # @api.onchange('current_user')
+    # def onchange_nursery(self):
+    #     if self.current_user:
+    #         print(self.current_user)
+    #         print(self.evaluation_type_id.users_ids.ids)
+    #         return {'domain': {'evaluation_type_id': [('current_user', 'in', self.evaluation_type_id.users_ids.ids)]}}
+
     @api.onchange('evaluation_type_id')
     def _get_evaluation_type(self):
         for r in self:
