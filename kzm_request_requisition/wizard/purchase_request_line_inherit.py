@@ -4,6 +4,19 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.exceptions import ValidationError
 
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    supplier_type_id = fields.Many2one('partner.supplier.type', string='Supplier type')
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    supplier_type_id = fields.Many2one(related='company_id.supplier_type_id', readonly=False, required=1)
+
+
 class PurchaseRequestLineGenerationType(models.TransientModel):
     _inherit = 'purchase.request.line.make.purchase.order'
     _description = 'add convert to field'
@@ -16,12 +29,21 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
         comodel_name="res.partner",
         string="Supplier",
         required=False,
-        domain=[("supplier_rank", ">", 0)],
+        domain="[('supplier_rank', '>', 0)]",
         context={"supplier_rank": 1},
     )
+    # company_id = fields.Many2one('res.company', string="Company")
     purchase_contract_id = fields.Many2one('purchase.requisition', string="Purchase contract",
                                            domain="[('state','=','ongoing')]")
     supplier_ids = fields.Many2many('res.partner', string="Suppliers", domain="[('supplier_rank','=',True)]")
+
+    # @api.onchange('convert_to')
+    # def onchange_convert_to(self):
+    #     for o in self:
+    #         o.supplier_id = False
+    #         if o.convert_to == 'purchase_contract':
+    #             return {'domain': {
+    #                 'supplier_id': [('supplier_type_id', '=', self.nursery_id.classroom_ids.ids)]}}
 
     def _get_products_from_contract(self, contract):
         products = []

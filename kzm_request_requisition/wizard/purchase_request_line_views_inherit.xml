@@ -9,6 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='purchase_order_id']" position="after">
                 <field name="convert_to" widget="radio"/>
+<!--                <field name="company_id" invisible="1"/>-->
                 <field name="supplier_id" attrs="{'invisible': [('convert_to','!=', 'purchase_contract')], 'required': [('convert_to','=', 'purchase_contract')]}"/>
                 <field name="purchase_contract_id" attrs="{'invisible': [('convert_to','!=', 'purchase_contract')], 'required': [('convert_to','=', 'purchase_contract')]}"/>
                 <field name="supplier_ids" attrs="{'invisible': [('convert_to','!=', 'multiple_consultation')], 'required': [('convert_to','=', 'multiple_consultation')]}"/>
