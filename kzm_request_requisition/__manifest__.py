@@ -11,6 +11,7 @@
                         
     "init_xml": [],
     'data': [
+        "views/purchase_order_views.xml",
         "wizard/purchase_request_line_views_inherit.xml",
         "views/request_requesition_appel_offre_views.xml",
         "views/res_config_views.xml",

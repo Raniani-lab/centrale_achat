@@ -1,4 +1,5 @@
 
+from odoo import tools
 from datetime import datetime
 
 from odoo import _, api, fields, models, exceptions
@@ -41,3 +42,37 @@ class PurchaseRequisition(models.Model):
                         })]
             else:
                 exceptions.ValidationError(_("Please make sure you have at least One supplier"))
+
+
+class PurchaseOrderLine(models.Model):
+    _inherit = 'purchase.order.line'
+
+    partner_id = fields.Many2one('res.partner', related="order_id.partner_id")
+    requisition_id = fields.Many2one('purchase.requisition', related="order_id.requisition_id")
+    date_end = fields.Datetime(related="order_id.requisition_id.date_end")
+
+
+# class MultipleConsultationReport(models.Model):
+#     _name = 'purchase.order.pivot'
+#     _description = "Purchase order pivot"
+#
+#     product_id = fields.Many2one('product.template', string='Product', readonly=True)
+#     purchase_order_id = fields.Many2one('purchase.order', string="Purchase order", readonly=True)
+#     order_line = fields.One2many('purchase.order.line', string="Order Line", readonly=True)
+#     partner_id = fields.Many2one('res.partner', string="Supplier", readonly=True)
+#     price_subtotal = fields.Monetary(string="Price subtotal", readonly=True)
+#
+#     def init(self):
+#         tools.drop_view_if_exists(self.env.cr, 'purchase_order_report_analysis')
+#         self.env.cr.execute("""
+#             CREATE VIEW purchase_order_report_analysis AS (
+#                 SELECT
+#                     O.id as id,
+#                     L.product_id AS product_id,
+#                     L.purchase_order_id AS purchase_order_id,
+#                     O.partner_id AS partner_id,
+#                     L.price_subtotal AS price_subtotal,
+#                 FROM purchase_order T
+#                     LEFT JOIN purchase_order_line L ON (O.id = L.purchase_order_id)
+#                 )
+#             """)

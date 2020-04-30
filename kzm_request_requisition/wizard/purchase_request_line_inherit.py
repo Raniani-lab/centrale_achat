@@ -37,14 +37,6 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
                                            domain="[('state','=','ongoing')]")
     supplier_ids = fields.Many2many('res.partner', string="Suppliers", domain="[('supplier_rank','=',True)]")
 
-    # @api.onchange('convert_to')
-    # def onchange_convert_to(self):
-    #     for o in self:
-    #         o.supplier_id = False
-    #         if o.convert_to == 'purchase_contract':
-    #             return {'domain': {
-    #                 'supplier_id': [('supplier_type_id', '=', self.nursery_id.classroom_ids.ids)]}}
-
     def _get_products_from_contract(self, contract):
         products = []
         for line in contract.line_ids:
