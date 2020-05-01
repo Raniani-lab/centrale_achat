@@ -9,7 +9,7 @@
                     <header>
                         <button name="action_draft" type="object"
                                 string="Reset to draft"
-                                states="confirmed"/>
+                                states="confirmed,refused,done"/>
                         <button name="action_confirm" type="object"
                                 string="SENT" states="draft"
                                 class="oe_highlight"/>
@@ -21,9 +21,6 @@
                                 string="REFUSE" states="confirmed"
                                 class="oe_highlight"
                                  groups="kzm_referencement_v.group_ref_manager"/>
-                        <button name="action_draft" type="object"
-                                string="Reset to draft"
-                                states="refused"/>
                         <field name="state" widget="statusbar"/>
 
                     </header>
@@ -40,6 +37,7 @@
                             <div class="oe_title">
                                 <h1>
                                     <field name="name" readonly="1"/>
+                                    <!--<field name="nature_type_tags" widget="many2many_tags"/>-->
                                     <field name="company_type" widget="radio" class="oe_edit_only"
                                        options="{'horizontal': true}"/>
                                 </h1>

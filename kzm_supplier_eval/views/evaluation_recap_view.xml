@@ -153,9 +153,9 @@
 
         <menuitem id="evaluation_recap_menu"
                   name="Recapitulation"
-                  parent="evaluation_menu"
-                  sequence = "5"
+                  sequence = "2"
+                  parent="purchase.menu_purchase_config"
                   action="evaluation_recap_list_action"
-                  groups="kzm_supplier_eval.group_eval_manager"/>
+                  />
 
 </odoo>

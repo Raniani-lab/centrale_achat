@@ -9,16 +9,10 @@
                     <header>
                         <button name="action_draft" type="object"
                                 string="Reset to draft"
-                                states="confirmed,done"/>
+                                states="confirmed"/>
                         <button name="action_confirm" type="object"
                                 string="Confirm" states="draft"
                                 class="oe_highlight"/>
-                        <button name="action_done" type="object"
-                                string="Mark as done" states="confirmed"
-                                class="oe_highlight"/>
-                        <!--                    <button name="create_invoice" type="object"-->
-                        <!--                            string="Facturate"-->
-                        <!--                    />-->
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -30,7 +24,7 @@
                                 </div>
                         </group>
                         <group>
-                            <field name="type_evaluation" />
+                            <field name="type_evaluation" required="1"/>
                             <field name="evaluation_weight" />
                             <field name="description"/>
                         </group>

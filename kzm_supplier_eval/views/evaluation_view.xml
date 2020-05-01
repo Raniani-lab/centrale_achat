@@ -19,9 +19,11 @@
                     <field name="name" />
                     <field name="evaluation_type_id"/>
                     <field name="current_user"/>
+                    <field name="supplier_eval"/>
                     <field name="evaluation_responsible_id" required="1" readonly="1"/>
-                    <field name="evaluation_deadline_date"/>
                     <field name="purchase_order_id" />
+                    <field name="invoice_id" />
+                    <field name="receipt_id" />
                     <field name="evaluation_note" />
 
                 </tree>
@@ -62,10 +64,10 @@
                                 string="Reset to draft"
                                 states="confirmed,done"/>
                         <button name="action_confirm" type="object"
-                                string="Confirm" states="draft"
+                                string="Submit Evaluation" states="draft"
                                 class="oe_highlight"/>
                         <button name="action_done" type="object"
-                                string="Submit Evaluation" states="confirmed"
+                                string="Confirm" states="confirmed"
                                  groups="kzm_supplier_eval.group_eval_manager"
                                 class="oe_highlight"/>
                         <field name="state" widget="statusbar"/>
@@ -82,7 +84,8 @@
                         </group>
                         <group>
                             <group string="">
-                                <field name="evaluation_type_id" required="1"/>
+                                <field name="evaluation_type_id" required="1"
+                                domain="[['state','=','confirmed']]"/>
                                 <field name="eval_type" invisible="1"/>
                                 <field name="state_invoice" invisible="1"/>
                                 <field name="evaluation_responsible_id"
@@ -110,6 +113,19 @@
                                 ,['evaluation_type_id','=',False]]
                                 ,'required': [['eval_type','=','storekeeper']]}"
                                 />
+                                <field name="supplier_id"
+                                  attrs="{'invisible': ['|','|',['eval_type','=','accountant'],['eval_type','=','storekeeper']
+                                  ,['evaluation_type_id','=',False]]}"
+                                />
+                                <field name="supplier_id_inv"
+                                  attrs="{'invisible': ['|','|',['eval_type','=','buyer'],['eval_type','=','storekeeper']
+                                  ,['evaluation_type_id','=',False]]}"
+                                />
+                                <field name="supplier_id_rec"
+                                attrs="{'invisible': ['|','|',['eval_type','=','accountant'],['eval_type','=','buyer']
+                                  ,['evaluation_type_id','=',False]]}"
+                                />
+                                <field name="supplier_eval" invisible="1"/>
                             </group>
 
                         </group>

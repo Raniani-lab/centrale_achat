@@ -27,7 +27,6 @@ class EvaluationType(models.Model):
     state = fields.Selection([
         ('draft', "Draft"),
         ('confirmed', "Confirmed"),
-        ('done', "Done"),
     ], default='draft', track_visibility='onchange')
 
     # @api.onchange('users_ids')

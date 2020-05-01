@@ -21,4 +21,4 @@ class SuppType(models.Model):
 class ResPartnerSupp(models.Model):
     _inherit = "res.partner"
 
-    supplier_type_id = fields.Many2one('partner.supplier.type',string="Supplier Nature")
+    supplier_type_id = fields.Many2many('partner.supplier.type',string="Supplier Nature")

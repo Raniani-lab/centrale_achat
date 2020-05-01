@@ -9,7 +9,7 @@
                 <header>
                     <button name="action_draft" type="object"
                             string="Reset to draft"
-                            states="draft"/>
+                            states="confirmed,refused,done"/>
                     <button name="action_confirm" type="object"
                             string="SEND" states="draft"
                             class="oe_highlight"/>
@@ -21,9 +21,6 @@
                                 string="REFUSE" states="confirmed"
                                 class="oe_highlight"
                                  groups="kzm_referencement_v.group_ref_manager"/>
-                        <button name="action_draft" type="object"
-                                string="Reset to draft"
-                                states="refused"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
