@@ -26,6 +26,7 @@ msgid "Choose the method to generate Purchase request:"
 msgstr "Choisissez la méthode pour générer la demande d'achat:"
 
 #. module: kzm_request_requisition
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line__status__eligible
 #: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order_item__status__eligible
 msgid "Eligible"
 msgstr "Éligible"
@@ -69,9 +70,15 @@ msgid "RFQ"
 msgstr "Demandes de Prix"
 
 #. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line__status
 #: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__status
 msgid "Status"
 msgstr "Statut"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line__status__not_eligible
+msgid "Not Eligible"
+msgstr "Non éligible"
 
 #. module: kzm_request_requisition
 #: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
@@ -205,6 +212,12 @@ msgstr "Fournisseur"
 #: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_wizard_ids
 msgid "Suppliers"
 msgstr "Fournisseurs"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/models/purchase_request_line.py:0
+#, python-format
+msgid "The cost for the product '%s' exceed the allowed in the budget."
+msgstr "Le cout pour le produit '%s' dépasse ce qui est alloué sur le Budget."
 
 #. module: kzm_request_requisition
 #: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+    <record id="view_purchase_request_form_status_inherit" model="ir.ui.view">
+        <field name="name">Purchase Request Line Inherit</field>
+        <field name="model">purchase.request</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree/field[@name='purchase_state']" position="after">
+                <field name="status" force_save="1"/>
+            </xpath>
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-danger">status=='not_eligible'</attribute>
+                <attribute name="decoration-success">status=='eligible'</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

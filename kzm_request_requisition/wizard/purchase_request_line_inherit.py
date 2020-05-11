@@ -4,6 +4,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.exceptions import ValidationError
 
+
 class PurchaseRequestLineGenerationType(models.TransientModel):
     _inherit = 'purchase.request.line.make.purchase.order'
     _description = 'add convert to field'
