@@ -35,12 +35,16 @@ class EvaluationEvaluation(models.Model):
                                  context={'contact_display': 'partner_address'})
     coef_sum = fields.Char(string="Total scale", compute='_compute_evaluation_note')
     supplier_id = fields.Many2one('res.partner', string="Supplier Evaluated", compute='_get_supplier_id')
+    supplier_id_inv = fields.Many2one('res.partner', string="Supplier Evaluated", compute='_get_supplier_id_inv')
+    supplier_id_rec = fields.Many2one('res.partner', string="Supplier Evaluated", compute='_get_supplier_id_rec')
+    supplier_eval = fields.Many2one('res.partner', string="Supplier Evaluated", compute='_get_supplier_eval')
     eval_type = fields.Char(string="Type of Evaluation", compute='_get_evaluation_type')
     state_invoice = fields.Char(string="State", compute='_get_state_invoice')
+    operation_evaluated = fields.Char(string="Operation Evaluated",compute='_get_op_eval')
     color = fields.Integer()
     state = fields.Selection([
         ('draft', "Draft"),
-        ('confirmed', "Confirmed"),
+        ('confirmed', "Submitted"),
         ('done', "Done"),
     ], default='draft', track_visibility='onchange')
 
@@ -68,6 +72,29 @@ class EvaluationEvaluation(models.Model):
         for r in self:
             r.supplier_id = r.purchase_order_id.partner_id.id
 
+    @api.onchange('invoice_id')
+    def _get_supplier_id_inv(self):
+        """permet de charger automatiquement le fournisseur une fois que la
+        facture est choisis"""
+        for r in self:
+            r.supplier_id_inv = r.invoice_id.partner_id.id
+
+    @api.onchange('receipt_id')
+    def _get_supplier_id_rec(self):
+        """permet de charger automatiquement le fournisseur une fois que
+         la réception est choisis"""
+        for r in self:
+            r.supplier_id_rec = r.receipt_id.partner_id.id
+
+    def _get_supplier_eval(self):
+        for r in self:
+            if r.supplier_id:
+                r.supplier_eval = r.purchase_order_id.partner_id.id
+            elif r.supplier_id_inv:
+                r.supplier_eval = r.invoice_id.partner_id.id
+            else:
+                r.supplier_eval = r.receipt_id.partner_id.id
+
     @api.onchange('evaluation_type_id')
     def _get_eval_lines(self):
         """permet de creer les lignes devaluations suivant le type devaluation en se basant sur les criteres"""
@@ -79,6 +106,8 @@ class EvaluationEvaluation(models.Model):
                     'evaluation_id': o.id,
                 }))
             o.evaluation_line_ids = to_be_creat
+
+
 
     def action_draft(self):
         self.state = 'draft'
