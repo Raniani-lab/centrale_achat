@@ -4,9 +4,26 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 from odoo.exceptions import ValidationError
 
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    supplier_type_id = fields.Many2one('partner.supplier.type', string='Supplier type')
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    supplier_type_id = fields.Many2one(related='company_id.supplier_type_id', readonly=False, required=1)
+
+
 class PurchaseRequestLineGenerationType(models.TransientModel):
     _inherit = 'purchase.request.line.make.purchase.order'
     _description = 'add convert to field'
+
+    def default_company(self):
+        user = self.env['res.users'].sudo().search([('id', '=', self.env.uid)])
+        return user.company_id
 
     convert_to = fields.Selection([('purchase_contract', 'Purchase contract'),
                                    ('multiple_consultation', 'Multiple consultation'),
@@ -16,9 +33,10 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
         comodel_name="res.partner",
         string="Supplier",
         required=False,
-        domain=[("supplier_rank", ">", 0)],
+        domain="[('supplier_rank', '>', 0)]",
         context={"supplier_rank": 1},
     )
+    company_id = fields.Many2one('res.company', default=default_company, string="Company")
     purchase_contract_id = fields.Many2one('purchase.requisition', string="Purchase contract",
                                            domain="[('state','=','ongoing')]")
     supplier_ids = fields.Many2many('res.partner', string="Suppliers", domain="[('supplier_rank','=',True)]")

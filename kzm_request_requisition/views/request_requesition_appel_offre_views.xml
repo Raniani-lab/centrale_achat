@@ -7,6 +7,12 @@
         <field name="model">purchase.requisition</field>
         <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form" />
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="%(action_purchase_order_line_pivot)d" type="action" class="oe_stat_button" icon="fa-list-alt"
+                        attrs="{'invisible': ['|','|',('multiple_consultation','!=', True),('state','!=', 'open'), ('order_count','=', 0)]}"
+                        string="Consultation Report">
+                </button>
+            </xpath>
             <xpath expr="//field[@name='vendor_id']" position="after">
                 <field name="multiple_consultation" invisible="1"/>
             </xpath>
