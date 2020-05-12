@@ -37,6 +37,7 @@ class PurchaseRequestLineGenerationType(models.TransientModel):
         context={"supplier_rank": 1},
     )
     company_id = fields.Many2one('res.company', default=default_company, string="Company")
+    supplier_type_id = fields.Many2one('partner.supplier.type', related='company_id.supplier_type_id')
     purchase_contract_id = fields.Many2one('purchase.requisition', string="Purchase contract",
                                            domain="[('state','=','ongoing')]")
     supplier_ids = fields.Many2many('res.partner', string="Suppliers", domain="[('supplier_rank','=',True)]")
