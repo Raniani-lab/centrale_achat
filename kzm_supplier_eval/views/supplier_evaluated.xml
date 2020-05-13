@@ -5,19 +5,21 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//group[@name='purchase']" position="inside">
-                    <field name="supplier"/>
-                </xpath>
-                <xpath expr="//sheet" position="inside">
-                    <div class="oe_button_box" name="button_box">
-                        <field name="evaluation_note" invisible="1"/>
-                        <field name="evaluation_class_name" invisible="1"/>
+                 <div name="button_box" position="inside">
                         <button name="eval_recap" type="object"
                                 class="oe_stat_button"
                                 attrs="{'invisible':['|',('evaluation_note','=',0.0),('supplier','!=',True)]}"
                                 icon="fa-bar-chart-o">
-                               <field name="evaluation_note"/>
+                               <field string="Evaluation note" name="evaluation_note" widget="statinfo" />
                         </button>
+                 </div>
+                <xpath expr="//group[@name='purchase']" position="inside">
+                    <field name="supplier"/>
+                </xpath>
+                <xpath expr="//group[@name='purchase']" position="inside">
+                    <div name="button_box" position="inside">
+                        <field name="evaluation_note" invisible="1"/>
+                        <field name="evaluation_class_name" invisible="1"/>
                          <button name="supplier_class" type="object"
                                  class="oe_stat_button"
                                  attrs="{'invisible':['|',('evaluation_class_name','=',False),('supplier','!=',True)]}"

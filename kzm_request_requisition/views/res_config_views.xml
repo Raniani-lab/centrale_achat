@@ -1,0 +1,36 @@
+<odoo>
+    <record id="view_ref_config_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.supplier.type</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="priority">3</field>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='purchase_setting_container']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box" title="Type of suppliers">
+                    <div class="o_setting_right_pane">
+                        <span class="o_form_label">Supplier type</span>
+                        <div class="content-group" name="supplier_type_id">
+                            <div class="mt16">
+                                <field name="supplier_type_id" placeholder="Supplier type"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="company_view_partner_form" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='supplier_type_id']" position="inside">
+                    <field name="company_id" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+
+</odoo>

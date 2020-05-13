@@ -209,7 +209,8 @@ msgstr "Fournisseur"
 
 #. module: kzm_request_requisition
 #: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_ids
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_wizard_ids
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_requisition__supplier_ids
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_requisition_inherit
 msgid "Suppliers"
 msgstr "Fournisseurs"
 

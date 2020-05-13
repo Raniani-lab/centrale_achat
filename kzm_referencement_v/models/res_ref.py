@@ -25,6 +25,7 @@ class ResRef(models.Model):
     site_web = fields.Char("Web Site")
     file = fields.Binary(string='Terms and Conditions', attachement=True)
     file_sec = fields.Binary(string='Financial Information', attachement=True)
+    # nature_type_tags = fields.Many2many('partner.supplier.type', string="Tags")
     file_name = fields.Char("File Name")
     file_name_sec = fields.Char("File Name")
     function = fields.Char("Function")
@@ -118,4 +119,3 @@ class ResRef(models.Model):
          'UNIQUE(res_name)',
          "The name  must be unique"),
     ]
-
