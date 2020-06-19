@@ -22,3 +22,8 @@
 	path = OCA/queue
 	url = git@github.com:OCA/queue.git
 	branch = 13.0
+
+[submodule "OCA/account-financial-tools"]
+	path = OCA/account-financial-tools
+	url = git@github.com:OCA/account-financial-tools.git
+	branch = 13.0
