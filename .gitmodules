@@ -32,3 +32,8 @@
 	path = karizmaconseil/karizma_tools
 	url = git@github.com:karizmaconseil/karizma_tools.git
 	branch = 13.0
+
+[submodule "OCA/purchase-workflow"]
+	path = OCA/purchase-workflow
+	url = git@github.com:OCA/purchase-workflow.git
+	branch = 13.0
