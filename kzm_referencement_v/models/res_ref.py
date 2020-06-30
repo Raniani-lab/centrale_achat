@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from odoo import models, fields, api, exceptions, _
-from zeep.exceptions import ValidationError
+from odoo.exceptions import ValidationError
 
 
 class ResRef(models.Model):

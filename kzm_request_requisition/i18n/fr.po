@@ -16,9 +16,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__availability
-msgid "Availability"
-msgstr "Disponibilité"
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_ref_config_form_inherit
+msgid "<span class=\"o_form_label\">Supplier type</span>"
+msgstr ""
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_order_line__date_end
+msgid "Agreement Deadline"
+msgstr "Date limite de l'accord"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line__analytic_account_id
+msgid "Analytic Account"
+msgstr "Compte analytique"
 
 #. module: kzm_request_requisition
 #: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_request_line_make_purchase_order_inherit
@@ -102,19 +112,10 @@ msgid "Create RFQ"
 msgstr "Générer une Demande de Prix"
 
 #. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__create_uid
-msgid "Created by"
-msgstr "Créer par"
-
-#. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__create_date
-msgid "Created on"
-msgstr ""
-
-#. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__display_name
-msgid "Display Name"
-msgstr ""
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line__status__eligible
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order_item__status__eligible
+msgid "Eligible"
+msgstr "Éligible"
 
 #. module: kzm_request_requisition
 #: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
@@ -129,24 +130,14 @@ msgid "Enter a supplier."
 msgstr "Entrer un fournisseur."
 
 #. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__id
-msgid "ID"
-msgstr ""
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_requisition_inherit
+msgid "Generate Quotation requests"
+msgstr "Générer les demandes de prix"
 
 #. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__write_uid
-msgid "Last Updated by"
-msgstr ""
-
-#. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__write_date
-msgid "Last Updated on"
-msgstr ""
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_requisition__multiple_consultation
+msgid "Multiple Consultation"
+msgstr "Consultation Multiple"
 
 #. module: kzm_request_requisition
 #: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order__convert_to__multiple_consultation
@@ -154,13 +145,49 @@ msgid "Multiple consultation"
 msgstr "Consultation Multiple"
 
 #. module: kzm_request_requisition
-#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
-#, python-format
-msgid "Non Available"
-msgstr "Non disponible"
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order_item__status__non_eligible
+msgid "Non Eligible"
+msgstr "Non éligible"
 
 #. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_supplier__purchase_request_line_id
+#: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line__status__not_eligible
+msgid "Not Eligible"
+msgstr "Non éligible"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_order_line__partner_id
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
+#, python-format
+msgid "Please insert at least One supplier."
+msgstr "Veuillez insérer au moins un fournisseur."
+
+#. module: kzm_request_requisition
+#: code:addons/kzm_request_requisition/models/purchase_requisition_type_multi.py:0
+#, python-format
+msgid "Please make sure you have at least One supplier"
+msgstr "Veuillez vous assurer d'avoir au moins un fournisseur"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_order_line__requisition_id
+msgid "Purchase Agreement"
+msgstr "Convention d'achat"
+
+#. module: kzm_request_requisition
+#: model:ir.model,name:kzm_request_requisition.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "Ligne de demande d'achat"
+
+#. module: kzm_request_requisition
+#: model:ir.model,name:kzm_request_requisition.model_purchase_request
+msgid "Purchase Request"
+msgstr "Demande d'achat"
+
+#. module: kzm_request_requisition
+#: model:ir.model,name:kzm_request_requisition.model_purchase_request_line
 msgid "Purchase Request Line"
 msgstr "Ligne de la demande d'Achat"
 
@@ -189,17 +216,23 @@ msgstr "Quantité disponible"
 #: code:addons/kzm_request_requisition/wizard/purchase_request_line_inherit.py:0
 #, python-format
 msgid "RFQ"
-msgstr ""
-
-#. module: kzm_request_requisition
-#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__red
-msgid "Red"
-msgstr "Rouge"
+msgstr "Demandes de Prix"
 
 #. module: kzm_request_requisition
 #: model:ir.model.fields.selection,name:kzm_request_requisition.selection__purchase_request_line_make_purchase_order__convert_to__request_quotation
 msgid "Request for Quotation"
 msgstr "Demande de prix"
+
+#. module: kzm_request_requisition
+#: model:ir.actions.act_window,name:kzm_request_requisition.action_purchase_order_line_pivot
+msgid "Request for Quotations Pivot"
+msgstr "Demande pour Devis pivot "
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line__status
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order_item__status
+msgid "Status"
+msgstr "Statut"
 
 #. module: kzm_request_requisition
 #: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_id
@@ -208,8 +241,17 @@ msgid "Supplier"
 msgstr "Fournisseur"
 
 #. module: kzm_request_requisition
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_type_id
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_res_company__supplier_type_id
+#: model:ir.model.fields,field_description:kzm_request_requisition.field_res_config_settings__supplier_type_id
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_ref_config_form_inherit
+msgid "Supplier type"
+msgstr "Type de fournisseur"
+
+#. module: kzm_request_requisition
 #: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_request_line_make_purchase_order__supplier_ids
 #: model:ir.model.fields,field_description:kzm_request_requisition.field_purchase_requisition__supplier_ids
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.purchase_order_line_analysis
 #: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_purchase_requisition_inherit
 msgid "Suppliers"
 msgstr "Fournisseurs"
@@ -231,6 +273,18 @@ msgstr "Veuillez vérifier la disponibilité du produit '%s' dans le contrat d'A
 #, python-format
 msgid "The product '%s' does not exist or exceed the quantity in the contract."
 msgstr "Le produit '% s' n'existe pas ou dépasse la quantité sur le contrat"
+
+#. module: kzm_request_requisition
+#: model_terms:ir.ui.view,arch_db:kzm_request_requisition.view_ref_config_form_inherit
+msgid "Type of suppliers"
+msgstr "Type de fournisseur"
+
+#. module: kzm_request_requisition
+#: model:ir.model.fields,help:kzm_request_requisition.field_purchase_order_line__partner_id
+msgid "You can find a vendor by its Name, TIN, Email or Internal Reference."
+msgstr ""
+"Vous pouvez trouver un fournisseur par son nom, numéro de TVA, email ou sa "
+"référence interne."
 
 #. module: kzm_request_requisition
 #: model:ir.model,name:kzm_request_requisition.model_purchase_request_line_make_purchase_order

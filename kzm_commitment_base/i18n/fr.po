@@ -56,7 +56,7 @@ msgstr "Budget"
 #. module: smile_commitment_base
 #: model:ir.ui.view,arch_db:smile_commitment_base.view_users_form
 msgid "Budget Commitments"
-msgstr "Engagements"
+msgstr "Engagements budgétaires"
 
 #. module: smile_commitment_base
 #: model:ir.model,name:smile_commitment_base.model_crossovered_budget_lines
@@ -90,7 +90,7 @@ msgstr "Engagé"
 #. module: smile_commitment_base
 #: model:ir.model.fields,field_description:smile_commitment_base.field_account_budget_post_commitment_limit_amount_limit
 msgid "Commitment Amount Limit"
-msgstr "Plafond du montant d'engagement"
+msgstr "Montant d'engagement limit"
 
 #. module: smile_commitment_base
 #: model:ir.model.fields,field_description:smile_commitment_base.field_account_budget_post_commitment_limit_ids
@@ -103,7 +103,8 @@ msgstr "Plafonds d'engagement"
 #: code:addons/smile_commitment_base/models/analytic.py:25
 #, python-format
 msgid "Commitment account is required if general account is not set."
-msgstr "Le compte d'engagement est requis si le compte financier n'est pas défini."
+msgstr ""
+"Le compte d'engagement est requis si le compte financier n'est pas défini."
 
 #. module: smile_commitment_base
 #: model:ir.model.fields,field_description:smile_commitment_base.field_account_budget_post_commitment_limit_create_uid
@@ -128,7 +129,7 @@ msgstr "Jusqu'à"
 #. module: smile_commitment_base
 #: model:ir.model.fields,field_description:smile_commitment_base.field_account_budget_post_commitment_limit_display_name
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Afficher Nom"
 
 #. module: smile_commitment_base
 #: model:ir.model.fields,field_description:smile_commitment_base.field_res_users_commitment_global_limit
@@ -148,7 +149,7 @@ msgstr "ID"
 #. module: smile_commitment_base
 #: model:ir.model.fields,help:smile_commitment_base.field_res_users_commitment_global_limit
 msgid "If equal to 0, the sky's the limit"
-msgstr "Si le montant est nul, pas de plafond"
+msgstr "Si égual à 0 , le ciel est la limite"
 
 #. module: smile_commitment_base
 #: model:ir.model.fields,field_description:smile_commitment_base.field_account_budget_post_commitment_limit___last_update
@@ -190,14 +191,19 @@ msgstr "Voir les détails"
 #. module: smile_commitment_base
 #: code:addons/smile_commitment_base/models/res_users.py:24
 #, python-format
-msgid "You are not authorized to confirm this order.\n"
+msgid ""
+"You are not authorized to confirm this order.\n"
 "Amount for '%s' exceeds your commitment authorization"
-msgstr "Vous n'êtes pas autorisé à confirmer cette commande.\n"
+msgstr ""
+"Vous n'êtes pas autorisé à confirmer cette commande.\n"
 "Le montant pour '%s' dépasse votre plafond d'engagement"
 
 #. module: smile_commitment_base
 #: code:addons/smile_commitment_base/models/account_budget.py:110
 #, python-format
-msgid "You cannot define a budget post commitment limit superior to the global limit of this user"
-msgstr "Vous ne pouvez définir un plafond par poste budgétaire supérieure au plafond globale de l'utilisateur"
-
+msgid ""
+"You cannot define a budget post commitment limit superior to the global "
+"limit of this user"
+msgstr ""
+"Vous ne pouvez définir un plafond par poste budgétaire supérieure au plafond"
+" globale de l'utilisateur"

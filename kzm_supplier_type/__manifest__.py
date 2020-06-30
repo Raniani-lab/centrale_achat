@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "kzm_supplier_type",
+    'name': "kzm Supplier Type",
 
     'summary': """
         Short (1 phrase/line) summary of the module's purpose, used as
@@ -10,8 +10,8 @@
         Long description of module's purpose
     """,
 
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
+    'author': "karizma-conseil",
+    'website': "http://www.karizma-conseil.com",
 
     # Categories can be used to filter modules in modules listing
     # Check https://github.com/odoo/odoo/blob/13.0/odoo/addons/base/data/ir_module_category_data.xml

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "kzm_referencement_v",
+    'name': "kzm referencement v",
 
     'summary': """
         Referencement of products and suppliers""",
