@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_dossier_import,dossier_import,model_dossier_import,group_dossier_import,1,1,1,1
+access_achat_line_dossier_import,achat_line_dossier_import,model_achat_line_dossier_import,group_dossier_import,1,1,1,1
+access_frais_dossier_import,frais_dossier_import,model_frais_dossier_import,group_dossier_import,1,1,1,1
+access_dossier_import_tags,dossier_import_tags,model_dossier_import_tags,group_dossier_import,1,1,1,1
+access_ligne_distrib_analytic,ligne_distrib_analytic,model_ligne_distrib_analytic,group_dossier_import,1,1,1,1
+access_product_new_price,product_new_price,model_product_new_price,group_dossier_import,1,1,1,1
