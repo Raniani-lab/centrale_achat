@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_landed_cost_wizard" model="ir.ui.view">
+            <field name="name">landed.cost.wizard.form</field>
+            <field name="model">landed.cost.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="picking_ids" widget="many2many_tags"
+                               domain="[('state', '=', 'done')]" context="{'landed_cost': active_id}"/>
+                    </group>
+                    <footer>
+                        <button name="action_import_picking" string="Importer" type="object" class="oe_highlight"/>
+                        ou
+                        <button string="Annuler" class="oe_link" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>
