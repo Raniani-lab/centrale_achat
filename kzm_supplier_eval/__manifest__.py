@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "kzm_supplier_eval",
+    'name': "kzm supplier eval",
 
     'summary': """
         Supplier Evaluation based on Criterias and defined type of Evaluation""",
@@ -13,6 +13,7 @@
     'website': "http://www.karizma-conseil.com",
     # any module necessary for this oThree 6 Mafiane to work correctly
     'depends': ['base',
+                'hr',
                 'purchase'],
 
     # always loaded

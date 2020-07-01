@@ -9,7 +9,7 @@
         "purchase",
         "kzm_commitment_base",
     ],
-    "author": "Smile",
+    "author": "Karizma-conseil",
     "license": 'LGPL-3',
     "description": """
 This module generates analytic lines at purchase confirmation / cancellation.
@@ -24,11 +24,10 @@ Usage
     * Confirm the purchase.
     * Return to your budget to see the new commitment amount.
 
-Suggestions & Feedback to: Corentin Pouhet-Brunerie &
-Isabelle RICHARD
+
     """,
     "summary": "",
-    "website": "http://www.smile.fr",
+    "website": "http://www.karizma-conseil.com",
     "category": 'Purchase Management',
     "sequence": 20,
     "data": [],

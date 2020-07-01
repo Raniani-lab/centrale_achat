@@ -8,7 +8,7 @@
     "depends": [
         "account_budget",
     ],
-    "author": "Smile",
+    "author": "Karizma-conseil",
     "license": 'AGPL-3',
     "description": """
 Features
@@ -20,11 +20,9 @@ Todo
 
     * Add tolerance percentage or fixed amount for over budget commitment
 
-Suggestions & Feedback to: Corentin Pouhet-Brunerie &
-Isabelle RICHARD
     """,
     "summary": "",
-    "website": "http://www.smile.fr",
+    "website": "http://www.karizma-conseil.com",
     "category": 'Accounting & Finance',
     "sequence": 20,
     "data": [
