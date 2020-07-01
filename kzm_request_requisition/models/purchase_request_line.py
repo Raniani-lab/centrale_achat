@@ -21,8 +21,7 @@ class PurchaseRequestLine(models.Model):
     def onchange_analytic_account_status(self):
         for o in self:
             if o.analytic_account_id:
-                budget_line = self.env["crossovered.budget.lines"].search([("analytic_account_id", "=", o.analytic_account_id.id)])
-                print(budget_line.planned_amount)
+                budget_line = self.env["crossovered.budget.lines"].search([("analytic_account_id", "=", o.analytic_account_id.id)], limit=1)
                 if budget_line:
                     if (budget_line.date_from <= fields.Date.today() <= budget_line.date_to) and o.estimated_cost <= budget_line.planned_amount:
                         o.status = 'eligible'
