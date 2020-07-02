@@ -39,7 +39,9 @@
                     </group>
                     <group>
                         <group>
-                            <field name="prod_name" placeholder="Name of the product" required="1"/>
+                            <field name="prod_name" placeholder="Name of the product" required="1" />
+                            <field name="no_update" invisible="1"/>
+                            <field name="no_update_approved" invisible="1"/>
                         </group>
                         <group>
                             <div>
@@ -117,6 +119,7 @@
             <field name="ref_asked_by"/>
             <field name="ref_responsible"/>
 
+
             <field name="state"/>
         </tree>
     </field>
@@ -126,6 +129,7 @@
         <field name="name">Product referencement</field>
         <field name="res_model">ref.product</field>
         <field name="view_mode">tree,form</field>
+         <field name="context">{'is_user': False}</field>
     </record>
     </data>
 </odoo>
