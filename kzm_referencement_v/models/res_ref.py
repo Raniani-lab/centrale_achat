@@ -149,23 +149,23 @@ class ResRef(models.Model):
                     print("==========",node.get('name', 'TTTT'))
                     modifiers = json.loads(node.get("modifiers"))
                     print("********************", modifiers)
-                    modifiers['readonly'] = [('no_update', '=', True)]
+                    modifiers['readonly'] = ['|',('no_update', '=', True),('no_update_approved', '=', True)]
                     print("**********2222**********", modifiers)
                     node.set("modifiers", json.dumps(modifiers))
             res['arch'] = etree.tostring(doc, encoding='unicode')
         return res
 
-    @api.model
-    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
-        res = super(ResRef, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar,
-                                                      submenu=submenu)
-
-        if view_type in ['form']:  # Applies only for form view
-            doc = etree.XML(res['arch'])
-            for node in doc.xpath("//field"):  # All the view fields to readonly
-                if node.get('name', 'TTTT'):
-                    modifiers = json.loads(node.get("modifiers"))
-                    modifiers['readonly'] = [('no_update_approved', '=', True)]
-                    node.set("modifiers", json.dumps(modifiers))
-            res['arch'] = etree.tostring(doc, encoding='unicode')
-        return res
+    # @api.model
+    # def fields_view_get2(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+    #     res = super(ResRef, self).fields_view_get2(view_id=view_id, view_type=view_type, toolbar=toolbar,
+    #                                                   submenu=submenu)
+    #
+    #     if view_type in ['form']:  # Applies only for form view
+    #         doc = etree.XML(res['arch'])
+    #         for node in doc.xpath("//field"):  # All the view fields to readonly
+    #             if node.get('name', 'TTTT'):
+    #                 modifiers = json.loads(node.get("modifiers"))
+    #                 modifiers['readonly'] = [('no_update_approved', '=', True)]
+    #                 node.set("modifiers", json.dumps(modifiers))
+    #         res['arch'] = etree.tostring(doc, encoding='unicode')
+    #     return res

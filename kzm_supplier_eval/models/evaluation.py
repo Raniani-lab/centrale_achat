@@ -2,6 +2,8 @@
 from datetime import timedelta, date
 from odoo import tools
 from odoo import models, fields, api, exceptions, _
+from lxml import etree
+import json
 
 
 class EvaluationEvaluation(models.Model):
@@ -100,6 +102,7 @@ class EvaluationEvaluation(models.Model):
         """permet de creer les lignes devaluations suivant le type devaluation en se basant sur les criteres"""
         for o in self:
             to_be_creat = []
+            o.evaluation_line_ids = False
             for c in o.evaluation_type_id.criterias_ids:
                 to_be_creat.append((0, 0, {
                     'criteria_id': c.id,
@@ -158,6 +161,39 @@ class EvaluationEvaluation(models.Model):
             o.coef_sum = str(coefs)
             o.evaluation_note = round(notes / (coefs or 1.0), 2)
 
+    no_update = fields.Boolean(string="Cannot update", compute='_check_update')
+
+    def _check_update(self):
+        for r in self:
+            no_update = (r.state not in ['draft']) and not self.env.user.has_group(
+                'kzm_referencement_v.group_ref_manager')
+            r.no_update = no_update
+
+    no_update_approved = fields.Boolean(string="Cannot update approved", compute='_check_approved')
+
+    def _check_approved(self):
+        for r in self:
+            no_update_approved = (r.state not in ['draft', 'confirmed', 'refused'])
+            r.no_update_approved = no_update_approved
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        res = super(EvaluationEvaluation, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar,
+                                                                submenu=submenu)
+
+        if view_type in ['form']:  # Applies only for form view
+            doc = etree.XML(res['arch'])
+            for node in doc.xpath("//field"):  # All the view fields to readonly
+                if node.get('name', 'TTTT'):
+                    print("==========", node.get('name', 'TTTT'))
+                    modifiers = json.loads(node.get("modifiers"))
+                    print("********************", modifiers)
+                    modifiers['readonly'] = ['|',('no_update', '=', True),('no_update_approved', '=', True)]
+                    print("**********2222**********", modifiers)
+                    node.set("modifiers", json.dumps(modifiers))
+            res['arch'] = etree.tostring(doc, encoding='unicode')
+        return res
+
 
 class EvaluationLine(models.Model):
     """Represente les lignes devaluations contenues dans la classe de levaluations"""
@@ -186,3 +222,5 @@ class EvaluationLine(models.Model):
         """ recupere le coef du critere"""
         for r in self:
             r.criteria_coef = str(r.criteria_id.criteria_coef) if r.criteria_id else None
+
+

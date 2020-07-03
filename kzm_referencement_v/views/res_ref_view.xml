@@ -9,10 +9,12 @@
                     <header>
                         <button name="action_draft" type="object"
                                 string="Reset to draft"
-                                states="confirmed,refused,done"/>
+                                states="confirmed,refused,done"
+                                groups="kzm_referencement_v.group_ref_manager"/>
                         <button name="action_confirm" type="object"
                                 string="SENT" states="draft"
-                                class="oe_highlight"/>
+                                class="oe_highlight"
+                        />
                         <button name="action_done" type="object"
                                 string="APPROVED" states="confirmed"
                                 class="oe_highlight"
@@ -47,7 +49,7 @@
                                 <div class="oe_title">
                                     <h1>
                                         <field name="res_name" required="1" placeholder="Name"/>
-                                        <field name="no_update"/>
+                                        <field name="no_update" invisible="1"/>
                                         <field name="no_update_approved" invisible="1"/>
                                     </h1>
                                     <field name="parent_id"
@@ -142,30 +144,17 @@
                 </xpath>
             </field>
         </record>
+
+
         <record model="ir.actions.act_window" id="res_ref_list_action">
             <field name="name">Client referencement</field>
             <field name="res_model">ref.res</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain" >[('nature', '=', 'client')]</field>
         </record>
         <record model="ir.actions.act_window" id="res_ref_list_action_sup">
             <field name="name">Supplier referencement</field>
             <field name="res_model">ref.res</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain" >[('nature', '=', 'supplier')]</field>
-        </record>
-
-          <record id="res_partner_view_search_inherited" model="ir.ui.view">
-            <field name="name">res.partner.search.inherited</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="base.view_res_partner_filter"/>
-            <field name="arch" type="xml">
-                <xpath expr="//filter[@name='inactive']" position="before">
-                   <filter string="Customers" name="customer" domain="[('customer_rank','>', 0)]"/>
-                   <filter string="Vendors" name="supplier" domain="[('supplier_rank','>', 0)]"/>
-                   <separator/>
-                </xpath>
-            </field>
         </record>
 
     </data>
