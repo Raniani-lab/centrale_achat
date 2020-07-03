@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from odoo import api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_is_zero
 
 
 class dossier_import(models.Model):
@@ -182,28 +183,28 @@ class dossier_import(models.Model):
                     self.env['ligne.distrib.analytic'].create(distrib_line)
 
     def get_couts_unitaires(self):
-       couts_unitaires = {}
-       for rec in self:
-        for line in rec.analytic_line_ids:
-            if not line.product_id.id in couts_unitaires.keys():
-                couts_unitaires[line.product_id.id] = {'amount': line.montant_unitaire,
-                                                       'prix_achat': 0,
-                                                       'quantite': 0,
-                                                       'price_unit_devise': line.price_unit_devise,
-                                                       'price_total_devise': line.price_total_devise
-                                                       }
-            else:
-                couts_unitaires[line.product_id.id]['amount'] += line.montant_unitaire
-                # Ressortir le prix d'achat moyen de chaque article
-        for article in couts_unitaires.keys():
-                    somme_qte = 0
-                    somme_montant = 0
-                    for line in rec.line_achat_ids.filtered(lambda r: r.product_id.id == article):
-                        somme_qte += line.ordered_qty
-                        somme_montant += line.montant_dirham
-                    couts_unitaires[line.product_id.id]['prix_achat'] = somme_montant / (somme_qte or 1)
-                    couts_unitaires[line.product_id.id]['quantite'] = somme_qte
-       return couts_unitaires
+        couts_unitaires = {}
+        for rec in self:
+            for line in rec.analytic_line_ids:
+                if not line.product_id.id in couts_unitaires.keys():
+                    couts_unitaires[line.product_id.id] = {'amount': line.montant_unitaire,
+                                                           'prix_achat': 0,
+                                                           'quantite': 0,
+                                                           'price_unit_devise': line.price_unit_devise,
+                                                           'price_total_devise': line.price_total_devise
+                                                           }
+                else:
+                    couts_unitaires[line.product_id.id]['amount'] += line.montant_unitaire
+                    # Ressortir le prix d'achat moyen de chaque article
+            for article in couts_unitaires.keys():
+                        somme_qte = 0
+                        somme_montant = 0
+                        for line in rec.line_achat_ids.filtered(lambda r: r.product_id.id == article):
+                            somme_qte += line.ordered_qty
+                            somme_montant += line.montant_dirham
+                        couts_unitaires[line.product_id.id]['prix_achat'] = somme_montant / (somme_qte or 1)
+                        couts_unitaires[line.product_id.id]['quantite'] = somme_qte
+        return couts_unitaires
 
     #calcul le total des frais douane seulement
     def get_frais_douane(self,article):
@@ -287,22 +288,57 @@ class dossier_import(models.Model):
                         frais.amount = total_copyright
         return  couts_unitaires
 
-     # Effectuer La mise à jour du prix de revient
-    def update_cost_price(self):
-         couts_unitaires = self.get_couts_unitaires()
-         for rec in self:
-            for article in couts_unitaires.keys():
-                article_tmpl = self.env['product.product'].search([('id','=',article)]).product_tmpl_id
-                prix_revient_initial = article_tmpl.standard_price
-                stock_initital = article_tmpl.qty_available - couts_unitaires[article]['quantite']
+    #  # Effectuer La mise à jour du prix de revient
+    # def update_cost_price(self):
+    #      couts_unitaires = self.get_couts_unitaires()
+    #      for rec in self:
+    #         for article in couts_unitaires.keys():
+    #             article_tmpl = self.env['product.product'].search([('id','=',article)]).product_tmpl_id
+    #             prix_revient_initial = article_tmpl.standard_price
+    #             stock_initital = article_tmpl.qty_available - couts_unitaires[article]['quantite']
+    #
+    #             prix_dossier = couts_unitaires[article]['amount'] + couts_unitaires[article]['prix_achat']
+    #             if prix_revient_initial > 0:
+    #                 stock_global = stock_initital + couts_unitaires[article]['quantite']
+    #                 new_price = ((prix_revient_initial * stock_initital)+(prix_dossier * couts_unitaires[article]['quantite'])) / (stock_global or 1)
+    #             else:
+    #                 new_price = prix_dossier
+    #             article_tmpl.standard_price = new_price
 
-                prix_dossier = couts_unitaires[article]['amount'] + couts_unitaires[article]['prix_achat']
-                if prix_revient_initial > 0:
-                    stock_global = stock_initital + couts_unitaires[article]['quantite']
-                    new_price = ((prix_revient_initial * stock_initital)+(prix_dossier * couts_unitaires[article]['quantite'])) / (stock_global or 1)
-                else:
-                    new_price = prix_dossier
-                article_tmpl.standard_price = new_price
+
+    def update_cost_price(self):
+        couts_unitaires = self.get_couts_unitaires()
+        for cost in self:
+            for line in cost.line_achat_ids.filtered(lambda line: line.move_id):
+                product = line.move_id.product_id
+                if product.cost_method == 'average' and not float_is_zero(product.quantity_svl,
+                                                                          precision_rounding=product.uom_id.rounding):
+
+                    remaining_qty = sum(line.move_id.stock_valuation_layer_ids.mapped('remaining_qty'))
+                    linked_layer = line.move_id.stock_valuation_layer_ids[-1]
+
+                    cost_to_add = (remaining_qty / line.move_id.product_qty) * couts_unitaires[line.product_id.id]['amount']*couts_unitaires[line.product_id.id]['quantite']
+                    if not cost.company_id.currency_id.is_zero(cost_to_add):
+                        self.env['stock.valuation.layer'].create({
+                            'value': cost_to_add,
+                            'unit_cost': 0,
+                            'quantity': 0,
+                            'remaining_qty': 0,
+                            'stock_valuation_layer_id': linked_layer.id,
+                            'description': cost.name,
+                            'stock_move_id': line.move_id.id,
+                            'product_id': line.move_id.product_id.id,
+                            'company_id': cost.company_id.id,
+                        })
+
+                    product.with_context(force_company=self.company_id.id).sudo().standard_price += cost_to_add / product.quantity_svl
+
+                if product.cost_method == 'standard':
+                    new_price = couts_unitaires[line.product_id.id]['amount'] + couts_unitaires[line.product_id.id][
+                                                                                      'prix_achat']
+                    counterpart_account_id = product.property_account_expense_id.id or product.categ_id.property_account_expense_categ_id.id
+                    product._change_standard_price(new_price,
+                                                counterpart_account_id=counterpart_account_id)
 
     def unlink(self):
         if self.state != "encours":
@@ -375,6 +411,8 @@ class FraisDossierImport(models.Model):
                     rec.amount_dh = rec.amount * rec.currency_rate
                 else:
                     rec.amount_dh = rec.amount
+            else:
+                rec.amount_dh = 0.0
 
 
 # Classe qui représente les lignes de distributions analytique des frais du dossier d'import sur chaque article
