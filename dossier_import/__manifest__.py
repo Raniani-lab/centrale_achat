@@ -3,7 +3,7 @@
 {
     "name": "Dossier Import",
     "version": "12.1",
-    "depends": ["sale","purchase","account","stock"],
+    "depends": ["sale","purchase","account","stock","stock_account"],
     "author": "KARIZMA CONSEIL",
     'website': 'https://karizma-conseil.com',
     "category": "",
