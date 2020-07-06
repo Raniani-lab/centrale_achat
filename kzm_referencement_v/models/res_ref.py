@@ -88,6 +88,8 @@ class ResRef(models.Model):
             'isReferenced': True,
             'reference_id': self.id,
         })
+        self.ref_responsible = self.env.uid
+        self.ref_val_date = fields.Date.today()
 
     def res_ref(self):
         """action de redirection le produit reference """

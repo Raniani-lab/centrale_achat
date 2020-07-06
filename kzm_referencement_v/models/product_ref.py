@@ -86,6 +86,8 @@ class ProductRef(models.Model):
         self.state = 'refused'
 
     def action_done(self):
+        self.ref_responsible = self.env.uid
+        self.ref_val_date = fields.Date.today()
         self.env['product.template'].create({
             'name': self.prod_name,
             'sale_ok': self.sale_ok,

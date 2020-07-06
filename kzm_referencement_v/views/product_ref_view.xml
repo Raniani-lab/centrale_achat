@@ -9,6 +9,7 @@
                 <header>
                     <button name="action_draft" type="object"
                             string="Reset to draft"
+                            groups="kzm_referencement_v.group_ref_manager"
                             states="confirmed,refused,done"/>
                     <button name="action_confirm" type="object"
                             string="SEND" states="draft"
@@ -62,14 +63,14 @@
                             <field name="ref_asked_by"/>
                             <field name="ref_responsible"
                                    attrs="{'readonly' : [['state','=','draft']]
-                                ,'required': [['state','=','confirmed']]}"
+                                }"
                           />
                         </group>
                         <group string="">
                             <field name="ref_date"/>
                             <field name="ref_val_date"
                           attrs="{'readonly' : [['state','=','draft']]
-                                ,'required': [['state','=','confirmed']]}"/>
+                                }"/>
                         </group>
                     </group>
                     <group>
