@@ -5,8 +5,8 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//sheet" position="inside">
-                    <div class="oe_button_box" name="button_box">
+                <xpath expr="//div[@class='oe_button_box']" position="inside">
+
                         <field name="isReferenced" invisible="1" />
                         <button name="product_ref" type="object"
                                 class="oe_stat_button"
@@ -14,7 +14,7 @@
                                 icon="fa-star">
                             <field name="reference_id" />
                         </button>
-                    </div>
+
                 </xpath>
             </field>
         </record>

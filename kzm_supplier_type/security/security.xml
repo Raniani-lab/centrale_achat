@@ -14,6 +14,8 @@
 
         <record id="group_st_manager" model="res.groups">
             <field name="name">Manager</field>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="implied_ids" eval="[(4, ref('kzm_supplier_type.group_st_user'))]"/>
             <field name="category_id" ref="kzm_supplier_type.supplier_type_category"/>
         </record>
 

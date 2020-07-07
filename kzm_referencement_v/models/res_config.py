@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    approb_def1 = fields.Boolean("Default approbation", related='company_id.approb_def1', readonly=False)
+    # approb_def1 = fields.Boolean("Default approbation", related='company_id.approb_def1', readonly=False)
     default_ref_responsible = fields.Many2one('res.users', default_model='ref.res', string="Approver")
 
     @api.model

@@ -22,6 +22,7 @@
     'depends': ['base',
                 'product',
                 'group_master',
+                'account',
                 ],
 
     # always loaded
@@ -30,7 +31,7 @@
         'security/ir.model.access.csv',
         'views/product_ref_view.xml',
         'views/product_template_view.xml',
-        'views/res_config_view.xml',
+        #'views/res_config_view.xml',
         'views/res_ref_view.xml',
         'views/menus.xml',
         'data/ref_seq.xml',

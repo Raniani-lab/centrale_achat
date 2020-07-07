@@ -41,11 +41,11 @@
               parent="product_ref_menu"
               action="res_ref_list_action_sup"/>
 
-    <menuitem id="ref_config_config_menu"
-              name="Settings"
-              sequence="1"
-              parent="ref_config_menu"
-              action="action_ref_configuration"/>
+<!--    <menuitem id="ref_config_config_menu"-->
+<!--              name="Settings"-->
+<!--              sequence="1"-->
+<!--              parent="ref_config_menu"-->
+<!--              action="action_ref_configuration"/>-->
 
     <menuitem id="ref_product_menu_prod"
               name="Products"
@@ -55,11 +55,11 @@
     <menuitem id="ref_client_menu_prod"
               name="Clients"
               parent="product_template_menu"
-              action="base.action_partner_customer_form"/>
+              action="account.res_partner_action_customer"/>
 
     <menuitem id="ref_supplier_menu_prod"
               name="Supplier"
               parent="product_template_menu"
-              action="base.action_partner_supplier_form"/>
+              action="account.res_partner_action_supplier"/>
         </data>
 </odoo>

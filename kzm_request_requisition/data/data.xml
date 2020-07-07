@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="partner.supplier.type" id="supplier_type_1">
+        <field name="name">ACHAT</field>
+        <field name="code">ACH</field>
+    </record>
+</odoo>

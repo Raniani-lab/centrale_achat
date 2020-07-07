@@ -16,7 +16,8 @@
         <record id="group_eval_manager" model="res.groups">
             <field name="name">Manager</field>
             <field name="category_id" ref="kzm_supplier_eval.eval_category"/>
-            <field name="implied_ids" eval="[(4, ref('kzm_supplier_eval.group_eval_user'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+            <field name="implied_ids" eval="[(4, ref('kzm_supplier_eval.group_eval_evaluator'))]"/>
         </record>
 
         <record id="group_eval_evaluator" model="res.groups">
@@ -30,7 +31,7 @@
             <field name="model_id" ref="model_evaluation_type"/>
             <field name="groups" eval="[(4, ref('base.group_user'))]"/>
             <field name="perm_create" eval="False"/>
-            <field name="domain_force">[('id','=',user.models_ids.ids)]</field>
+            <field name="domain_force">[('id','in',user.models_ids.ids)]</field>
         </record>
 
         <record id="rule_insurance_file_for_insurance_manager" model="ir.rule">

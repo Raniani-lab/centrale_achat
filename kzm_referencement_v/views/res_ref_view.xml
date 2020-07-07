@@ -9,10 +9,12 @@
                     <header>
                         <button name="action_draft" type="object"
                                 string="Reset to draft"
-                                states="confirmed,refused,done"/>
+                                states="confirmed,refused,done"
+                                groups="kzm_referencement_v.group_ref_manager"/>
                         <button name="action_confirm" type="object"
                                 string="SENT" states="draft"
-                                class="oe_highlight"/>
+                                class="oe_highlight"
+                        />
                         <button name="action_done" type="object"
                                 string="APPROVED" states="confirmed"
                                 class="oe_highlight"
@@ -47,6 +49,8 @@
                                 <div class="oe_title">
                                     <h1>
                                         <field name="res_name" required="1" placeholder="Name"/>
+                                        <field name="no_update" invisible="1"/>
+                                        <field name="no_update_approved" invisible="1"/>
                                     </h1>
                                     <field name="parent_id"
                                            attrs="{'invisible': [('company_type', '=', 'person')]}"
@@ -81,13 +85,13 @@
                                 <field name="ref_asked_by"/>
                                 <field name="ref_responsible"
                                   attrs="{'readonly' : [['state','=','draft']]
-                                ,'required': [['state','=','confirmed']]}"/>
+                                }"/>
                             </group>
                             <group string="">
                                 <field name="ref_date"/>
                                 <field name="ref_val_date"
                                   attrs="{'readonly' : [['state','=','draft']]
-                                ,'required': [['state','=','confirmed']]}"/>
+                                }"/>
                             </group>
                         </group>
                     </sheet>
@@ -140,17 +144,17 @@
                 </xpath>
             </field>
         </record>
+
+
         <record model="ir.actions.act_window" id="res_ref_list_action">
             <field name="name">Client referencement</field>
             <field name="res_model">ref.res</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain" >[('nature', '=', 'client')]</field>
         </record>
         <record model="ir.actions.act_window" id="res_ref_list_action_sup">
             <field name="name">Supplier referencement</field>
             <field name="res_model">ref.res</field>
             <field name="view_mode">tree,form</field>
-            <field name="domain" >[('nature', '=', 'supplier')]</field>
         </record>
 
     </data>

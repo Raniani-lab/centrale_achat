@@ -2,6 +2,9 @@
 from odoo.addons import decimal_precision as dp
 from odoo import models, fields, api, exceptions, _
 from odoo.exceptions import ValidationError, RedirectWarning, UserError
+from lxml import etree
+import json
+
 
 
 class ProductRef(models.Model):
@@ -10,6 +13,8 @@ class ProductRef(models.Model):
     _name = 'ref.product'
     _description = "Referencement of product"
     _inherit = ['ref.ref', 'mail.thread', 'mail.activity.mixin']
+
+
 
     name = fields.Char("Ref sequence", default='New')
     prod_name = fields.Char("Product Name")
@@ -81,6 +86,8 @@ class ProductRef(models.Model):
         self.state = 'refused'
 
     def action_done(self):
+        self.ref_responsible = self.env.uid
+        self.ref_val_date = fields.Date.today()
         self.env['product.template'].create({
             'name': self.prod_name,
             'sale_ok': self.sale_ok,
@@ -134,3 +141,48 @@ class ProductRef(models.Model):
          'UNIQUE(prod_name)',
          "The name  must be unique"),
     ]
+    no_update = fields.Boolean(string="Cannot update", compute='_check_update')
+    def _check_update(self):
+        for r in self:
+            no_update = (r.state not in ['draft']) and not self.env.user.has_group('kzm_referencement_v.group_ref_manager')
+            r.no_update = no_update
+
+    no_update_approved = fields.Boolean(string="Cannot update approved", compute='_check_approved')
+
+    def _check_approved(self):
+        for r in self:
+            no_update_approved = (r.state not in ['draft','confirmed','refused'])
+            r.no_update_approved = no_update_approved
+
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        res = super(ProductRef, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar,
+                                                       submenu=submenu)
+
+        if view_type in ['form']:  # Applies only for form view
+            doc = etree.XML(res['arch'])
+            for node in doc.xpath("//field"):  # All the view fields to readonly
+                if node.get('name', 'TTTT'):
+                    modifiers = json.loads(node.get("modifiers"))
+                    modifiers['readonly'] = [('no_update', '=', True)]
+
+                    node.set("modifiers", json.dumps(modifiers))
+            res['arch'] = etree.tostring(doc, encoding='unicode')
+        return res
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False, submenu=False):
+        res = super(ProductRef, self).fields_view_get(view_id=view_id, view_type=view_type, toolbar=toolbar,
+                                                      submenu=submenu)
+
+        if view_type in ['form']:  # Applies only for form view
+            doc = etree.XML(res['arch'])
+            for node in doc.xpath("//field"):  # All the view fields to readonly
+                if node.get('name', 'TTTT'):
+                    modifiers = json.loads(node.get("modifiers"))
+                    modifiers['readonly'] = [('no_update_approved', '=', True)]
+
+                    node.set("modifiers", json.dumps(modifiers))
+            res['arch'] = etree.tostring(doc, encoding='unicode')
+        return res
