@@ -13,53 +13,55 @@ class dossier_import(models.Model):
         for rec in self:
             rec.taux_frais_approche = (rec.total_frais_dh / ((rec.total_frais_dh+rec.total_achats_dh) or 1))*100
 
-    name = fields.Char(u"Numéro", size=64,readonly=True,default=False,copy=False)
+    name = fields.Char(u"Number", size=64,readonly=True,default=False,copy=False)
     date_dossier_import=fields.Date(u"Date")
-    partner_id =fields.Many2one('res.partner', u'Fournisseur')
+    partner_id =fields.Many2one('res.partner', u'Vendor')
     num_dum= fields.Char(u"DUM N°", size=128)
-    date_dum= fields.Date(u"Date DUM")
+    date_dum= fields.Date(u"DUM date")
     marchandise= fields.Char(u"Marchandise", size=128)
-    country_id=fields.Many2one('res.country', u'Venant de')
-    devise_id=fields.Many2one('res.currency', u'Devise')
-    taux_change= fields.Float(u'Taux de change', digits=(16,4))
-    poids_brut= fields.Char(u'Poids Brut', size=265)
-    nbre_colis= fields.Char(u'Nombre de colis', size=265)
-    num_quittance= fields.Char(u"Numéro QUITTANCE", size=128)
-    date_quittance= fields.Date(u"Date QUITTANCE")
-    fiche_liquidation= fields.Char(u"Fiche de liquidation", size=128)
-    company_id = fields.Many2one('res.company', string=u'Société', readonly=True,default=lambda self: self.env['res.company']._company_default_get('dossier_import'))
+    country_id=fields.Many2one('res.country', u'Coming from')
+    devise_id=fields.Many2one('res.currency', u'Currency')
+    taux_change= fields.Float(u'Exchange rates', digits=(16,4))
+    poids_brut= fields.Char(u'Gross Weight', size=265)
+    nbre_colis= fields.Char(u'Number of packages', size=265)
+    num_quittance= fields.Char(u"QUITTANCE number", size=128)
+    date_quittance= fields.Date(u"QUITTANCE date")
+    fiche_liquidation= fields.Char(u"Liquidation form", size=128)
+    company_id = fields.Many2one('res.company', string=u'Company', readonly=True,default=lambda self: self.env['res.company']._company_default_get('dossier_import'))
     #picking_ids = fields.Many2many('stock.picking','rel_di_picking','dossier_id','picking_id',string=u"Réceptions",copy=False)
-    purchase_ids = fields.Many2many('purchase.order','rel_di_purchase','dossier_id','purchase_id',string=u"Commandes",copy=False)
-    line_achat_ids = fields.One2many('achat.line.dossier.import','dossier_id',string=u"Lignes d'achats")
-    line_frais_ids = fields.One2many('frais.dossier.import','dossier_id',string=u"Frais")
-    total_achats_dh = fields.Float(string=u"Total achats (DH)", compute='get_total_achats',)
-    total_frais_dh = fields.Float(string=u"Total frais (DH)", compute='get_total_frais')
-    taux_frais_approche = fields.Float(compute='compute_taux_frais_approche',string="Taux frais d’approche %" ,copy=False)
-    tag_ids = fields.Many2many('dossier.import.tags','rel_di_tags','dossier_id','tag_id',string=u"Etapes")
+    purchase_ids = fields.Many2many('purchase.order','rel_di_purchase','dossier_id','purchase_id',string=u"Orders",copy=False)
+    line_achat_ids = fields.One2many('achat.line.dossier.import','dossier_id',string=u"Purchasing lines")
+    line_frais_ids = fields.One2many('frais.dossier.import','dossier_id',string=u"Fees")
+    total_achats_dh = fields.Float(string=u"Total purchases (DH)", compute='get_total_achats',)
+    total_frais_dh = fields.Float(string=u"Total fees (DH)", compute='get_total_frais')
+    taux_frais_approche = fields.Float(compute='compute_taux_frais_approche',string="Approach fee rates %" ,copy=False)
+    tag_ids = fields.Many2many('dossier.import.tags','rel_di_tags','dossier_id','tag_id',string=u"Stages")
 
     # Ajout de champs de suivi
     num_portnet = fields.Char(string=u"N° Portnet")
-    transitaire_id = fields.Many2one('res.partner',string=u"Transitaire")
-    transporteur_id = fields.Many2one('res.partner',string=u"Transporteur")
+    transitaire_id = fields.Many2one('res.partner',string=u"Forwarder")
+    transporteur_id = fields.Many2one('res.partner',string=u"Carrier")
     incoterm_id = fields.Many2one('account.incoterms', string=u"Incoterm")
-    date_facturation = fields.Date(string=u"Date de facturation")
-    date_mise_en_transport = fields.Date(string=u"Date de mise en transport")
-    date_arrivee_magasin = fields.Date(string=u"Date d'arrivée magasin")
-    date_paiement_fournisseur = fields.Date(string=u"Date paiement fournisseur")
+    date_facturation = fields.Date(string=u"Invoice date")
+    date_mise_en_transport = fields.Date(string=u"Date of shipment")
+    date_arrivee_magasin = fields.Date(string=u"Store Arrival Date")
+    date_paiement_fournisseur = fields.Date(string=u"Supplier payment date")
 
     # Totaux
-    tot_qte_cmd = fields.Float(string=u"Total Qté commandée", compute='get_totaux')
-    tot_poids = fields.Float(string=u"Total poids", compute='get_totaux')
+    tot_qte_cmd = fields.Float(string=u"Total Qty ordered", compute='get_totaux')
+    tot_poids = fields.Float(string=u"Total weight", compute='get_totaux')
     tot_volume = fields.Float(string=u"Total volume", compute='get_totaux')
 
     # Champ de répartition analytique
-    product_new_price_ids = fields.One2many('product.new.price','dossier_id',string=u"Prix de revient")
-    analytic_line_ids = fields.One2many('ligne.distrib.analytic','dossier_id',string=u"Lignes répartitions analytique")
+    product_new_price_ids = fields.One2many('product.new.price','dossier_id',string=u"Cost price")
+    analytic_line_ids = fields.One2many('ligne.distrib.analytic','dossier_id',string=u"Analytical breakdown lines")
 
-    state = fields.Selection([('encours', 'En cours'),
-                             ('termine', u'Terminé'),
-                             ('traiter', 'Traité'),
-                             ('valide', u'Validé')], u'Statut', default='encours' ,readonly=True, required=True)
+    state = fields.Selection([('encours', 'In progress'),
+                             ('termine', u'Finished'),
+                             ('traiter', 'Treated'),
+                             ('valide', u'Validated')], u'Status', default='encours' ,readonly=True, required=True)
+
+
 
     def to_termine(self):
         self.write( {'state': 'termine'})
@@ -345,21 +347,39 @@ class dossier_import(models.Model):
             raise UserError(('Action non valide,Impossible de supprimer un dossier terminer'))
         return super(dossier_import, self).unlink()
 
+    folder_ids = fields.Many2many('stock.move', compute="_compute_move_ids", string="MOVES",store=True)
+
+    @api.depends('line_achat_ids')
+    def _compute_move_ids(self):
+        for r in self:
+            moves = []
+            for line in r.line_achat_ids:
+                print(line.move_id)
+                print(line.move_id)
+                print(line.move_id)
+                if line.move_id:
+                    moves.append(line.move_id.id)
+            print("=========",moves)
+            r.folder_ids = [(6, 0, moves)]
+
+
 
 class AchatLineDossierImport(models.Model):
     _name = 'achat.line.dossier.import'
 
     dossier_id = fields.Many2one('dossier_import')
     purchase_id = fields.Many2one('purchase.order',string=u"N° BC")
-    currency_id = fields.Many2one('res.currency', related='purchase_id.currency_id', string=u"Devise")
+    currency_id = fields.Many2one('res.currency', related='purchase_id.currency_id', string=u"Currency")
     #picking_id = fields.Many2one('stock.picking', string=u"N° Réception")
-    product_id = fields.Many2one('product.product',string=u"Article")
-    ordered_qty = fields.Float(string=u"Qté commandée")
-    taux_douane=fields.Float(string='Taux douane',readonly=True)
-    prix_devise = fields.Float(string=u"Prix (Devise)")
-    montant_devise = fields.Float(string=u"Montant (Devise)")
-    montant_dirham = fields.Float(string=u"Montant (DHS)", compute='get_montant_dh')
+    product_id = fields.Many2one('product.product',string=u"Product")
+    ordered_qty = fields.Float(string=u"Ordered Qty")
+    taux_douane=fields.Float(string='Customs rate',readonly=True)
+    prix_devise = fields.Float(string=u"Price (Currency)")
+    montant_devise = fields.Float(string=u"Amount (Currency)")
+    montant_dirham = fields.Float(string=u"Amount (DHS)", compute='get_montant_dh')
     move_id = fields.Many2one('stock.move',string=u"Move")
+    import_id = fields.Many2one('dossier_import',string=u"Import id")
+
 
     # Méthode qui calcule le montant en DHS relatif au frais inséré
 
@@ -372,6 +392,12 @@ class AchatLineDossierImport(models.Model):
             else:
                 rec.montant_dirham = rec.montant_devise
 
+    def unlink(self):
+        for r in self:
+            print("=========================",r.move_id.folder_id)
+            r.move_id.folder_id = False
+        return super(AchatLineDossierImport, self).unlink()
+
 
 class FraisDossierImport(models.Model):
     _name = 'frais.dossier.import'
@@ -379,20 +405,20 @@ class FraisDossierImport(models.Model):
     def get_split_methods(self):
 
         return (
-            ('by_current_cost_price', 'Par prix actuel'),
-            ('equal','Egal'),
-            ('by_quantity','Par Quantité'),
-            ('by_weight','Par Poids'),
-            ('by_volume','Par Volume')
+            ('by_current_cost_price', 'By current price'),
+            ('equal','Equal'),
+            ('by_quantity','By quantity'),
+            ('by_weight','By weight'),
+            ('by_volume','by Volume')
         )
 
     dossier_id = fields.Many2one('dossier_import')
-    product_id = fields.Many2one('product.product',string=u'Frais',domain="[('landed_cost_ok','=',True)]")
-    split_method = fields.Selection(string=u"Mode répartition", selection='get_split_methods',default='by_current_cost_price')
-    amount = fields.Float(string=u"Montant")
-    currency_id = fields.Many2one('res.currency',string=u"Devise")
-    amount_dh = fields.Float(string=u"Montant dhs",compute='get_montant_dh')
-    currency_rate = fields.Float(u'Taux de change', digits=(16,4))
+    product_id = fields.Many2one('product.product',string=u'Fees',domain="[('landed_cost_ok','=',True)]")
+    split_method = fields.Selection(string=u"Dispatch mode", selection='get_split_methods',default='by_current_cost_price')
+    amount = fields.Float(string=u"Amount")
+    currency_id = fields.Many2one('res.currency',string=u"Currency")
+    amount_dh = fields.Float(string=u"Amount dhs",compute='get_montant_dh')
+    currency_rate = fields.Float(u'Exchage rates', digits=(16,4))
 
     @api.onchange('product_id')
     def change_split_method(self):
@@ -420,12 +446,12 @@ class LigneDistribAnalytic(models.Model):
     _name = 'ligne.distrib.analytic'
     _order = 'product_id'
 
-    dossier_id = fields.Many2one('dossier_import',string=u"Dossier import")
-    frais_id = fields.Many2one('product.product',string=u'Frais')
-    product_id = fields.Many2one('product.product',string=u'Article')
-    montant_unitaire = fields.Float(string=u"Montant")
-    price_unit_devise= fields.Float(string='PU devise')
-    price_total_devise= fields.Float(string='Total devise')
+    dossier_id = fields.Many2one('dossier_import',string=u"Import Folder")
+    frais_id = fields.Many2one('product.product',string=u'Fees')
+    product_id = fields.Many2one('product.product',string=u'Product')
+    montant_unitaire = fields.Float(string=u"Amount")
+    price_unit_devise= fields.Float(string='PU currency')
+    price_total_devise= fields.Float(string='Total currency')
 
 
 class ProductNewPrice(models.Model):
@@ -437,22 +463,27 @@ class ProductNewPrice(models.Model):
             prix_vente_ht=rec.price_unite_sale / 1.2
             if prix_vente_ht >0:
               rec.marge=((prix_vente_ht-rec.price)/prix_vente_ht) *100
-    product_id = fields.Many2one('product.product',string=u'Article')
-    price = fields.Float(string=u"Prix Revient Un")
-    total_price = fields.Float(string=u"Total P.Revient")
-    dossier_id = fields.Many2one('dossier_import',string=u"Dossier import")
-    qty = fields.Float(string=u'Quantité')
-    price_unit_devise = fields.Float(string=u'PU devise')
-    price_total_devise = fields.Float(string=u'Total devise')
-    frais_douane = fields.Float(string=u'Frais douane DH')
-    copyright = fields.Float(string=u'Droits d\'auteurs DH')
-    autres_frais = fields.Float(string=u'Autres frais DH')
-    taux = fields.Float(string='Taux')
-    price_unite_sale=fields.Float(string=u'Prix de vente TTC', compute='get_prices')
-    marge = fields.Float(string=u'Marge %', compute='get_prices')
+    product_id = fields.Many2one('product.product',string=u'Product')
+    price = fields.Float(string=u"Price Comes Back ")
+    total_price = fields.Float(string=u"Total P.Comes Back")
+    dossier_id = fields.Many2one('dossier_import',string=u"Import folder")
+    qty = fields.Float(string=u'Quantity')
+    price_unit_devise = fields.Float(string=u'PU currency')
+    price_total_devise = fields.Float(string=u'Total currency')
+    frais_douane = fields.Float(string=u'Customs fees DH')
+    copyright = fields.Float(string=u'Copyrights DH')
+    autres_frais = fields.Float(string=u'Other fees DH')
+    taux = fields.Float(string='Rates')
+    price_unite_sale=fields.Float(string=u'Selling price incl. VAT', compute='get_prices')
+    marge = fields.Float(string=u'margin %', compute='get_prices')
 
 
 class DossierImportTags(models.Model):
     _name = 'dossier.import.tags'
 
     name = fields.Char(string="Tag")
+
+class StockMove(models.Model):
+    _inherit = 'stock.move'
+
+    folder_id = fields.Many2one('dossier_import', "Dossier")

@@ -27,6 +27,7 @@ class LandedCostWizard(models.TransientModel):
             self.env.context['active_id'])
         previous_moves = dossier_import_id.mapped('line_achat_ids.move_id')
         for move in self.mapped('picking_ids.move_lines'):
-            if move not in previous_moves:
-                self.env['achat.line.dossier.import'].create(
+            if move not in previous_moves and not move.folder_id:
+                dossier_line = self.env['achat.line.dossier.import'].create(
                     self._prepare_distribution_line(move))
+                dossier_line.move_id.folder_id = dossier_line.dossier_id

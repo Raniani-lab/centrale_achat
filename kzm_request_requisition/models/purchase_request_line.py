@@ -22,8 +22,9 @@ class PurchaseRequestLine(models.Model):
         for o in self:
             if o.analytic_account_id:
                 budget_line = self.env["crossovered.budget.lines"].search([("analytic_account_id", "=", o.analytic_account_id.id)], limit=1)
-                if budget_line:
-                    if (budget_line.date_from <= fields.Date.today() <= budget_line.date_to) and o.estimated_cost <= budget_line.planned_amount:
+                budget = self.env["crossovered.budget"].search([("crossovered_budget_line.analytic_account_id", "=", o.analytic_account_id.id)], limit=1)
+                if budget_line and (budget.state in "confirm" or budget.state in "validate"):
+                    if (budget_line.date_from.month == o.date_required.month == budget_line.date_to.month) and o.estimated_cost <= budget_line.planned_amount:
                         o.status = 'eligible'
                     else:
                         o.status = 'not_eligible'
