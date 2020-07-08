@@ -1,0 +1,66 @@
+<odoo>
+    <!--tree-->
+    <record id="view_medical_record_benefit_tree_1" model="ir.ui.view">
+        <field name="name">medical.record.benefit.tree</field>
+        <field name="model">medical.record.benefit</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="name"/>
+                <field name="refund_rate"/>
+                <field name="upper_limit"/>
+                <field name="currency_id" />
+                <field name="observation" />
+            </tree>
+        </field>
+    </record>
+    <!--search-->
+
+    <!--form-->
+    <record id="view_medical_record_benefit_form_1" model="ir.ui.view">
+        <field name="name">medical.record.benefit.form</field>
+        <field name="model">medical.record.benefit</field>
+        <field name="arch" type="xml">
+            <form string="Medical record benefit">
+                <sheet>
+                    <group>
+                    <group>
+                        <field name="name" required="1"/>
+                        <field name="refund_rate"/>
+                         <label for="upper_limit"/>
+                                    <div class="o_row" name="upper_limit">
+                                        <field name="upper_limit" nolabel="1"/>
+                                        <span>(Years number)</span>
+                                    </div>
+                    </group>
+                    <group>
+                        <field name="currency_id"/>
+                        <field name="observation"/>
+                    </group>
+                    </group>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--action-->
+
+    <record id="medical_record_benefit_menu_8" model="ir.actions.act_window">
+        <field name="name">Medical record benefit</field>
+        <field name="res_model">medical.record.benefit</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new payments
+            </p>
+        </field>
+    </record>
+
+
+
+</odoo>

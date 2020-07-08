@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_medical_record_benefit,kzm_medical_insurance.medical_record_benefit,model_medical_record_benefit,base.group_user,1,1,1,1
+access_medical_record_type,kzm_medical_insurance.medical_record_type,model_medical_record_type,base.group_user,1,1,1,1
+access_medical_record,kzm_medical_insurance.medical_record,model_medical_record,base.group_user,1,1,1,1
+access_medical_refund_request,kzm_medical_insurance.medical_refund_request,model_medical_refund_request,base.group_user,1,1,1,1
+access_medical_refund_request_run,kzm_medical_insurance.medical_refund_request_run,model_medical_refund_request_run,base.group_user,1,1,1,1
+access_medical_refund_request_line,kzm_medical_insurance.medical_refund_request_line,model_medical_refund_request_line,base.group_user,1,1,1,1

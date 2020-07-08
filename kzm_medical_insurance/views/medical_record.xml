@@ -1,0 +1,79 @@
+<odoo>
+    <!--tree-->
+    <record id="view_medical_record_tree_1" model="ir.ui.view">
+        <field name="name">medical.record.tree</field>
+        <field name="model">medical.record</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="departement_id"/>
+                <field name="job_id" />
+                <field name="folder_type" />
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <!--search-->
+
+    <!--form-->
+    <record id="view_medical_record_form_1" model="ir.ui.view">
+        <field name="name">medical.record.form</field>
+        <field name="model">medical.record</field>
+        <field name="arch" type="xml">
+            <form string="Medical record">
+                 <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="new,in_progress,expired,canceled"
+                        statusbar_colors='{"approved":"blue"}'
+                        options="{'clickable': '1'}"
+                    />
+                </header>
+                <sheet>
+                     <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                    <group>
+                <field name="employee_id"/>
+                <field name="departement_id"/>
+                <field name="job_id" />
+
+                    </group>
+                    <group>
+                        <field name="folder_type"/>
+                        <field name="beneficiaries_ids" widget="many2many_tags" domain="[('employee_id','=',employee_id)]"
+                        />
+                    </group>
+                    </group>
+                </sheet>
+                <div class="o_attachment_preview"/>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <!--action-->
+
+    <record id="medical_record_menu_8" model="ir.actions.act_window">
+        <field name="name">Medical record</field>
+        <field name="res_model">medical.record</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a new payments
+            </p>
+        </field>
+    </record>
+
+
+
+</odoo>

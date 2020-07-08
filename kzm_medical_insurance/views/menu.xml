@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <menuitem id="main_insurance_menu"
+                  name="Medical Insurance"
+                  web_icon="kzm_medical_insurance,static/description/icon.png"
+                  sequence="3"/>
+
+        <menuitem id="employee_insurance_menu"
+                  name="Employees"
+                  sequence="1"
+                  parent="main_insurance_menu"/>
+
+        <menuitem id="employee_insurance_menu2"
+                  sequence="2"
+                  name="Employees"
+                  parent="employee_insurance_menu"
+                  action="hr.open_view_employee_list_my"/>
+
+        <menuitem id="medical_record_insurance_menu"
+                  sequence="4"
+                  name="Medical records"
+                  parent="employee_insurance_menu"
+                  action="medical_record_menu_8"
+        />
+
+        <menuitem id="refund_request_insurance_menu"
+                  sequence="5"
+                  name="Refund request"
+                  parent="employee_insurance_menu"
+                  action="medical_refund_request_menu_8"/>
+
+        <menuitem id="refunds_insurance_menu"
+                  sequence="2"
+                  name="Refunds"
+                  parent="main_insurance_menu"
+        />
+        <menuitem id="refunds_insurance_to_pay_menu"
+                  sequence="7"
+                  name="To pay"
+                  parent="refunds_insurance_menu"
+                  action="medical_refund_request_menu_8"
+        />
+        <menuitem id="refunds_all_insurance_menu"
+                  sequence="8"
+                  name="All requests"
+                  action="medical_refund_request_menu_8"
+                  parent="refunds_insurance_menu"
+        />
+
+        <menuitem id="refunds_lots_insurance_menu"
+                  sequence="9"
+                  name="Lots"
+                  parent="refunds_insurance_menu"
+                  action="medical_refund_request_run_menu_8"/>
+
+        <menuitem id="ref_config_menu_medical"
+                  sequence="10"
+                  name="Settings"
+                  parent="main_insurance_menu"
+                  groups="kzm_referencement_v.group_ref_manager"
+        />
+
+        <menuitem id="refunds_record_type_insurance_menu"
+                  sequence="11"
+                  name="Record type"
+                  parent="ref_config_menu_medical"
+                  action="medical_record_type_menu_8"/>
+
+        <menuitem id="refunds_medical_presentation_insurance_menu"
+                  sequence="12"
+                  name="Medical service"
+                  parent="ref_config_menu_medical"
+                  action="medical_record_benefit_menu_8"/>
+
+
+    </data>
+</odoo>
