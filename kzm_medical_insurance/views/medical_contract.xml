@@ -24,9 +24,9 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="see_medical_records"
                                 class="oe_stat_button"
-                                string="Medical records"
                                 type="object"
                                 icon="fa-bars">
+                            <field name="records_count" widget="statinfo" string="Medical records"/>
                         </button>
                     </div>
                     <div class="oe_title">

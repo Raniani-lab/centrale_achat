@@ -46,7 +46,7 @@ class MedicalRecord(models.Model):
     departement_id =fields.Many2one('hr.department' ,string="Department")
     job_id = fields.Many2one('hr.job', string="Job",required= True)
     #folder_type = fields.Many2one('medical.record.type', required= True)
-    beneficiaries_ids = fields.One2many('hr.employee.dependent','medical_record_id')
+    beneficiaries_ids = fields.One2many('hr.employee.dependent','medical_id')
     mutual_contract = fields.Many2one('medical.contract', string="Mutual Contract", required=True)
     refund_request_ids = fields.One2many('medical.refund.request', 'mutual_refund_id')
     hr_expense_id = fields.Many2one('hr.expense', string="Expense sheet")
@@ -90,9 +90,11 @@ class MedicalRecord(models.Model):
         for r in self:
             if len(r.beneficiaries_ids) > 4 :
                 raise ValidationError(_("The benefeciaries can not be more than four !"))
-            if r.beneficiaries_ids.age > 23:
-                raise ValidationError(_("The benefeciaries can not be aged more than 23 years !"))
-
+            for l in r.beneficiaries_ids:
+                if l.age > 23:
+                    raise ValidationError(_("The benefeciaries can not be aged more than 23 years !"))
+                else:
+                    continue
 
 
 
@@ -141,14 +143,15 @@ class MedicalRefundRequest(models.Model):
     def see_expense(self):
         action = self.env.ref('hr_expense.hr_expense_actions_my_unsubmitted').read()[0]
         action['domain'] = [('id', 'in', self.hr_expense_ids.ids)]
-        if self.hr_expense_ids:
-            action['res_id'] = self.hr_expense_ids[0].id
-        else:
-            action['context'] = {
-                'default_medical_refund_expense_id': self.id,
-                'default_employee_id': self.employee_id.id,
-
-            }
+        print("tttttttttttttttttttttttttttttt",self.hr_expense_ids.ids)
+        # if self.hr_expense_ids:
+        #     action['res_id'] = self.hr_expense_ids[0].id
+        # else:
+        #     action['context'] = {
+        #         'default_medical_refund_expense_id': self.id,
+        #         'default_employee_id': self.employee_id.id,
+        #
+        #     }
         print("action   : ", action)
         return action
 
@@ -208,7 +211,7 @@ class MedicalRefundRequestRun(models.Model):
     total = fields.Float(string="Total" , compute="_compute_total")
     actual_sold = fields.Float(string="Actual Sold")
     diffrence = fields.Float(string="Difference")
-    #expences_ids = fields.Many2many('hr.expense', compute="_compute_expense_ids", string="Expenses", store=True)
+    #expences_ids = fields.Many2many('hr.expense', compute="_compute_expense_ids", string="Expenses", medical.contract=True)
     #
     # @api.depends('refund_request_ids')
     # def _compute_expense_ids(self):
@@ -255,8 +258,8 @@ class MedicalRefundRequestRun(models.Model):
             r.total = sum
 
     def validate_action(self):
-        self.state = 'validated'
         self.generate_expense()
+        self.state = 'validated'
 
     def generate_expense(self):
         for r in self:
@@ -265,14 +268,25 @@ class MedicalRefundRequestRun(models.Model):
                     'name': l.name,
                     'product_id': l.env.company.expense_medical_product_id.id,
                     'employee_id': l.employee_id.id,
-                    'unit_amount': r.refund_request_ids.total,
+                    'medical_refund_expense_id': l.id,
+                    'unit_amount': l.total,
                 }
                 #data['expenses_ids'] = [(4, l.medical_run_id.id)]
                 print("+++++++++++++++++++++++++++++++++++++++++++++++++")
                 pprint(data)
                 expense = self.env['hr.expense'].create(data)
                 print("====================================", expense.id)
-                expense.action_submit_expenses()
+                data = {
+                    'name': expense.name,
+                    'employee_id': expense.employee_id.id,
+
+                    'expense_line_ids':[(4, expense.id)],
+
+                }
+                expens_sheet = self.env['hr.expense.sheet'].create(data)
+                expens_sheet.action_submit_sheet()
+                expens_sheet.approve_expense_sheets()
+
 
     def draft_action(self):
         self.state = 'draft'
@@ -323,3 +337,8 @@ class HrExpense(models.Model):
 
     medical_refund_expense_id = fields.Many2one('medical.refund.request')
 
+class HrEmployeeDependent(models.Model):
+    _inherit = 'hr.employee.dependent'
+
+    medical_record_id = fields.Many2one('medical.record')
+    medical_id = fields.Many2one('medical.record')

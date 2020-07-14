@@ -37,9 +37,10 @@
                     <div class="oe_button_box" name="button_box">
                         <button name="see_medical_refunds"
                                 class="oe_stat_button"
-                                string="Medical refunds"
                                 type="object"
                                 icon="fa-credit-card">
+                            <field name="refund_count" widget="statinfo" string="Medical refunds"/>
+
                         </button>
                     </div>
                      <div class="oe_title">
@@ -58,6 +59,7 @@
 <!--                        <field name="folder_type"/>-->
                         <field name="mutual_contract"/>
                         <field name="beneficiaries_ids" widget="many2many_tags" domain="[('employee_id','=',employee_id)]"
+
                         />
                     </group>
                     </group>

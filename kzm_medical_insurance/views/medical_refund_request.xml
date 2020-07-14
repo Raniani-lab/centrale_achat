@@ -52,9 +52,9 @@
                      <div class="oe_button_box" name="button_box">
                         <button name="see_expense"
                                 class="oe_stat_button"
-                                string="Expenses"
                                 type="object"
                                 icon="fa-dollar">
+                            <field name="expense_count" widget="statinfo" string="Expenses"/>
                         </button>
                     </div>
                     <h1>
