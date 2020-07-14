@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-08 17:01+0000\n"
-"PO-Revision-Date: 2020-07-08 17:01+0000\n"
+"POT-Creation-Date: 2020-07-14 21:34+0000\n"
+"PO-Revision-Date: 2020-07-14 21:34+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,9 +16,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.res_config_settings_form_view_expense_medical8
+msgid "<span class=\"o_form_label\">Medical expense product</span>"
+msgstr ""
+
+#. module: kzm_medical_insurance
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_record_benefit_form_1
-msgid "<span>(Years number)</span>"
-msgstr "<span>(Nombre d'années)</span>"
+msgid "<span>(Months number)</span>"
+msgstr "<span>(Nbr de mois)</span>"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__message_needaction
@@ -73,6 +78,12 @@ msgid "Amount"
 msgstr "Montant"
 
 #. module: kzm_medical_insurance
+#: model:product.product,name:kzm_medical_insurance.expense_medical_product_id
+#: model:product.template,name:kzm_medical_insurance.expense_medical_product_id_product_template
+msgid "Article des Frais medicaux"
+msgstr "Article des Frais medicaux"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__message_attachment_count
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__message_attachment_count
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__message_attachment_count
@@ -91,14 +102,34 @@ msgid "Beneficiaries"
 msgstr "Bénéficiaires"
 
 #. module: kzm_medical_insurance
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__contribution_amount
-msgid "Caisse contribution amount"
-msgstr "Montant contribution caisse"
-
-#. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_record__state__canceled
 msgid "Canceled"
 msgstr "Annulé"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.res_config_settings_form_view_expense_medical8
+msgid "Choose your medical expense product"
+msgstr "Choisir votre produit medical de fraix"
+
+#. module: kzm_medical_insurance
+#: model:ir.model,name:kzm_medical_insurance.model_res_company
+msgid "Company"
+msgstr "Societe"
+
+#. module: kzm_medical_insurance
+#: model:ir.model,name:kzm_medical_insurance.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramètres de config"
+
+#. module: kzm_medical_insurance
+#: model:ir.ui.menu,name:kzm_medical_insurance.employee_insurance_menu_contract
+msgid "Contrats"
+msgstr "Contrats"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.actions.act_window,help:kzm_medical_insurance.medical_contract_menu_8
+msgid "Create a new cotract"
+msgstr "Créer une nouvelle contrat"
 
 #. module: kzm_medical_insurance
 #: model_terms:ir.actions.act_window,help:kzm_medical_insurance.medical_record_benefit_menu_8
@@ -110,6 +141,7 @@ msgid "Create a new payments"
 msgstr "Creer un medical fichier"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__create_uid
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__create_uid
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__create_uid
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__create_uid
@@ -120,6 +152,7 @@ msgid "Created by"
 msgstr "Créé par"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__create_date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__create_date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__create_date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__create_date
@@ -139,7 +172,7 @@ msgstr "Devise"
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_line__date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__date
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__departement_id
@@ -152,8 +185,6 @@ msgid "Description"
 msgstr "Déscription"
 
 #. module: kzm_medical_insurance
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__difference
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_line__difference
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__diffrence
 msgid "Difference"
 msgstr "Différence"
@@ -164,6 +195,7 @@ msgid "Disease nature"
 msgstr "Nature de la maladie"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__display_name
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__display_name
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__display_name
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__display_name
@@ -186,7 +218,16 @@ msgid "Employee"
 msgstr "Employé"
 
 #. module: kzm_medical_insurance
-#: model:ir.ui.menu,name:kzm_medical_insurance.employee_insurance_menu
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__employee_categ_ids
+msgid "Employee Categ"
+msgstr "Categorie de l'employé"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_contract_form_1
+msgid "Employee Category"
+msgstr "Catégorie de l'employé"
+
+#. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.employee_insurance_menu2
 msgid "Employees"
 msgstr "Employés"
@@ -197,14 +238,36 @@ msgid "End Date"
 msgstr "Date de fin"
 
 #. module: kzm_medical_insurance
+#: model:ir.model,name:kzm_medical_insurance.model_hr_expense
+msgid "Expense"
+msgstr "Dépense"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__expense_count
+msgid "Expense Count"
+msgstr "Compte de fraix"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_res_company__expense_medical_product_id
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_res_config_settings__expense_medical_product_id
+msgid "Expense medical product"
+msgstr "Article des Frais médicaux "
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__hr_expense_id
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__hr_expense_id
+msgid "Expense sheet"
+msgstr "Fichier de fraix"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
+msgid "Expenses"
+msgstr "Notes de Frais"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_record__state__expired
 msgid "Expired"
 msgstr "Expiré"
-
-#. module: kzm_medical_insurance
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__folder_type
-msgid "Folder Type"
-msgstr "Type de dossier"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__message_follower_ids
@@ -231,6 +294,22 @@ msgid "Followers (Partners)"
 msgstr "Abonnés (Partenaires)"
 
 #. module: kzm_medical_insurance
+#: model:ir.model,name:kzm_medical_insurance.model_hr_category
+msgid "HR Category"
+msgstr ""
+
+#. module: kzm_medical_insurance
+#: model:ir.model,name:kzm_medical_insurance.model_hr_employee_dependent
+msgid "HR Employee Dependent"
+msgstr ""
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__hr_expense_ids
+msgid "Hr Expense"
+msgstr "Dépense RH"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__id
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__id
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__id
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__id
@@ -270,13 +349,9 @@ msgstr "Si coché, de nouveaux messages demandent votre attention."
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record__message_has_error
-#: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record__message_has_sms_error
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record_benefit__message_has_error
-#: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record_benefit__message_has_sms_error
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record_type__message_has_error
-#: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record_type__message_has_sms_error
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_refund_request__message_has_error
-#: model:ir.model.fields,help:kzm_medical_insurance.field_medical_refund_request__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si actif, certains messages ont une erreur de livraison."
 
@@ -299,6 +374,7 @@ msgid "Job"
 msgstr "Poste"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract____last_update
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record____last_update
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit____last_update
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type____last_update
@@ -309,6 +385,7 @@ msgid "Last Modified on"
 msgstr "Dernière modification le"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__write_uid
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__write_uid
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__write_uid
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__write_uid
@@ -319,6 +396,7 @@ msgid "Last Updated by"
 msgstr "Dernière mise à jour par"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__write_date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__write_date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__write_date
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__write_date
@@ -331,7 +409,7 @@ msgstr "Dernière mise à jour le"
 #. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.refunds_lots_insurance_menu
 msgid "Lots"
-msgstr "Lots"
+msgstr ""
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__message_main_attachment_id
@@ -342,14 +420,24 @@ msgid "Main Attachment"
 msgstr "Pièce jointe principale"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_hr_employee_dependent__medical_id
+msgid "Medical"
+msgstr ""
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_hr_category__medical_contract_id
+msgid "Medical Contract"
+msgstr ""
+
+#. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.main_insurance_menu
 msgid "Medical Insurance"
 msgstr "Assurance médicale"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__medical_presentation_ids
-msgid "Medical Prestation"
-msgstr "Prestations médicales"
+msgid "Medical Presentation"
+msgstr ""
 
 #. module: kzm_medical_insurance
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
@@ -357,9 +445,25 @@ msgid "Medical Prestation"
 msgstr "Prestations médicales"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_hr_employee_dependent__medical_record_id
+msgid "Medical Record"
+msgstr "Document Medical"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_hr_expense__medical_refund_expense_id
+msgid "Medical Refund Expense"
+msgstr "Note de fraix medicale de rembourssement"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__medical_run_id
 msgid "Medical Run"
 msgstr "Course médicale"
+
+#. module: kzm_medical_insurance
+#: model:ir.actions.act_window,name:kzm_medical_insurance.medical_contract_menu_8
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_contract_form_1
+msgid "Medical contract"
+msgstr "Contrat medical"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__name
@@ -368,6 +472,7 @@ msgstr "Prestations médicales"
 
 #. module: kzm_medical_insurance
 #: model:ir.actions.act_window,name:kzm_medical_insurance.medical_record_menu_8
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__medical_record_ids
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_record_form_1
 msgid "Medical record"
 msgstr "Dossier Médical"
@@ -386,6 +491,7 @@ msgstr "Type de dossier "
 
 #. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.medical_record_insurance_menu
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_contract_form_1
 msgid "Medical records"
 msgstr "Dossiers médicaux"
 
@@ -393,13 +499,19 @@ msgstr "Dossiers médicaux"
 #: model:ir.actions.act_window,name:kzm_medical_insurance.medical_refund_request_menu_8
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
 msgid "Medical refund request"
-msgstr ""
+msgstr "Demande de rembourcement medical"
 
 #. module: kzm_medical_insurance
 #: model:ir.actions.act_window,name:kzm_medical_insurance.medical_refund_request_run_menu_8
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_run_form_1
 msgid "Medical refund request run"
 msgstr "Demandes de remboursement"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_record_form_1
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_run_form_1
+msgid "Medical refunds"
+msgstr "Rembourssements medicaux"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__prestation_ids
@@ -422,6 +534,26 @@ msgstr "Erreur d'envoi du message"
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__message_ids
 msgid "Messages"
 msgstr ""
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__mutual_contract
+msgid "Mutual Contract"
+msgstr "Contrats mutuelle"
+
+#. module: kzm_medical_insurance
+#: model:ir.ui.menu,name:kzm_medical_insurance.employee_insurance_menu
+msgid "Mutual Contracts"
+msgstr "Contrats mutuelle"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__mutual_refund_id
+msgid "Mutual Refund"
+msgstr "Rembourssement mutuelle"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__contract_name
+msgid "Name"
+msgstr "Nom"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_record__state__new
@@ -453,6 +585,7 @@ msgid "Next Activity Type"
 msgstr "Type d'activités à venir"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__name
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__name
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__name
 msgid "Number"
@@ -510,17 +643,35 @@ msgid "Patient Full Name"
 msgstr " Nom et prénom du malade"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__performance_matrix_id
+#: model:ir.ui.menu,name:kzm_medical_insurance.refunds_record_type_insurance_menu
+msgid "Performance Matrix"
+msgstr "Matrices de prestations"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__periodicities
+msgid "Periodicities"
+msgstr "Périodicités"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_run_form_1
+msgid "Re draft"
+msgstr "Re brouillant"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__record_type
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__name
 msgid "Record Type"
 msgstr "Type de dossier"
 
 #. module: kzm_medical_insurance
-#: model:ir.ui.menu,name:kzm_medical_insurance.refunds_record_type_insurance_menu
-msgid "Record type"
-msgstr "Type de dossier"
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_contract__records_count
+msgid "Records Count"
+msgstr ""
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__refund_request_ids
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_line__refund_request_id
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__refund_request_ids
 msgid "Refund Request"
@@ -547,8 +698,18 @@ msgid "Refunds"
 msgstr "Remboursements"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__refund_count
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__refund_count
+msgid "Refunds Count"
+msgstr ""
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
+msgid "Refuse"
+msgstr "Refuser"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_refund_request__state__refused
-#: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_refund_request_run__state__refused
 msgid "Refused"
 msgstr "Refusé"
 
@@ -559,14 +720,6 @@ msgstr "Refusé"
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__activity_user_id
 msgid "Responsible User"
 msgstr "Responsable"
-
-#. module: kzm_medical_insurance
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__message_has_sms_error
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__message_has_sms_error
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_type__message_has_sms_error
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Erreur d'envoi SMS"
 
 #. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.ref_config_menu_medical
@@ -602,14 +755,31 @@ msgstr ""
 "Planifiée : activités futures"
 
 #. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
+msgid "Submit"
+msgstr "Soumettre"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_refund_request__state__submited
 msgid "Submitted"
 msgstr "Soumis"
 
 #. module: kzm_medical_insurance
+#: code:addons/kzm_medical_insurance/models/medical_models.py:0
+#, python-format
+msgid "The benefeciaries can not be aged more than 23 years !"
+msgstr "Le beneficiaire ne peut pas etre agé plus de 23 and!"
+
+#. module: kzm_medical_insurance
+#: code:addons/kzm_medical_insurance/models/medical_models.py:0
+#, python-format
+msgid "The benefeciaries can not be more than four !"
+msgstr "Il ne faut pas dépasser 4 bénificiaires"
+
+#. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__adherent_folder
-msgid "The file concerns the member"
-msgstr "Le dossier concerne l’adhérent"
+msgid "The request concerns a depending memeber?"
+msgstr "La demande concerne une personne à charge?"
 
 #. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.refunds_insurance_to_pay_menu
@@ -620,12 +790,12 @@ msgstr "A payer"
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request__total
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__total
 msgid "Total"
-msgstr "Total"
+msgstr ""
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_line__type_id
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_record__activity_exception_decoration
@@ -634,6 +804,12 @@ msgstr "Type"
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_refund_request__activity_exception_decoration
 msgid "Type of the exception activity on record."
 msgstr "Type d'activité d'exception enregistrée"
+
+#. module: kzm_medical_insurance
+#: model:product.product,uom_name:kzm_medical_insurance.expense_medical_product_id
+#: model:product.template,uom_name:kzm_medical_insurance.expense_medical_product_id_product_template
+msgid "Units"
+msgstr "Unité(s)"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__message_unread
@@ -652,15 +828,15 @@ msgid "Unread Messages Counter"
 msgstr "Compteur de messages non lus"
 
 #. module: kzm_medical_insurance
-#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__upper_limit
-msgid "Upper limit"
-msgstr "Plafond"
-
-#. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_refund_request__state__validated
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_refund_request_run__state__validated
 msgid "Validated"
 msgstr "Validé"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
+msgid "Verify"
+msgstr "Verifier"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record__website_message_ids
@@ -677,6 +853,11 @@ msgstr "Messages du site web"
 #: model:ir.model.fields,help:kzm_medical_insurance.field_medical_refund_request__website_message_ids
 msgid "Website communication history"
 msgstr "Historique de communication du site web"
+
+#. module: kzm_medical_insurance
+#: model:ir.model,name:kzm_medical_insurance.model_medical_contract
+msgid "medical.contract"
+msgstr ""
 
 #. module: kzm_medical_insurance
 #: model:ir.model,name:kzm_medical_insurance.model_medical_record
@@ -712,6 +893,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_refund_request_run__period_id
 msgid "period"
 msgstr "Période"
+
+#. module: kzm_medical_insurance
+#: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_run_form_1
+msgid "validate"
+msgstr "valider"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields.selection,name:kzm_medical_insurance.selection__medical_refund_request__state__verified
