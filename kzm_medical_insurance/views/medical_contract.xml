@@ -1,0 +1,75 @@
+<odoo>
+    <!--tree-->
+    <record id="view_medical_contract_tree_1" model="ir.ui.view">
+        <field name="name">medical.contract.tree</field>
+        <field name="model">medical.contract</field>
+        <field name="arch" type="xml">
+            <tree>
+
+                <field name="name"/>
+                <field name="contract_name"/>
+                <field name="performance_matrix_id"/>
+            </tree>
+        </field>
+    </record>
+    <!--search-->
+
+    <!--form-->
+    <record id="view_medical_contract_form_1" model="ir.ui.view">
+        <field name="name">medical.contract.form</field>
+        <field name="model">medical.contract</field>
+        <field name="arch" type="xml">
+            <form string="Medical contract">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="see_medical_records"
+                                class="oe_stat_button"
+                                string="Medical records"
+                                type="object"
+                                icon="fa-bars">
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="contract_name"/>
+                        </group>
+                        <group>
+                            <field name="performance_matrix_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Employee Category">
+                            <field name="employee_categ_ids" required="1">
+                                <tree editable="bottom">
+                                    <field name="name" required="1"/>
+                                    <field name="category_id"/>
+                                    <field name="grade_id"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <!--action-->
+
+    <record id="medical_contract_menu_8" model="ir.actions.act_window">
+        <field name="name">Medical contract</field>
+        <field name="res_model">medical.contract</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new cotract
+            </p>
+        </field>
+    </record>
+
+
+</odoo>

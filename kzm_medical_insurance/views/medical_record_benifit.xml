@@ -8,7 +8,7 @@
 
                 <field name="name"/>
                 <field name="refund_rate"/>
-                <field name="upper_limit"/>
+<!--                <field name="upper_limit"/>-->
                 <field name="currency_id" />
                 <field name="observation" />
             </tree>
@@ -27,10 +27,15 @@
                     <group>
                         <field name="name" required="1"/>
                         <field name="refund_rate"/>
-                         <label for="upper_limit"/>
-                                    <div class="o_row" name="upper_limit">
-                                        <field name="upper_limit" nolabel="1"/>
-                                        <span>(Years number)</span>
+<!--                         <label for="upper_limit"/>-->
+<!--                                    <div class="o_row" name="upper_limit">-->
+<!--                                        <field name="upper_limit" nolabel="1"/>-->
+<!--                                        <span>(Years number)</span>-->
+<!--                                    </div>-->
+                         <label for="periodicities"/>
+                                    <div class="o_row" name="periodicities">
+                                        <field name="periodicities" nolabel="1"/>
+                                        <span>(Months number)</span>
                                     </div>
                     </group>
                     <group>

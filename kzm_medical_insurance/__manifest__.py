@@ -24,17 +24,21 @@
                 'isesco_hr',
                 'date_range',
                 'kzm_account_fiscalyear_type',
+                'hr_expense',
                 ],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'data/data.xml',
+        'data/data_setting.xml',
         'views/medical_record.xml',
+        'views/medical_contract.xml',
         'views/medical_record_benifit.xml',
         'views/medical_record_type.xml',
         'views/medical_refund_request.xml',
         'views/medical_refund_request_run.xml',
+        'views/res_config_settings.xml',
         'views/menu.xml',
 
     ],

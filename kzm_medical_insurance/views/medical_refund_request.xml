@@ -23,15 +23,40 @@
         <field name="arch" type="xml">
             <form string="Medical refund request">
                   <header>
-                    <field
-                        name="state"
-                        widget="statusbar"
-                        statusbar_visible="draft,submited,verified,validated,refused"
-                        statusbar_colors='{"approved":"blue"}'
-                        options="{'clickable': '1'}"
-                    />
+                      <button name="draft_action" type="object"
+                            string="Re draft"
+                            states="submited,verified,validated,refused"/>
+
+                    <button name="submit_action" type="object"
+                            string="Submit"
+                            states="draft"/>
+
+                    <button name="verify_action" type="object"
+                            string="Verify" states="submited"
+                            class="oe_highlight"/>
+
+                    <button name="refuse_action" type="object"
+                            string="Refuse" states="draft"
+                            class="oe_highlight"/>
+
+                    <field name="state" widget="statusbar"/>
+<!--                    <field-->
+<!--                        name="state"-->
+<!--                        widget="statusbar"-->
+<!--                        statusbar_visible="draft,submited,verified,validated,refused"-->
+<!--                        statusbar_colors='{"approved":"blue"}'-->
+<!--                        options="{'clickable': '1'}"-->
+<!--                    />-->
                 </header>
                 <sheet>
+                     <div class="oe_button_box" name="button_box">
+                        <button name="see_expense"
+                                class="oe_stat_button"
+                                string="Expenses"
+                                type="object"
+                                icon="fa-dollar">
+                        </button>
+                    </div>
                     <h1>
                         <field name="name" readonly="1"/>
                     </h1>
@@ -46,7 +71,7 @@
                     <group>
 
                         <field name="nature_of_the_disease"/>
-                        <field name="contribution_amount"/>
+<!--                        <field name="contribution_amount"/>-->
                      </group>
                     </group>
                         <notebook>
@@ -59,7 +84,7 @@
                                 <field name="amount"/>
                                 <field name="date"/>
                                 <field name="attachment_ids" widget="many2many_binary"/>
-                                <field name="refund_request_id"/>
+<!--                                <field name="refund_request_id"/>-->
                             </tree>
                         </field>
                                  <group class="oe_subtotal_footer oe_right" colspan="2">
@@ -67,7 +92,7 @@
                                         <label for="total"/>
                                     </div>
                                     <field name="total" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                                    <field name="difference"/>
+<!--                                    <field name="difference"/>-->
                                  </group>
                          </group>
                             </page>

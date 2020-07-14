@@ -7,7 +7,7 @@
                   sequence="3"/>
 
         <menuitem id="employee_insurance_menu"
-                  name="Employees"
+                  name="Mutual Contracts"
                   sequence="1"
                   parent="main_insurance_menu"/>
 
@@ -16,6 +16,13 @@
                   name="Employees"
                   parent="employee_insurance_menu"
                   action="hr.open_view_employee_list_my"/>
+
+        <menuitem id="employee_insurance_menu_contract"
+                  sequence="3"
+                  name="Contrats"
+                  parent="employee_insurance_menu"
+                  action="medical_contract_menu_8"/>
+
 
         <menuitem id="medical_record_insurance_menu"
                   sequence="4"
@@ -63,7 +70,7 @@
 
         <menuitem id="refunds_record_type_insurance_menu"
                   sequence="11"
-                  name="Record type"
+                  name="Performance Matrix"
                   parent="ref_config_menu_medical"
                   action="medical_record_type_menu_8"/>
 

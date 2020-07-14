@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="expense_medical_product_id" model="product.product">
+            <field name="name">Article des Frais medicaux</field>
+        </record>
+    </data>
+</odoo>

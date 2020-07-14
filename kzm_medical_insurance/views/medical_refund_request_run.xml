@@ -24,15 +24,32 @@
         <field name="arch" type="xml">
             <form string="Medical refund request run">
                   <header>
-                    <field
-                        name="state"
-                        widget="statusbar"
-                        statusbar_visible="draft,validated,refused"
-                        statusbar_colors='{"approved":"blue"}'
-                        options="{'clickable': '1'}"
-                    />
+                           <button name="draft_action" type="object"
+                            string="Re draft"
+                            states="validated"/>
+
+                    <button name="validate_action" type="object"
+                            string="validate"
+                            states="draft"/>
+
+                    <field name="state" widget="statusbar"/>
+<!--                    <field-->
+<!--                        name="state"-->
+<!--                        widget="statusbar"-->
+<!--                        statusbar_visible="draft,validated,refused"-->
+<!--                        statusbar_colors='{"approved":"blue"}'-->
+<!--                        options="{'clickable': '1'}"-->
+<!--                    />-->
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="see_medical_refunds"
+                                class="oe_stat_button"
+                                string="Medical refunds"
+                                type="object"
+                                icon="fa-credit-card">
+                        </button>
+                    </div>
                     <h1>
                         <field name="name" readonly="1"/>
                     </h1>
@@ -50,7 +67,16 @@
                     <notebook>
                         <page string="Refund requests">
                             <group>
-                                    <field name="refund_request_ids" editable="bottom"/>
+                                    <field name="refund_request_ids" widget="many2many" domain="[('state','=','verified')]">
+                                        <tree editable="bottom">
+                                            <field name="name"/>
+                                            <field name="employee_id"/>
+                                            <field name="nature_of_the_disease"/>
+                                            <field name="date"/>
+                                            <field name="state" readonly="1"/>
+                                        </tree>
+                                    </field>
+
                                 <group class="oe_subtotal_footer oe_right" colspan="2">
                               <div class="oe_subtotal_footer_separator oe_inline o_td_label">
                                         <label for="total"/>
