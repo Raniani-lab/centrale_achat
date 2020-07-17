@@ -755,6 +755,16 @@ msgstr ""
 "Planifiée : activités futures"
 
 #. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__is_capped
+msgid "Is capped ?"
+msgstr "Est plafonné?"
+
+#. module: kzm_medical_insurance
+#: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__upper_limit
+msgid "Upper limit"
+msgstr "Plafond"
+
+#. module: kzm_medical_insurance
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
 msgid "Submit"
 msgstr "Soumettre"
