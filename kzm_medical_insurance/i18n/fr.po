@@ -657,7 +657,7 @@ msgstr "Périodicités"
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_form_1
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_run_form_1
 msgid "Re draft"
-msgstr "Re brouillant"
+msgstr "Remettre en brouillon"
 
 #. module: kzm_medical_insurance
 #: model:ir.model.fields,field_description:kzm_medical_insurance.field_medical_record_benefit__record_type
@@ -690,7 +690,7 @@ msgstr "Demandes de remboursement"
 #. module: kzm_medical_insurance
 #: model_terms:ir.ui.view,arch_db:kzm_medical_insurance.view_medical_refund_request_run_form_1
 msgid "Refund requests"
-msgstr ""
+msgstr "Demandes de remboursement"
 
 #. module: kzm_medical_insurance
 #: model:ir.ui.menu,name:kzm_medical_insurance.refunds_insurance_menu

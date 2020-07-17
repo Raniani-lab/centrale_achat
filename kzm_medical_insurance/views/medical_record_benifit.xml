@@ -27,6 +27,8 @@
                     <group>
                         <field name="name" required="1"/>
                         <field name="refund_rate"/>
+                        <field name="is_capped"/>
+                        <field name="upper_limit" attrs="{'invisible': [('is_capped','=',False)],'required': [('is_capped', '=', True)]}" />
 <!--                         <label for="upper_limit"/>-->
 <!--                                    <div class="o_row" name="upper_limit">-->
 <!--                                        <field name="upper_limit" nolabel="1"/>-->

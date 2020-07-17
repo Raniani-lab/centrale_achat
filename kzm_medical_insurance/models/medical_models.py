@@ -11,7 +11,8 @@ class MedicalRecordBenifit(models.Model):
 
     name = fields.Char(string="Medical présentation", required= True)
     refund_rate = fields.Integer(string="Refund rate", required=True)
-    #upper_limit = fields.Float(string="Upper limit")
+    is_capped= fields.Boolean(string="Is capped ?")
+    upper_limit = fields.Float(string="Upper limit")
     periodicities = fields.Integer(string="Periodicities")
     currency_id = fields.Many2one ('res.currency', string="Currency")
     observation = fields.Text(string="Observation")
@@ -88,13 +89,17 @@ class MedicalRecord(models.Model):
     @api.constrains('beneficiaries_ids')
     def define_age_and_number(self):
         for r in self:
-            if len(r.beneficiaries_ids) > 4 :
-                raise ValidationError(_("The benefeciaries can not be more than four !"))
+            nuber_childs = 0
             for l in r.beneficiaries_ids:
-                if l.age > 23:
-                    raise ValidationError(_("The benefeciaries can not be aged more than 23 years !"))
-                else:
-                    continue
+                if l.type == "child":
+                    nuber_childs += 1
+                    if l.age > 23:
+                        raise ValidationError(_("The benefeciaries can not be aged more than 23 years !"))
+                    else:
+                        continue
+            if nuber_childs > 4 :
+                raise ValidationError(_("The benefeciaries can not be more than four children!"))
+
 
 
 
@@ -210,7 +215,13 @@ class MedicalRefundRequestRun(models.Model):
     refund_request_ids = fields.One2many('medical.refund.request','medical_run_id')
     total = fields.Float(string="Total" , compute="_compute_total")
     actual_sold = fields.Float(string="Actual Sold")
-    diffrence = fields.Float(string="Difference")
+    diffrence = fields.Float(string="Difference" , compute="_compute_diff")
+
+    @api.depends('actual_sold','total')
+    def _compute_diff(self):
+        for r in self:
+            r.diffrence = r.actual_sold - r.total
+
     #expences_ids = fields.Many2many('hr.expense', compute="_compute_expense_ids", string="Expenses", medical.contract=True)
     #
     # @api.depends('refund_request_ids')
@@ -299,7 +310,7 @@ class MedicalContract (models.Model):
     name = fields.Char("Number", required=True, default="CM")
     contract_name = fields.Char("Name", required=True)
     performance_matrix_id = fields.Many2one('medical.record.type')
-    employee_categ_ids = fields.One2many('hr.category', 'medical_contract_id')
+    employee_categ_ids = fields.One2many('hr.category.medical.line', 'medical_contract_id')
     medical_record_ids = fields.One2many('medical.record', 'mutual_contract',string="Medical record")
 
     records_count = fields.Integer(compute='_compute_records_count', string='Records Count')
@@ -327,10 +338,29 @@ class MedicalContract (models.Model):
         print("action   : ", action)
         return action
 
-class HrCategory(models.Model):
-    _inherit = 'hr.category'
+    category_ids = fields.Many2many('hr.category', compute="_compute_category_ids", string="Categories", store=True)
+
+    @api.depends('employee_categ_ids')
+    def _compute_category_ids(self):
+        for r in self:
+            categories = []
+            for category in r.employee_categ_ids:
+                if category.category_id:
+                    categories.append(category.category_id.id)
+            r.category_ids = [(6, 0, categories)]
+
+class HrMedicalCategoryLine(models.Model):
+    _name = 'hr.category.medical.line'
 
     medical_contract_id = fields.Many2one('medical.contract')
+    category_id = fields.Many2one('hr.category')
+
+
+# class HrContractCategory(models.Model):
+#     _inherit = 'hr.category'
+#
+#     medical_contract_id = fields.Many2one('medical.contract')
+
 
 class HrExpense(models.Model):
     _inherit = 'hr.expense'
